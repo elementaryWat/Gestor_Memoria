@@ -75,8 +75,6 @@
             this.CPU2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPU3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.estadisticass = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -127,22 +125,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Politica4 = new System.Windows.Forms.RadioButton();
-            this.Politica3 = new System.Windows.Forms.RadioButton();
-            this.Politica2 = new System.Windows.Forms.RadioButton();
-            this.Politica = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.politicaESRR = new System.Windows.Forms.RadioButton();
-            this.politicaESSRTF = new System.Windows.Forms.RadioButton();
-            this.politicaESSJF = new System.Windows.Forms.RadioButton();
-            this.politicaESFCFS = new System.Windows.Forms.RadioButton();
-            this.ConPol4 = new System.Windows.Forms.TextBox();
-            this.NomPol4 = new System.Windows.Forms.Label();
-            this.NomPolRR = new System.Windows.Forms.Label();
-            this.ConPolRR = new System.Windows.Forms.TextBox();
             this.Promediosrafagas = new System.Windows.Forms.DataGridView();
             this.PromDifAr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PromRaf1CPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -150,8 +133,28 @@
             this.PromRaf2CPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PromSalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PromRaf3CPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoDatosrep = new System.Windows.Forms.CheckBox();
-            this.InstGant = new System.Windows.Forms.CheckBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.iniciarEjecucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.datosEjecucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.datosDeInicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejercicio7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.InstGant = new System.Windows.Forms.ToolStripMenuItem();
+            this.NoDatosrep = new System.Windows.Forms.ToolStripMenuItem();
+            this.limpiarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planificadorLargoPlazoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.politicaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Politica1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Politica2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Politica3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Politica4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cambiarTiempoDeQuantumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planificadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.politicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.politicaESFCFS = new System.Windows.Forms.ToolStripMenuItem();
+            this.politicaESSJF = new System.Windows.Forms.ToolStripMenuItem();
+            this.politicaESSRTF = new System.Windows.Forms.ToolStripMenuItem();
+            this.politicaESRR = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiempoQuantumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -166,9 +169,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.EstadisticaspromedioS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadisticasEjecS)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Promediosrafagas)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // FlujoEjec
@@ -269,7 +271,7 @@
             this.CPU2,
             this.Salida,
             this.CPU3});
-            this.DatosFlow.Location = new System.Drawing.Point(95, 12);
+            this.DatosFlow.Location = new System.Drawing.Point(262, 26);
             this.DatosFlow.Name = "DatosFlow";
             this.DatosFlow.Size = new System.Drawing.Size(747, 153);
             this.DatosFlow.TabIndex = 1;
@@ -310,37 +312,13 @@
             this.CPU3.HeaderText = "CPU3";
             this.CPU3.Name = "CPU3";
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button1.ForeColor = System.Drawing.Color.LightCyan;
-            this.button1.Location = new System.Drawing.Point(12, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 47);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Cargar datos ejercicio 7";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button2.ForeColor = System.Drawing.Color.LightCyan;
-            this.button2.Location = new System.Drawing.Point(12, 91);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 35);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Iniciar ejecucion";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // estadisticass
             // 
             this.estadisticass.Controls.Add(this.tabPage1);
             this.estadisticass.Controls.Add(this.tabPage2);
             this.estadisticass.Controls.Add(this.tabPage3);
             this.estadisticass.Controls.Add(this.tabPage4);
-            this.estadisticass.Location = new System.Drawing.Point(5, 251);
+            this.estadisticass.Location = new System.Drawing.Point(-1, 283);
             this.estadisticass.Name = "estadisticass";
             this.estadisticass.SelectedIndex = 0;
             this.estadisticass.Size = new System.Drawing.Size(1077, 371);
@@ -731,190 +709,18 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Uso de recursos";
             // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button3.ForeColor = System.Drawing.Color.LightCyan;
-            this.button3.Location = new System.Drawing.Point(12, 53);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(77, 32);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Limpiar datos";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.RoyalBlue;
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(854, 2);
+            this.groupBox1.Location = new System.Drawing.Point(21, 93);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 86);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Referencias";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.groupBox2.Controls.Add(this.Politica4);
-            this.groupBox2.Controls.Add(this.Politica3);
-            this.groupBox2.Controls.Add(this.Politica2);
-            this.groupBox2.Controls.Add(this.Politica);
-            this.groupBox2.ForeColor = System.Drawing.Color.LightCyan;
-            this.groupBox2.Location = new System.Drawing.Point(854, 94);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(228, 47);
-            this.groupBox2.TabIndex = 11;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Politica CPU";
-            // 
-            // Politica4
-            // 
-            this.Politica4.AutoSize = true;
-            this.Politica4.Location = new System.Drawing.Point(175, 19);
-            this.Politica4.Name = "Politica4";
-            this.Politica4.Size = new System.Drawing.Size(41, 17);
-            this.Politica4.TabIndex = 13;
-            this.Politica4.Text = "RR";
-            this.Politica4.UseVisualStyleBackColor = true;
-            this.Politica4.CheckedChanged += new System.EventHandler(this.Politica4_CheckedChanged);
-            // 
-            // Politica3
-            // 
-            this.Politica3.AutoSize = true;
-            this.Politica3.Location = new System.Drawing.Point(120, 19);
-            this.Politica3.Name = "Politica3";
-            this.Politica3.Size = new System.Drawing.Size(53, 17);
-            this.Politica3.TabIndex = 11;
-            this.Politica3.Text = "SRTF";
-            this.Politica3.UseVisualStyleBackColor = true;
-            this.Politica3.CheckedChanged += new System.EventHandler(this.Politica_CheckedChanged);
-            // 
-            // Politica2
-            // 
-            this.Politica2.AutoSize = true;
-            this.Politica2.Location = new System.Drawing.Point(63, 19);
-            this.Politica2.Name = "Politica2";
-            this.Politica2.Size = new System.Drawing.Size(43, 17);
-            this.Politica2.TabIndex = 10;
-            this.Politica2.Text = "SJF";
-            this.Politica2.UseVisualStyleBackColor = true;
-            this.Politica2.CheckedChanged += new System.EventHandler(this.Politica_CheckedChanged);
-            // 
-            // Politica
-            // 
-            this.Politica.AutoSize = true;
-            this.Politica.Checked = true;
-            this.Politica.Location = new System.Drawing.Point(6, 19);
-            this.Politica.Name = "Politica";
-            this.Politica.Size = new System.Drawing.Size(51, 17);
-            this.Politica.TabIndex = 9;
-            this.Politica.TabStop = true;
-            this.Politica.Text = "FCFS";
-            this.Politica.UseVisualStyleBackColor = true;
-            this.Politica.CheckedChanged += new System.EventHandler(this.Politica_CheckedChanged);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.RoyalBlue;
-            this.groupBox3.Controls.Add(this.politicaESRR);
-            this.groupBox3.Controls.Add(this.politicaESSRTF);
-            this.groupBox3.Controls.Add(this.politicaESSJF);
-            this.groupBox3.Controls.Add(this.politicaESFCFS);
-            this.groupBox3.ForeColor = System.Drawing.Color.LightCyan;
-            this.groupBox3.Location = new System.Drawing.Point(854, 164);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(228, 47);
-            this.groupBox3.TabIndex = 12;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Politica E/S";
-            // 
-            // politicaESRR
-            // 
-            this.politicaESRR.AutoSize = true;
-            this.politicaESRR.Location = new System.Drawing.Point(175, 19);
-            this.politicaESRR.Name = "politicaESRR";
-            this.politicaESRR.Size = new System.Drawing.Size(41, 17);
-            this.politicaESRR.TabIndex = 12;
-            this.politicaESRR.Text = "RR";
-            this.politicaESRR.UseVisualStyleBackColor = true;
-            this.politicaESRR.CheckedChanged += new System.EventHandler(this.politicaESRR_CheckedChanged);
-            // 
-            // politicaESSRTF
-            // 
-            this.politicaESSRTF.AutoSize = true;
-            this.politicaESSRTF.Location = new System.Drawing.Point(120, 19);
-            this.politicaESSRTF.Name = "politicaESSRTF";
-            this.politicaESSRTF.Size = new System.Drawing.Size(53, 17);
-            this.politicaESSRTF.TabIndex = 11;
-            this.politicaESSRTF.Text = "SRTF";
-            this.politicaESSRTF.UseVisualStyleBackColor = true;
-            this.politicaESSRTF.CheckedChanged += new System.EventHandler(this.politicaESFCFS_CheckedChanged);
-            // 
-            // politicaESSJF
-            // 
-            this.politicaESSJF.AutoSize = true;
-            this.politicaESSJF.Location = new System.Drawing.Point(63, 19);
-            this.politicaESSJF.Name = "politicaESSJF";
-            this.politicaESSJF.Size = new System.Drawing.Size(43, 17);
-            this.politicaESSJF.TabIndex = 10;
-            this.politicaESSJF.Text = "SJF";
-            this.politicaESSJF.UseVisualStyleBackColor = true;
-            this.politicaESSJF.CheckedChanged += new System.EventHandler(this.politicaESFCFS_CheckedChanged);
-            // 
-            // politicaESFCFS
-            // 
-            this.politicaESFCFS.AutoSize = true;
-            this.politicaESFCFS.Checked = true;
-            this.politicaESFCFS.Location = new System.Drawing.Point(6, 19);
-            this.politicaESFCFS.Name = "politicaESFCFS";
-            this.politicaESFCFS.Size = new System.Drawing.Size(51, 17);
-            this.politicaESFCFS.TabIndex = 9;
-            this.politicaESFCFS.TabStop = true;
-            this.politicaESFCFS.Text = "FCFS";
-            this.politicaESFCFS.UseVisualStyleBackColor = true;
-            this.politicaESFCFS.CheckedChanged += new System.EventHandler(this.politicaESFCFS_CheckedChanged);
-            // 
-            // ConPol4
-            // 
-            this.ConPol4.Location = new System.Drawing.Point(976, 145);
-            this.ConPol4.Name = "ConPol4";
-            this.ConPol4.Size = new System.Drawing.Size(100, 20);
-            this.ConPol4.TabIndex = 13;
-            this.ConPol4.Visible = false;
-            // 
-            // NomPol4
-            // 
-            this.NomPol4.AutoSize = true;
-            this.NomPol4.ForeColor = System.Drawing.Color.LightCyan;
-            this.NomPol4.Location = new System.Drawing.Point(920, 148);
-            this.NomPol4.Name = "NomPol4";
-            this.NomPol4.Size = new System.Drawing.Size(50, 13);
-            this.NomPol4.TabIndex = 14;
-            this.NomPol4.Text = "Quantum";
-            this.NomPol4.Visible = false;
-            // 
-            // NomPolRR
-            // 
-            this.NomPolRR.AutoSize = true;
-            this.NomPolRR.ForeColor = System.Drawing.Color.LightCyan;
-            this.NomPolRR.Location = new System.Drawing.Point(918, 209);
-            this.NomPolRR.Name = "NomPolRR";
-            this.NomPolRR.Size = new System.Drawing.Size(50, 13);
-            this.NomPolRR.TabIndex = 16;
-            this.NomPolRR.Text = "Quantum";
-            this.NomPolRR.Visible = false;
-            // 
-            // ConPolRR
-            // 
-            this.ConPolRR.Location = new System.Drawing.Point(974, 206);
-            this.ConPolRR.Name = "ConPolRR";
-            this.ConPolRR.Size = new System.Drawing.Size(100, 20);
-            this.ConPolRR.TabIndex = 15;
-            this.ConPolRR.Visible = false;
             // 
             // Promediosrafagas
             // 
@@ -926,7 +732,7 @@
             this.PromRaf2CPU,
             this.PromSalida,
             this.PromRaf3CPU});
-            this.Promediosrafagas.Location = new System.Drawing.Point(198, 164);
+            this.Promediosrafagas.Location = new System.Drawing.Point(365, 185);
             this.Promediosrafagas.Name = "Promediosrafagas";
             this.Promediosrafagas.Size = new System.Drawing.Size(644, 90);
             this.Promediosrafagas.TabIndex = 17;
@@ -961,50 +767,252 @@
             this.PromRaf3CPU.HeaderText = "3ERRCPUPromedio";
             this.PromRaf3CPU.Name = "PromRaf3CPU";
             // 
-            // NoDatosrep
+            // menuStrip1
             // 
-            this.NoDatosrep.AutoSize = true;
-            this.NoDatosrep.Location = new System.Drawing.Point(12, 228);
-            this.NoDatosrep.Name = "NoDatosrep";
-            this.NoDatosrep.Size = new System.Drawing.Size(152, 17);
-            this.NoDatosrep.TabIndex = 19;
-            this.NoDatosrep.Text = "No mostrar datos repetidos";
-            this.NoDatosrep.UseVisualStyleBackColor = true;
+            this.menuStrip1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.iniciarEjecucionToolStripMenuItem,
+            this.datosEjecucionToolStripMenuItem,
+            this.planificadorLargoPlazoToolStripMenuItem,
+            this.planificadorToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1072, 24);
+            this.menuStrip1.TabIndex = 21;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // iniciarEjecucionToolStripMenuItem
+            // 
+            this.iniciarEjecucionToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.iniciarEjecucionToolStripMenuItem.Name = "iniciarEjecucionToolStripMenuItem";
+            this.iniciarEjecucionToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
+            this.iniciarEjecucionToolStripMenuItem.Text = "Iniciar ejecucion";
+            this.iniciarEjecucionToolStripMenuItem.Click += new System.EventHandler(this.Iniciarejecucion);
+            // 
+            // datosEjecucionToolStripMenuItem
+            // 
+            this.datosEjecucionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.datosDeInicioToolStripMenuItem,
+            this.InstGant,
+            this.NoDatosrep,
+            this.limpiarDatosToolStripMenuItem});
+            this.datosEjecucionToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.datosEjecucionToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.datosEjecucionToolStripMenuItem.Name = "datosEjecucionToolStripMenuItem";
+            this.datosEjecucionToolStripMenuItem.Size = new System.Drawing.Size(103, 20);
+            this.datosEjecucionToolStripMenuItem.Text = "Datos ejecucion";
+            // 
+            // datosDeInicioToolStripMenuItem
+            // 
+            this.datosDeInicioToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.datosDeInicioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ejercicio7ToolStripMenuItem});
+            this.datosDeInicioToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.datosDeInicioToolStripMenuItem.Name = "datosDeInicioToolStripMenuItem";
+            this.datosDeInicioToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.datosDeInicioToolStripMenuItem.Text = "Datos de inicio";
+            // 
+            // ejercicio7ToolStripMenuItem
+            // 
+            this.ejercicio7ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.ejercicio7ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.ejercicio7ToolStripMenuItem.Name = "ejercicio7ToolStripMenuItem";
+            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.ejercicio7ToolStripMenuItem.Text = "Ejercicio 7";
+            this.ejercicio7ToolStripMenuItem.Click += new System.EventHandler(this.DatosEjer7_Inicio);
             // 
             // InstGant
             // 
-            this.InstGant.AutoSize = true;
+            this.InstGant.BackColor = System.Drawing.Color.RoyalBlue;
             this.InstGant.Checked = true;
+            this.InstGant.CheckOnClick = true;
             this.InstGant.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.InstGant.Location = new System.Drawing.Point(12, 209);
+            this.InstGant.ForeColor = System.Drawing.Color.Cyan;
             this.InstGant.Name = "InstGant";
-            this.InstGant.Size = new System.Drawing.Size(171, 17);
-            this.InstGant.TabIndex = 20;
+            this.InstGant.Size = new System.Drawing.Size(230, 22);
             this.InstGant.Text = "Señalar instantes para GANTT";
-            this.InstGant.UseVisualStyleBackColor = true;
+            // 
+            // NoDatosrep
+            // 
+            this.NoDatosrep.BackColor = System.Drawing.Color.RoyalBlue;
+            this.NoDatosrep.CheckOnClick = true;
+            this.NoDatosrep.ForeColor = System.Drawing.Color.Cyan;
+            this.NoDatosrep.Name = "NoDatosrep";
+            this.NoDatosrep.Size = new System.Drawing.Size(230, 22);
+            this.NoDatosrep.Text = "No mostrar datos repetidos";
+            // 
+            // limpiarDatosToolStripMenuItem
+            // 
+            this.limpiarDatosToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.limpiarDatosToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.limpiarDatosToolStripMenuItem.Name = "limpiarDatosToolStripMenuItem";
+            this.limpiarDatosToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.limpiarDatosToolStripMenuItem.Text = "Limpiar datos";
+            this.limpiarDatosToolStripMenuItem.Click += new System.EventHandler(this.Limpiardatos);
+            // 
+            // planificadorLargoPlazoToolStripMenuItem
+            // 
+            this.planificadorLargoPlazoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.politicaToolStripMenuItem1});
+            this.planificadorLargoPlazoToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.planificadorLargoPlazoToolStripMenuItem.Name = "planificadorLargoPlazoToolStripMenuItem";
+            this.planificadorLargoPlazoToolStripMenuItem.Size = new System.Drawing.Size(144, 20);
+            this.planificadorLargoPlazoToolStripMenuItem.Text = "Planificador corto plazo";
+            // 
+            // politicaToolStripMenuItem1
+            // 
+            this.politicaToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.politicaToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Politica1,
+            this.Politica2,
+            this.Politica3,
+            this.Politica4});
+            this.politicaToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
+            this.politicaToolStripMenuItem1.Name = "politicaToolStripMenuItem1";
+            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.politicaToolStripMenuItem1.Text = "Politica";
+            // 
+            // Politica1
+            // 
+            this.Politica1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Politica1.Checked = true;
+            this.Politica1.CheckOnClick = true;
+            this.Politica1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Politica1.ForeColor = System.Drawing.Color.Cyan;
+            this.Politica1.Name = "Politica1";
+            this.Politica1.Size = new System.Drawing.Size(172, 22);
+            this.Politica1.Text = "FCFS";
+            this.Politica1.Click += new System.EventHandler(this.OnSelPolCPU_Click);
+            // 
+            // Politica2
+            // 
+            this.Politica2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Politica2.CheckOnClick = true;
+            this.Politica2.ForeColor = System.Drawing.Color.Cyan;
+            this.Politica2.Name = "Politica2";
+            this.Politica2.Size = new System.Drawing.Size(172, 22);
+            this.Politica2.Text = "SJF";
+            this.Politica2.Click += new System.EventHandler(this.OnSelPolCPU_Click);
+            // 
+            // Politica3
+            // 
+            this.Politica3.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Politica3.CheckOnClick = true;
+            this.Politica3.ForeColor = System.Drawing.Color.Cyan;
+            this.Politica3.Name = "Politica3";
+            this.Politica3.Size = new System.Drawing.Size(172, 22);
+            this.Politica3.Text = "SRTF";
+            this.Politica3.Click += new System.EventHandler(this.OnSelPolCPU_Click);
+            // 
+            // Politica4
+            // 
+            this.Politica4.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Politica4.CheckOnClick = true;
+            this.Politica4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cambiarTiempoDeQuantumToolStripMenuItem});
+            this.Politica4.ForeColor = System.Drawing.Color.Cyan;
+            this.Politica4.Name = "Politica4";
+            this.Politica4.Size = new System.Drawing.Size(172, 22);
+            this.Politica4.Text = "Round robin (q=1)";
+            this.Politica4.Click += new System.EventHandler(this.OnSelPolCPU_Click);
+            // 
+            // cambiarTiempoDeQuantumToolStripMenuItem
+            // 
+            this.cambiarTiempoDeQuantumToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.cambiarTiempoDeQuantumToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.cambiarTiempoDeQuantumToolStripMenuItem.Name = "cambiarTiempoDeQuantumToolStripMenuItem";
+            this.cambiarTiempoDeQuantumToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.cambiarTiempoDeQuantumToolStripMenuItem.Text = "Cambiar tiempo de quantum";
+            this.cambiarTiempoDeQuantumToolStripMenuItem.Click += new System.EventHandler(this.cambiarTiempoDeQuantumToolStripMenuItem_Click);
+            // 
+            // planificadorToolStripMenuItem
+            // 
+            this.planificadorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.politicaToolStripMenuItem});
+            this.planificadorToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.planificadorToolStripMenuItem.Name = "planificadorToolStripMenuItem";
+            this.planificadorToolStripMenuItem.Size = new System.Drawing.Size(147, 20);
+            this.planificadorToolStripMenuItem.Text = "Planificador dispositivos";
+            // 
+            // politicaToolStripMenuItem
+            // 
+            this.politicaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.politicaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.politicaESFCFS,
+            this.politicaESSJF,
+            this.politicaESSRTF,
+            this.politicaESRR});
+            this.politicaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.politicaToolStripMenuItem.Name = "politicaToolStripMenuItem";
+            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.politicaToolStripMenuItem.Text = "Politica";
+            // 
+            // politicaESFCFS
+            // 
+            this.politicaESFCFS.BackColor = System.Drawing.Color.RoyalBlue;
+            this.politicaESFCFS.Checked = true;
+            this.politicaESFCFS.CheckOnClick = true;
+            this.politicaESFCFS.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.politicaESFCFS.ForeColor = System.Drawing.Color.Cyan;
+            this.politicaESFCFS.Name = "politicaESFCFS";
+            this.politicaESFCFS.Size = new System.Drawing.Size(175, 22);
+            this.politicaESFCFS.Text = "FCFS";
+            this.politicaESFCFS.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
+            // 
+            // politicaESSJF
+            // 
+            this.politicaESSJF.BackColor = System.Drawing.Color.RoyalBlue;
+            this.politicaESSJF.CheckOnClick = true;
+            this.politicaESSJF.ForeColor = System.Drawing.Color.Cyan;
+            this.politicaESSJF.Name = "politicaESSJF";
+            this.politicaESSJF.Size = new System.Drawing.Size(175, 22);
+            this.politicaESSJF.Text = "SJF";
+            this.politicaESSJF.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
+            // 
+            // politicaESSRTF
+            // 
+            this.politicaESSRTF.BackColor = System.Drawing.Color.RoyalBlue;
+            this.politicaESSRTF.CheckOnClick = true;
+            this.politicaESSRTF.ForeColor = System.Drawing.Color.Cyan;
+            this.politicaESSRTF.Name = "politicaESSRTF";
+            this.politicaESSRTF.Size = new System.Drawing.Size(175, 22);
+            this.politicaESSRTF.Text = "SRTF";
+            this.politicaESSRTF.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
+            // 
+            // politicaESRR
+            // 
+            this.politicaESRR.BackColor = System.Drawing.Color.RoyalBlue;
+            this.politicaESRR.CheckOnClick = true;
+            this.politicaESRR.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tiempoQuantumToolStripMenuItem});
+            this.politicaESRR.ForeColor = System.Drawing.Color.Cyan;
+            this.politicaESRR.Name = "politicaESRR";
+            this.politicaESRR.Size = new System.Drawing.Size(175, 22);
+            this.politicaESRR.Text = "Round Robin (q=1)";
+            this.politicaESRR.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
+            // 
+            // tiempoQuantumToolStripMenuItem
+            // 
+            this.tiempoQuantumToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tiempoQuantumToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.tiempoQuantumToolStripMenuItem.Name = "tiempoQuantumToolStripMenuItem";
+            this.tiempoQuantumToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.tiempoQuantumToolStripMenuItem.Text = "Cambiar tiempo de quantum";
+            this.tiempoQuantumToolStripMenuItem.Click += new System.EventHandler(this.tiempoQuantumToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1072, 624);
-            this.Controls.Add(this.InstGant);
-            this.Controls.Add(this.NoDatosrep);
+            this.ClientSize = new System.Drawing.Size(1072, 660);
             this.Controls.Add(this.Promediosrafagas);
-            this.Controls.Add(this.NomPolRR);
-            this.Controls.Add(this.ConPolRR);
-            this.Controls.Add(this.NomPol4);
-            this.Controls.Add(this.ConPol4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.estadisticass);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.DatosFlow);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Planificador de procesos";
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).EndInit();
@@ -1022,11 +1030,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.estadisticasEjecS)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Promediosrafagas)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1043,8 +1049,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CPU2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Salida;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPU3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TabControl estadisticass;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -1075,12 +1079,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UCPU;
         private System.Windows.Forms.DataGridViewTextBoxColumn UEntrada;
         private System.Windows.Forms.DataGridViewTextBoxColumn USalida;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton Politica3;
-        private System.Windows.Forms.RadioButton Politica2;
-        private System.Windows.Forms.RadioButton Politica;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView EstadisticaspromedioE;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
@@ -1111,16 +1110,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton politicaESSRTF;
-        private System.Windows.Forms.RadioButton politicaESSJF;
-        private System.Windows.Forms.RadioButton politicaESFCFS;
-        private System.Windows.Forms.RadioButton Politica4;
-        private System.Windows.Forms.RadioButton politicaESRR;
-        private System.Windows.Forms.TextBox ConPol4;
-        private System.Windows.Forms.Label NomPol4;
-        private System.Windows.Forms.Label NomPolRR;
-        private System.Windows.Forms.TextBox ConPolRR;
         private System.Windows.Forms.DataGridView Promediosrafagas;
         private System.Windows.Forms.DataGridViewTextBoxColumn PromDifAr;
         private System.Windows.Forms.DataGridViewTextBoxColumn PromRaf1CPU;
@@ -1128,8 +1117,28 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PromRaf2CPU;
         private System.Windows.Forms.DataGridViewTextBoxColumn PromSalida;
         private System.Windows.Forms.DataGridViewTextBoxColumn PromRaf3CPU;
-        private System.Windows.Forms.CheckBox NoDatosrep;
-        private System.Windows.Forms.CheckBox InstGant;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem planificadorLargoPlazoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem planificadorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem politicaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem politicaESFCFS;
+        private System.Windows.Forms.ToolStripMenuItem politicaESSJF;
+        private System.Windows.Forms.ToolStripMenuItem politicaESSRTF;
+        private System.Windows.Forms.ToolStripMenuItem politicaESRR;
+        private System.Windows.Forms.ToolStripMenuItem politicaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem Politica1;
+        private System.Windows.Forms.ToolStripMenuItem Politica2;
+        private System.Windows.Forms.ToolStripMenuItem Politica3;
+        private System.Windows.Forms.ToolStripMenuItem tiempoQuantumToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Politica4;
+        private System.Windows.Forms.ToolStripMenuItem cambiarTiempoDeQuantumToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem datosEjecucionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem datosDeInicioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ejercicio7ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem InstGant;
+        private System.Windows.Forms.ToolStripMenuItem NoDatosrep;
+        private System.Windows.Forms.ToolStripMenuItem limpiarDatosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iniciarEjecucionToolStripMenuItem;
     }
 }
 

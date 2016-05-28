@@ -11,14 +11,17 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication3
 {
-   
+
     public partial class Form1 : Form
     {
+        DialogoSimple dialogoS = new DialogoSimple();
         Queue EjecucionFlujo = new Queue();
         public Form1()
         {
             InitializeComponent();
-        }
+            tiempoquantum=1;
+            tiempoquantumES=1;
+    }
         bool[] exProceso;
         int[] pend1CPU;
         int[] pendentrada;
@@ -44,6 +47,7 @@ namespace WindowsFormsApplication3
             pend2CPU = new int[cantidad];
             pendsalida = new int[cantidad];
             pend3CPU = new int[cantidad];
+            bool cerosdet = false;
             for (int x = 0; x < cantidad; x++)
             {
                 exProceso[x] = false;
@@ -52,6 +56,14 @@ namespace WindowsFormsApplication3
                 pend2CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[4].Value.ToString()));
                 pendsalida[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[5].Value.ToString()));
                 pend3CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[6].Value.ToString()));
+                if (pend1CPU[x]==0 || pendentrada[x] == 0 || pend2CPU[x] == 0 || pendsalida[x] == 0 || pend3CPU[x] == 0)
+                {
+                    cerosdet = true;
+                }
+            }
+            if (cerosdet)
+            {
+                MessageBox.Show("Se detectaron valores iguales a 0 en las rafagas. Es probable que el programa no funcione correctamente");
             }
             configuraciones.Add(pend1CPU);
             configuraciones.Add(pendentrada);
@@ -72,7 +84,7 @@ namespace WindowsFormsApplication3
             }
             return false;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void DatosEjer7_Inicio(object sender, EventArgs e)
         {
             DatosFlow.Rows.Clear();
             //{Id_Proceso,Tiempo_de_arribo,1er_R_CPU,Entrada,2da_R_CPU,Salida,3er_R_CPU}
@@ -468,7 +480,7 @@ namespace WindowsFormsApplication3
 
             }
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void Iniciarejecucion(object sender, EventArgs e)
         {
             backcolacpu = "";
             backcolaBE = "";
@@ -479,7 +491,7 @@ namespace WindowsFormsApplication3
             backenejcent = "";
             backenejcsal = "";
             bool noerror = true;
-            if (Politica.Checked)
+            if (Politica1.Checked)
             {
                 politica = FCFS;
             }
@@ -498,21 +510,6 @@ namespace WindowsFormsApplication3
             if (Politica4.Checked)
             {
                 politica = RR;
-                //Intenta convertir tiempo de quantum en numero
-                try
-                {
-                    tiempoquantum = Int32.Parse(ConPol4.Text);
-                    if (tiempoquantum<=0)
-                    {
-                        MessageBox.Show("Debe ingresar un valor de quantum para CPU mayor que 0");
-                        noerror = false;
-                    }
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Debe ingresar un numero en el tiempo de Quantum E/S");
-                    noerror = false;
-                }
             }
             if (politicaESFCFS.Checked)
             {
@@ -528,22 +525,7 @@ namespace WindowsFormsApplication3
             }
             if (politicaESRR.Checked)
             {
-                politicaES = RR;
-                //Intenta convertir tiempo de quantum en numero
-                try
-                {
-                    tiempoquantumES = Int32.Parse(ConPolRR.Text);
-                    if (tiempoquantumES <= 0)
-                    {
-                        MessageBox.Show("Debe ingresar un valor de quantum para E/S mayor que 0");
-                        noerror = false;
-                    }
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Debe ingresar un numero en el tiempo de Quantum E/S");
-                    noerror = false;
-                }
+                politicaES = RR;              
             }
             FlujoEjec.Rows.Clear();
             reloj =0;
@@ -620,38 +602,130 @@ namespace WindowsFormsApplication3
             
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Limpiardatos(object sender, EventArgs e)
         {
             DatosFlow.Rows.Clear();
         }
 
-        //Muestra el cuadro de texto del quantum cuando se selecciona politica RR
-        private void Politica4_CheckedChanged(object sender, EventArgs e)
-        {
-            ConPol4.Visible = true;
-            NomPol4.Visible = true;
-        }
-        //Oculta el cuadro de texto del quantum cuando se selecciona cualquier politica diferente a RR
-        private void Politica_CheckedChanged(object sender, EventArgs e)
-        {
-            ConPol4.Visible = false;
-            NomPol4.Visible = false;
-        }
-        private void politicaESRR_CheckedChanged(object sender, EventArgs e)
-        {
-            ConPolRR.Visible = true;
-            NomPolRR.Visible = true;
-        }
+        //Muestra el cuadro de texto del quantum cuando se selecciona politica R
 
-        private void politicaESFCFS_CheckedChanged(object sender, EventArgs e)
-        {
-            ConPolRR.Visible = false;
-            NomPolRR.Visible = false;
-        }
+
 
         private void DatosFlow_KeyUp(object sender, KeyEventArgs e)
         {
             //MessageBox.Show("Se ha cambiado el valor de una celda");
+        }
+
+
+        private void OnSelPolESCPU_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            if (!ts.Checked)
+            {
+                ts.Checked = true;
+            }
+            if (politicaESFCFS != ts)
+            {
+                politicaESFCFS.Checked = false;
+            }
+            if (politicaESSJF != ts)
+            {
+                politicaESSJF.Checked = false;
+            }
+            if (politicaESSRTF != ts)
+            {
+                politicaESSRTF.Checked = false;
+            }
+            if (politicaESRR != ts)
+            {
+                politicaESRR.Checked = false;
+            }
+        }
+        public void definirquantumCPU()
+        {
+            int temporal = dialogoS.bufer;
+            if (temporal > 0)
+            {
+                tiempoquantum = temporal;
+                Politica4.Text = "Round Robin (q=" + tiempoquantum + ")";
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar un tiempo de quantum mayor que 0");
+            }
+            dialogoS.Texto.Text = tiempoquantum.ToString();
+        }
+        private void cambiarTiempoDeQuantumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogoS = new DialogoSimple();
+            Politica1.Checked = false;
+            Politica2.Checked = false;
+            Politica3.Checked = false;
+            Politica4.Checked = true;
+            dialogoS.Text = "Quantum CPU";
+            dialogoS.Texto.Text = tiempoquantum.ToString();
+            dialogoS.Etiqueta.Text = "Quantum CPU";
+            dialogoS.BotonEst.Text = "Establecer este quantum";
+            dialogoS.mensaje = "Debe ingresar un numero para el tiempo de quantum";
+            //Establece la funcion de retorno
+            dialogoS.manejador = definirquantumCPU;
+            dialogoS.bufer = tiempoquantum;
+            dialogoS.Show();
+        }
+
+        private void OnSelPolCPU_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            if (!ts.Checked)
+            {
+                ts.Checked = true;
+            }
+            if (Politica1 != ts)
+            {
+                Politica1.Checked = false;
+            }
+            if (Politica2 != ts)
+            {
+                Politica2.Checked = false;
+            }
+            if (Politica3 != ts)
+            {
+                Politica3.Checked = false;
+            }
+            if (Politica4 != ts)
+            {
+                Politica4.Checked = false;
+            }
+        }
+        public void definirquantumES()
+        {
+            int temporal = dialogoS.bufer;
+            if (temporal > 0)
+            {
+                tiempoquantumES = temporal;
+                politicaESRR.Text = "Round Robin (q=" + tiempoquantumES + ")";
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar un tiempo de quantum mayor que 0");
+            }
+            dialogoS.Texto.Text = tiempoquantumES.ToString();
+        }
+        private void tiempoQuantumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogoS = new DialogoSimple();
+            politicaESFCFS.Checked = false;
+            politicaESSJF.Checked = false;
+            politicaESSRTF.Checked = false;
+            politicaESRR.Checked = true;
+            dialogoS.Text = "Quantum E/S";
+            dialogoS.Texto.Text = tiempoquantumES.ToString();
+            dialogoS.Etiqueta.Text = "Quantum E/S";
+            dialogoS.BotonEst.Text = "Establecer este quantum";
+            dialogoS.mensaje = "Debe ingresar un numero para el tiempo de quantum";
+            dialogoS.manejador = definirquantumES;
+            dialogoS.bufer = tiempoquantumES;
+            dialogoS.Show();
         }
     }
     class Computador
@@ -785,6 +859,7 @@ namespace WindowsFormsApplication3
                 Entrada.Enqueue(num_proceso);
                 hayarriboE = true;
                 bool modificada = false;
+                bool modificadab = false;
                 int temporal = -1;
                 int temporal2 = -1;
                 //Si se implementa politica SJF o SRTF se ordena la cola de listos
@@ -793,6 +868,7 @@ namespace WindowsFormsApplication3
                     int[] colaentrada = Entrada.ToArray();
                     int[] colabentrada = BEntrada.ToArray();
                     int cantidadcola = colaentrada.Length;
+                    int cantidadcolab = colabentrada.Length;
                     //Ordena la cola de listos teniendo en cuenta la primera rafaga de cada proceso
                     for (int x = 0; x < (cantidadcola - 1); x++)
                     {
@@ -801,12 +877,22 @@ namespace WindowsFormsApplication3
                             if (rafagas[1][colaentrada[x]] > rafagas[1][colaentrada[y]])
                             {
                                 temporal = colaentrada[x];
-                                temporal2 = colabentrada[x];
                                 colaentrada[x] = colaentrada[y];
-                                colabentrada[x] = colabentrada[y];
                                 colaentrada[y] = temporal;
-                                colabentrada[y] = temporal2;
                                 modificada = true;
+                            }
+                        }
+                    }
+                    for (int x = 0; x < (cantidadcolab - 1); x++)
+                    {
+                        for (int y = (x + 1); y < cantidadcolab; y++)
+                        {
+                            if (rafagas[1][colabentrada[x]] > rafagas[1][colabentrada[y]])
+                            {
+                                temporal2 = colabentrada[x];
+                                colabentrada[x] = colabentrada[y];
+                                colabentrada[y] = temporal2;
+                                modificadab = true;
                             }
                         }
                     }
@@ -816,6 +902,14 @@ namespace WindowsFormsApplication3
                         for (int x = 0; x < cantidadcola; x++)
                         {
                             Entrada.Enqueue(colaentrada[x]);
+                        }
+                    }
+                    if (modificadab)
+                    {
+                        BEntrada.Clear();
+                        for (int x = 0; x < cantidadcolab; x++)
+                        {
+                            BEntrada.Enqueue(colabentrada[x]);
                         }
                     }
                 }
@@ -834,6 +928,7 @@ namespace WindowsFormsApplication3
                 Salida.Enqueue(num_proceso);
                 hayarriboS = true;
                 bool modificada = false;
+                bool modificadab = false;
                 int temporal = -1;
                 int temporal2 = -1;
                 //Si se implementa politica SJF o SRTF se ordena la cola de listos
@@ -842,6 +937,7 @@ namespace WindowsFormsApplication3
                     int[] colasalida = Salida.ToArray();
                     int[] colabsalida = BSalida.ToArray();
                     int cantidadcola = colasalida.Length;
+                    int cantidadcolab = colabsalida.Length;
                     //Ordena la cola de listos teniendo en cuenta la primera rafaga de cada proceso
                     for (int x = 0; x < (cantidadcola - 1); x++)
                     {
@@ -850,12 +946,22 @@ namespace WindowsFormsApplication3
                             if (rafagas[3][colasalida[x]] > rafagas[3][colasalida[y]])
                             {
                                 temporal = colasalida[x];
-                                temporal2 = colabsalida[x];
                                 colasalida[x] = colasalida[y];
-                                colabsalida[x] = colabsalida[y];
                                 colasalida[y] = temporal;
-                                colabsalida[y] = temporal2;
                                 modificada = true;
+                            }
+                        }
+                    }
+                    for (int x = 0; x < (cantidadcolab - 1); x++)
+                    {
+                        for (int y = (x + 1); y < cantidadcolab; y++)
+                        {
+                            if (rafagas[3][colabsalida[x]] > rafagas[3][colabsalida[y]])
+                            {
+                                temporal2 = colabsalida[x];
+                                colabsalida[x] = colabsalida[y];
+                                colabsalida[y] = temporal2;
+                                modificadab = true;
                             }
                         }
                     }
@@ -865,6 +971,14 @@ namespace WindowsFormsApplication3
                         for (int x = 0; x < cantidadcola; x++)
                         {
                             Salida.Enqueue(colasalida[x]);
+                        }
+                    }
+                    if (modificadab)
+                    {
+                        BSalida.Clear();
+                        for (int x = 0; x < cantidadcolab; x++)
+                        {
+                            BSalida.Enqueue(colabsalida[x]);
                         }
                     }
                 }
@@ -956,15 +1070,34 @@ namespace WindowsFormsApplication3
                             {
                                 tiemposfinalizacion[uCPU] = instante;
                             }
+                            BEntrada.Enqueue(uCPU);
                             if (agregarprocesoE(uCPU))
                             {
-                                BEntrada.Enqueue(uCPU);
                                 tiemposarriboE[uCPU] = instante;
                             }
-                            else if (agregarprocesoS(uCPU))
+                            else 
                             {
-                                BSalida.Enqueue(uCPU);
-                                tiemposarriboS[uCPU] = instante;
+                                BEntrada.Dequeue();
+                                if (rafagas[2][uCPU] == 0)
+                                {
+                                    BSalida.Enqueue(uCPU);
+                                    if (agregarprocesoS(uCPU))
+                                    {
+                                        tiemposarriboS[uCPU] = instante;
+                                    }
+                                    else
+                                    {
+                                        BSalida.Dequeue();
+                                        if (rafagas[4][uCPU] != 0)
+                                        {
+                                            rafagas_actuales[uCPU] += 2;
+                                            agregarproceso(uCPU);
+                                        }
+                                    }
+                                } else
+                                {
+                                    agregarproceso(uCPU);
+                                }      
                             }
 
                             //Informa de un nuevo arribo a la cola de entrada
@@ -977,8 +1110,18 @@ namespace WindowsFormsApplication3
                                 tiemposfinalizacion[uCPU] = instante;
                             }
                             BSalida.Enqueue(uCPU);
-                            agregarprocesoS(uCPU);
-                            tiemposarriboS[uCPU] = instante;
+                            if (agregarprocesoS(uCPU))
+                            {
+                                tiemposarriboS[uCPU] = instante;
+                            }
+                            else
+                            {
+                                BSalida.Dequeue();
+                                if (rafagas[4][uCPU] != 0)
+                                {
+                                    agregarproceso(uCPU);
+                                }
+                            }
                             //Informa de un nuevo arribo a la cola de salida
                         }
                     }
@@ -1144,10 +1287,9 @@ namespace WindowsFormsApplication3
                                 rafagas[1][UEntrada] = TRestanteEntrada;
                                 //Saca el nuevo proceso a ejecutar
                                 tiemposprimerrespuestaE[proceso] = instante;
-                                Entrada.Dequeue();
-                                BEntrada.Dequeue();
                                 //Ordena la cola de listos 
                                 agregarprocesoE(UEntrada);
+                                Entrada.Dequeue();
                                 //Inicia la ejecucion del nuevo proceso
                                 UEntrada = proceso;
                                 //Descuenta el ciclo de reloj en curso
@@ -1267,10 +1409,9 @@ namespace WindowsFormsApplication3
                                 rafagas[3][USalida] = TRestanteSalida;
                                 //Saca el nuevo proceso a ejecutar
                                 tiemposprimerrespuestaS[proceso] = instante;
-                                Salida.Dequeue();
-                                BSalida.Dequeue();
                                 //Ordena la cola de listos 
                                 agregarprocesoS(USalida);
+                                Salida.Dequeue();
                                 //Inicia la ejecucion del nuevo proceso
                                 USalida = proceso;
                                 //Descuenta el ciclo de reloj en curso

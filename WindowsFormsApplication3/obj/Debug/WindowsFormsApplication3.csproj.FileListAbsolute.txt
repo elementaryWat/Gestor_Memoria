@@ -16,3 +16,13 @@ C:\Users\GerardoAugusto\Documents\Visual Studio 2015\Projects\Planificadorproces
 C:\Users\GerardoAugusto\Documents\Visual Studio 2015\Projects\Planificadorprocesos\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
 C:\Users\GerardoAugusto\Documents\Visual Studio 2015\Projects\Planificadorprocesos\WindowsFormsApplication3\obj\Debug\Planificadorprocesos.exe
 C:\Users\GerardoAugusto\Documents\Visual Studio 2015\Projects\Planificadorprocesos\WindowsFormsApplication3\obj\Debug\Planificadorprocesos.pdb
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\bin\Debug\Planificadorprocesos.exe.config
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\Planificadorprocesos.exe
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\Planificadorprocesos.pdb
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\bin\Debug\Planificadorprocesos.exe
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\bin\Debug\Planificadorprocesos.pdb
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Form1.resources
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\Planificadorprocesos.Properties.Resources.resources
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.DialogoSimple.resources
