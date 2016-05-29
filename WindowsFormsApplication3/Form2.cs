@@ -34,12 +34,17 @@ namespace WindowsFormsApplication3
                 error = true;
             }
             //Si no hay error en el procesamiento del numero llama a la funcion encapsulada por el delegado
+            manejador();
             if (!error)
             {
-                manejador();
                 Hide();
             }
             
+        }
+
+        private void DialogoSimple_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

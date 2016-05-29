@@ -138,9 +138,23 @@
             this.datosEjecucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datosDeInicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ejercicio7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.limpiarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.InstGant = new System.Windows.Forms.ToolStripMenuItem();
             this.NoDatosrep = new System.Windows.Forms.ToolStripMenuItem();
-            this.limpiarDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionDeMemoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BotTamMem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cambiarTamañoMemoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.organizacionMemoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PartFijas = new System.Windows.Forms.ToolStripMenuItem();
+            this.IgTamPart = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.DifTamPart = new System.Windows.Forms.ToolStripMenuItem();
+            this.UnaCola = new System.Windows.Forms.ToolStripMenuItem();
+            this.UnaColaPP = new System.Windows.Forms.ToolStripMenuItem();
+            this.organizarParticionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PartDin = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planificadorLargoPlazoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Politica1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -773,6 +787,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.iniciarEjecucionToolStripMenuItem,
             this.datosEjecucionToolStripMenuItem,
+            this.gestionDeMemoriaToolStripMenuItem,
             this.planificadorLargoPlazoToolStripMenuItem,
             this.planificadorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -788,19 +803,24 @@
             this.iniciarEjecucionToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
             this.iniciarEjecucionToolStripMenuItem.Text = "Iniciar ejecucion";
             this.iniciarEjecucionToolStripMenuItem.Click += new System.EventHandler(this.Iniciarejecucion);
+            this.iniciarEjecucionToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.iniciarEjecucionToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // datosEjecucionToolStripMenuItem
             // 
             this.datosEjecucionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.datosDeInicioToolStripMenuItem,
+            this.limpiarDatosToolStripMenuItem,
+            this.toolStripSeparator1,
             this.InstGant,
-            this.NoDatosrep,
-            this.limpiarDatosToolStripMenuItem});
+            this.NoDatosrep});
             this.datosEjecucionToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.datosEjecucionToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.datosEjecucionToolStripMenuItem.Name = "datosEjecucionToolStripMenuItem";
             this.datosEjecucionToolStripMenuItem.Size = new System.Drawing.Size(103, 20);
             this.datosEjecucionToolStripMenuItem.Text = "Datos ejecucion";
+            this.datosEjecucionToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.datosEjecucionToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // datosDeInicioToolStripMenuItem
             // 
@@ -811,15 +831,37 @@
             this.datosDeInicioToolStripMenuItem.Name = "datosDeInicioToolStripMenuItem";
             this.datosDeInicioToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.datosDeInicioToolStripMenuItem.Text = "Datos de inicio";
+            this.datosDeInicioToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.datosDeInicioToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // ejercicio7ToolStripMenuItem
             // 
             this.ejercicio7ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio7ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio7ToolStripMenuItem.Name = "ejercicio7ToolStripMenuItem";
-            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejercicio7ToolStripMenuItem.Text = "Ejercicio 7";
             this.ejercicio7ToolStripMenuItem.Click += new System.EventHandler(this.DatosEjer7_Inicio);
+            this.ejercicio7ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.ejercicio7ToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // limpiarDatosToolStripMenuItem
+            // 
+            this.limpiarDatosToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.limpiarDatosToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.limpiarDatosToolStripMenuItem.Name = "limpiarDatosToolStripMenuItem";
+            this.limpiarDatosToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.limpiarDatosToolStripMenuItem.Text = "Limpiar datos";
+            this.limpiarDatosToolStripMenuItem.Click += new System.EventHandler(this.Limpiardatos);
+            this.limpiarDatosToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.limpiarDatosToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.toolStripSeparator1.ForeColor = System.Drawing.Color.Cyan;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(227, 6);
             // 
             // InstGant
             // 
@@ -831,6 +873,8 @@
             this.InstGant.Name = "InstGant";
             this.InstGant.Size = new System.Drawing.Size(230, 22);
             this.InstGant.Text = "Señalar instantes para GANTT";
+            this.InstGant.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.InstGant.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // NoDatosrep
             // 
@@ -840,15 +884,177 @@
             this.NoDatosrep.Name = "NoDatosrep";
             this.NoDatosrep.Size = new System.Drawing.Size(230, 22);
             this.NoDatosrep.Text = "No mostrar datos repetidos";
+            this.NoDatosrep.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.NoDatosrep.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
-            // limpiarDatosToolStripMenuItem
+            // gestionDeMemoriaToolStripMenuItem
             // 
-            this.limpiarDatosToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
-            this.limpiarDatosToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
-            this.limpiarDatosToolStripMenuItem.Name = "limpiarDatosToolStripMenuItem";
-            this.limpiarDatosToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
-            this.limpiarDatosToolStripMenuItem.Text = "Limpiar datos";
-            this.limpiarDatosToolStripMenuItem.Click += new System.EventHandler(this.Limpiardatos);
+            this.gestionDeMemoriaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BotTamMem,
+            this.organizacionMemoriaToolStripMenuItem});
+            this.gestionDeMemoriaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.gestionDeMemoriaToolStripMenuItem.Name = "gestionDeMemoriaToolStripMenuItem";
+            this.gestionDeMemoriaToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.gestionDeMemoriaToolStripMenuItem.Text = "Gestion de memoria";
+            this.gestionDeMemoriaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.gestionDeMemoriaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // BotTamMem
+            // 
+            this.BotTamMem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.BotTamMem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cambiarTamañoMemoriaToolStripMenuItem});
+            this.BotTamMem.ForeColor = System.Drawing.Color.Cyan;
+            this.BotTamMem.Name = "BotTamMem";
+            this.BotTamMem.Size = new System.Drawing.Size(230, 22);
+            this.BotTamMem.Text = "Tamaño de memoria (128 KB)";
+            this.BotTamMem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.BotTamMem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // cambiarTamañoMemoriaToolStripMenuItem
+            // 
+            this.cambiarTamañoMemoriaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.cambiarTamañoMemoriaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.cambiarTamañoMemoriaToolStripMenuItem.Name = "cambiarTamañoMemoriaToolStripMenuItem";
+            this.cambiarTamañoMemoriaToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.cambiarTamañoMemoriaToolStripMenuItem.Text = "Cambiar tamaño memoria";
+            this.cambiarTamañoMemoriaToolStripMenuItem.Click += new System.EventHandler(this.cambiarTamañoMemoriaToolStripMenuItem_Click);
+            this.cambiarTamañoMemoriaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.cambiarTamañoMemoriaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // organizacionMemoriaToolStripMenuItem
+            // 
+            this.organizacionMemoriaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.organizacionMemoriaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PartFijas,
+            this.PartDin});
+            this.organizacionMemoriaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.organizacionMemoriaToolStripMenuItem.Name = "organizacionMemoriaToolStripMenuItem";
+            this.organizacionMemoriaToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.organizacionMemoriaToolStripMenuItem.Text = "Organizacion memoria";
+            this.organizacionMemoriaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.organizacionMemoriaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // PartFijas
+            // 
+            this.PartFijas.BackColor = System.Drawing.Color.RoyalBlue;
+            this.PartFijas.Checked = true;
+            this.PartFijas.CheckOnClick = true;
+            this.PartFijas.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.PartFijas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.IgTamPart,
+            this.DifTamPart});
+            this.PartFijas.ForeColor = System.Drawing.Color.Cyan;
+            this.PartFijas.Name = "PartFijas";
+            this.PartFijas.Size = new System.Drawing.Size(189, 22);
+            this.PartFijas.Text = "Particiones fijas";
+            this.PartFijas.Click += new System.EventHandler(this.TipoPart_Click);
+            this.PartFijas.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.PartFijas.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // IgTamPart
+            // 
+            this.IgTamPart.BackColor = System.Drawing.Color.RoyalBlue;
+            this.IgTamPart.CheckOnClick = true;
+            this.IgTamPart.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configurarToolStripMenuItem1});
+            this.IgTamPart.ForeColor = System.Drawing.Color.Cyan;
+            this.IgTamPart.Name = "IgTamPart";
+            this.IgTamPart.Size = new System.Drawing.Size(182, 22);
+            this.IgTamPart.Text = "Del mismo tamaño";
+            this.IgTamPart.Click += new System.EventHandler(this.TamPart_Click);
+            this.IgTamPart.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.IgTamPart.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // configurarToolStripMenuItem1
+            // 
+            this.configurarToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.configurarToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
+            this.configurarToolStripMenuItem1.Name = "configurarToolStripMenuItem1";
+            this.configurarToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.configurarToolStripMenuItem1.Text = "Configurar..";
+            this.configurarToolStripMenuItem1.Click += new System.EventHandler(this.configurarMismT);
+            this.configurarToolStripMenuItem1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.configurarToolStripMenuItem1.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // DifTamPart
+            // 
+            this.DifTamPart.BackColor = System.Drawing.Color.RoyalBlue;
+            this.DifTamPart.Checked = true;
+            this.DifTamPart.CheckOnClick = true;
+            this.DifTamPart.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.DifTamPart.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.UnaCola,
+            this.UnaColaPP,
+            this.organizarParticionesToolStripMenuItem});
+            this.DifTamPart.ForeColor = System.Drawing.Color.Cyan;
+            this.DifTamPart.Name = "DifTamPart";
+            this.DifTamPart.Size = new System.Drawing.Size(182, 22);
+            this.DifTamPart.Text = "De diferente tamaño";
+            this.DifTamPart.Click += new System.EventHandler(this.TamPart_Click);
+            this.DifTamPart.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.DifTamPart.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // UnaCola
+            // 
+            this.UnaCola.BackColor = System.Drawing.Color.RoyalBlue;
+            this.UnaCola.CheckOnClick = true;
+            this.UnaCola.ForeColor = System.Drawing.Color.Cyan;
+            this.UnaCola.Name = "UnaCola";
+            this.UnaCola.Size = new System.Drawing.Size(191, 22);
+            this.UnaCola.Text = "Una sola cola";
+            this.UnaCola.Click += new System.EventHandler(this.Cantidadcolas_Click);
+            this.UnaCola.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.UnaCola.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // UnaColaPP
+            // 
+            this.UnaColaPP.BackColor = System.Drawing.Color.RoyalBlue;
+            this.UnaColaPP.Checked = true;
+            this.UnaColaPP.CheckOnClick = true;
+            this.UnaColaPP.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.UnaColaPP.ForeColor = System.Drawing.Color.Cyan;
+            this.UnaColaPP.Name = "UnaColaPP";
+            this.UnaColaPP.Size = new System.Drawing.Size(191, 22);
+            this.UnaColaPP.Text = "Una cola por partición";
+            this.UnaColaPP.Click += new System.EventHandler(this.Cantidadcolas_Click);
+            this.UnaColaPP.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.UnaColaPP.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // organizarParticionesToolStripMenuItem
+            // 
+            this.organizarParticionesToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.organizarParticionesToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.organizarParticionesToolStripMenuItem.Name = "organizarParticionesToolStripMenuItem";
+            this.organizarParticionesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.organizarParticionesToolStripMenuItem.Text = "Organizar particiones";
+            this.organizarParticionesToolStripMenuItem.Click += new System.EventHandler(this.organizarParticionesToolStripMenuItem_Click);
+            this.organizarParticionesToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.organizarParticionesToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // PartDin
+            // 
+            this.PartDin.BackColor = System.Drawing.Color.RoyalBlue;
+            this.PartDin.CheckOnClick = true;
+            this.PartDin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configurarToolStripMenuItem});
+            this.PartDin.ForeColor = System.Drawing.Color.Cyan;
+            this.PartDin.Name = "PartDin";
+            this.PartDin.Size = new System.Drawing.Size(189, 22);
+            this.PartDin.Text = "Particiones dinamicas";
+            this.PartDin.Click += new System.EventHandler(this.TipoPart_Click);
+            this.PartDin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.PartDin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // configurarToolStripMenuItem
+            // 
+            this.configurarToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.configurarToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.configurarToolStripMenuItem.Name = "configurarToolStripMenuItem";
+            this.configurarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.configurarToolStripMenuItem.Text = "Configurar";
+            this.configurarToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.configurarToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // planificadorLargoPlazoToolStripMenuItem
             // 
@@ -858,6 +1064,8 @@
             this.planificadorLargoPlazoToolStripMenuItem.Name = "planificadorLargoPlazoToolStripMenuItem";
             this.planificadorLargoPlazoToolStripMenuItem.Size = new System.Drawing.Size(144, 20);
             this.planificadorLargoPlazoToolStripMenuItem.Text = "Planificador corto plazo";
+            this.planificadorLargoPlazoToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.planificadorLargoPlazoToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // politicaToolStripMenuItem1
             // 
@@ -871,6 +1079,8 @@
             this.politicaToolStripMenuItem1.Name = "politicaToolStripMenuItem1";
             this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.politicaToolStripMenuItem1.Text = "Politica";
+            this.politicaToolStripMenuItem1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.politicaToolStripMenuItem1.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // Politica1
             // 
@@ -883,6 +1093,8 @@
             this.Politica1.Size = new System.Drawing.Size(172, 22);
             this.Politica1.Text = "FCFS";
             this.Politica1.Click += new System.EventHandler(this.OnSelPolCPU_Click);
+            this.Politica1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.Politica1.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // Politica2
             // 
@@ -893,6 +1105,8 @@
             this.Politica2.Size = new System.Drawing.Size(172, 22);
             this.Politica2.Text = "SJF";
             this.Politica2.Click += new System.EventHandler(this.OnSelPolCPU_Click);
+            this.Politica2.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.Politica2.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // Politica3
             // 
@@ -903,6 +1117,8 @@
             this.Politica3.Size = new System.Drawing.Size(172, 22);
             this.Politica3.Text = "SRTF";
             this.Politica3.Click += new System.EventHandler(this.OnSelPolCPU_Click);
+            this.Politica3.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.Politica3.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // Politica4
             // 
@@ -915,6 +1131,8 @@
             this.Politica4.Size = new System.Drawing.Size(172, 22);
             this.Politica4.Text = "Round robin (q=1)";
             this.Politica4.Click += new System.EventHandler(this.OnSelPolCPU_Click);
+            this.Politica4.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.Politica4.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // cambiarTiempoDeQuantumToolStripMenuItem
             // 
@@ -924,6 +1142,8 @@
             this.cambiarTiempoDeQuantumToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.cambiarTiempoDeQuantumToolStripMenuItem.Text = "Cambiar tiempo de quantum";
             this.cambiarTiempoDeQuantumToolStripMenuItem.Click += new System.EventHandler(this.cambiarTiempoDeQuantumToolStripMenuItem_Click);
+            this.cambiarTiempoDeQuantumToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.cambiarTiempoDeQuantumToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // planificadorToolStripMenuItem
             // 
@@ -933,6 +1153,8 @@
             this.planificadorToolStripMenuItem.Name = "planificadorToolStripMenuItem";
             this.planificadorToolStripMenuItem.Size = new System.Drawing.Size(147, 20);
             this.planificadorToolStripMenuItem.Text = "Planificador dispositivos";
+            this.planificadorToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.planificadorToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // politicaToolStripMenuItem
             // 
@@ -944,8 +1166,10 @@
             this.politicaESRR});
             this.politicaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem.Name = "politicaToolStripMenuItem";
-            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.politicaToolStripMenuItem.Text = "Politica";
+            this.politicaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.politicaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // politicaESFCFS
             // 
@@ -958,6 +1182,8 @@
             this.politicaESFCFS.Size = new System.Drawing.Size(175, 22);
             this.politicaESFCFS.Text = "FCFS";
             this.politicaESFCFS.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
+            this.politicaESFCFS.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.politicaESFCFS.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // politicaESSJF
             // 
@@ -968,6 +1194,8 @@
             this.politicaESSJF.Size = new System.Drawing.Size(175, 22);
             this.politicaESSJF.Text = "SJF";
             this.politicaESSJF.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
+            this.politicaESSJF.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.politicaESSJF.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // politicaESSRTF
             // 
@@ -978,6 +1206,8 @@
             this.politicaESSRTF.Size = new System.Drawing.Size(175, 22);
             this.politicaESSRTF.Text = "SRTF";
             this.politicaESSRTF.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
+            this.politicaESSRTF.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.politicaESSRTF.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // politicaESRR
             // 
@@ -990,6 +1220,8 @@
             this.politicaESRR.Size = new System.Drawing.Size(175, 22);
             this.politicaESRR.Text = "Round Robin (q=1)";
             this.politicaESRR.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
+            this.politicaESRR.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.politicaESRR.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // tiempoQuantumToolStripMenuItem
             // 
@@ -999,6 +1231,8 @@
             this.tiempoQuantumToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.tiempoQuantumToolStripMenuItem.Text = "Cambiar tiempo de quantum";
             this.tiempoQuantumToolStripMenuItem.Click += new System.EventHandler(this.tiempoQuantumToolStripMenuItem_Click);
+            this.tiempoQuantumToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.tiempoQuantumToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // Form1
             // 
@@ -1015,6 +1249,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Planificador de procesos";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).EndInit();
             this.estadisticass.ResumeLayout(false);
@@ -1139,6 +1374,20 @@
         private System.Windows.Forms.ToolStripMenuItem NoDatosrep;
         private System.Windows.Forms.ToolStripMenuItem limpiarDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iniciarEjecucionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem gestionDeMemoriaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BotTamMem;
+        private System.Windows.Forms.ToolStripMenuItem cambiarTamañoMemoriaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem organizacionMemoriaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PartFijas;
+        private System.Windows.Forms.ToolStripMenuItem PartDin;
+        private System.Windows.Forms.ToolStripMenuItem configurarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem IgTamPart;
+        private System.Windows.Forms.ToolStripMenuItem DifTamPart;
+        private System.Windows.Forms.ToolStripMenuItem UnaCola;
+        private System.Windows.Forms.ToolStripMenuItem UnaColaPP;
+        private System.Windows.Forms.ToolStripMenuItem configurarToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem organizarParticionesToolStripMenuItem;
     }
 }
 

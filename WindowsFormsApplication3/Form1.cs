@@ -14,12 +14,15 @@ namespace WindowsFormsApplication3
 
     public partial class Form1 : Form
     {
-        DialogoSimple dialogoS = new DialogoSimple();
-        Queue EjecucionFlujo = new Queue();
+        DialogoSimple dialogoS;
+        ConfPartFijas2 dialogoConfPF;
+        Memoria Gestormemoria;
         public Form1()
         {
             InitializeComponent();
-            tiempoquantum=1;
+            dialogoS = new DialogoSimple();
+            Gestormemoria = new Memoria(128);
+            tiempoquantum =1;
             tiempoquantumES=1;
     }
         bool[] exProceso;
@@ -188,7 +191,7 @@ namespace WindowsFormsApplication3
             int prompendSalida = 0;
             int sumapend3CPU = 0;
             int prompend3CPU = 0;
-            //Obtiene estadiscticas de ordenador
+            //Obtiene estadisticas de ordenador
             tiemposfinalizacion = ordenador.tiemposfinalizacion;
             tiemposprimerrespuesta = ordenador.tiemposprimerrespuesta;
 
@@ -205,7 +208,7 @@ namespace WindowsFormsApplication3
             int promrespuestaE = 0;
             int sumaresperaE = 0;
             int promesperaE = 0;
-            //Obtiene estadiscticas de ordenador
+            //Obtiene estadisticas de ordenador
             tiemposfinalizacionE = ordenador.tiemposfinalizacionE;
             tiemposprimerrespuestaE = ordenador.tiemposprimerrespuestaE;
             tiemposarriboE = ordenador.tiemposarriboE;
@@ -651,6 +654,7 @@ namespace WindowsFormsApplication3
             }
             else
             {
+                dialogoS.error = true;
                 MessageBox.Show("Debe ingresar un tiempo de quantum mayor que 0");
             }
             dialogoS.Texto.Text = tiempoquantum.ToString();
@@ -707,6 +711,7 @@ namespace WindowsFormsApplication3
             }
             else
             {
+                dialogoS.error = true;
                 MessageBox.Show("Debe ingresar un tiempo de quantum mayor que 0");
             }
             dialogoS.Texto.Text = tiempoquantumES.ToString();
@@ -727,737 +732,118 @@ namespace WindowsFormsApplication3
             dialogoS.bufer = tiempoquantumES;
             dialogoS.Show();
         }
-    }
-    class Computador
-    {
-        public Computador(int cantproces,int[][] configuraciones)
+
+        private void Form1_Load(object sender, EventArgs e)
         {
-            // configuraciones[rafaga][num_proceso]
-            rafagas = configuraciones;
-            esprimerarespuesta = new bool[cantproces];
-            esprimerarespuestaE = new bool[cantproces];
-            esprimerarespuestaS = new bool[cantproces];
-            rafagas_actuales = new int[cantproces];
-            rafagas_anteriores = new int[cantproces];
-            tiemposfinalizacion = new int[cantproces];
-            tiemposprimerrespuesta = new int[cantproces];
-            tiemposarriboE = new int[cantproces];
-            tiemposfinalizacionE = new int[cantproces];
-            tiemposprimerrespuestaE = new int[cantproces];
-            tiemposarriboS = new int[cantproces];
-            tiemposfinalizacionS = new int[cantproces];
-            tiemposprimerrespuestaS = new int[cantproces];
-            hayarribo = false;
-            hayarriboE = false;
-            hayarriboS = false;
-            for (int x=0; x< cantproces;x++)
-            {
-                //Recuerda la rafaga de CPU que tiene que ejecutar
-                rafagas_actuales[x]=1;
-                rafagas_anteriores[x] = 0;
-                esprimerarespuesta[x] = true;
-                esprimerarespuestaE[x] = true;
-                esprimerarespuestaS[x] = true;
-            }
-            cantidad_procesos = cantproces;
-            uCPU = UEntrada = USalida = -1;
-            TRestanteCPU = TRestanteEntrada = TRestanteSalida = 0;
-            CPU = new Queue<int>();
-            BEntrada = new Queue<int>();
-            BSalida = new Queue<int>();
-            Entrada = new Queue<int>();
-            Salida = new Queue<int>();
+
         }
-        //Contadores auxiliares
-        public int[] rafagas_actuales;
-        public int[] rafagas_anteriores;
-        public int[][] rafagas;
-        private int cantidad_procesos;
-        public int TRestanteCPU;
-        public int TRestanteEntrada;
-        public int TRestanteSalida;
-        bool hayarribo;
-        bool hayarriboE;
-        bool hayarriboS;
-        public int politica, politicaES, instante;
-        //Datos para estadisticas de procesos
-        public int[] tiemposfinalizacion;
-        public int[] tiemposprimerrespuesta;
-        public int[] tiemposarriboE;
-        public int[] tiemposfinalizacionE;
-        public int[] tiemposprimerrespuestaE;
-        public int[] tiemposarriboS;
-        public int[] tiemposfinalizacionS;
-        public int[] tiemposprimerrespuestaS;
-        bool[] esprimerarespuesta;
-        bool[] esprimerarespuestaE;
-        bool[] esprimerarespuestaS;
-        const int FCFS=1;
-        const int SJF = 2;
-        const int SRTF = 3;
-        const int RR = 4;
-        public int tiempoquantum;
-        public int tiempoquantumES;
-        //Estados
-        //Listo = Cola de CPU
-        //Ejecucion=uCPU
-        public Queue<int> BEntrada;
-        public Queue<int> BSalida;
-        //COLA de recursos
-        public Queue<int> CPU;
-        public Queue<int> Entrada;
-        public Queue<int> Salida;
-        //Uso recursos
-        public int uCPU;
-        public int UEntrada;
-        public int USalida;
-        public void agregarproceso(int num_proceso)
+        //Gestion de memoria
+        public void definirtamaño()
         {
-            //Agrega a la cola solo a procesos con irrupciones distintas de 0 en sus rafagas actuales
-            if (rafagas[(rafagas_actuales[num_proceso] - 1)][num_proceso] != 0)
+            int temporal = dialogoS.bufer;
+            if (temporal > 0)
             {
-                //Tendra en cuenta el valor del arreglo politica para definir el criterio de ordenacion de la cola de listos
-                CPU.Enqueue(num_proceso);
-                hayarribo = true;
-                bool modificada = false;
-                int temporal = -1;
-                //Si se implementa politica SJF o SRTF se ordena la cola de listos
-                if (politica == SJF || politica == SRTF)
-                {
-                    int[] colaaccpu = CPU.ToArray();
-                    int cantidadcola = colaaccpu.Length;
-                    //Ordena la cola de listos teniendo en cuenta la primera rafaga de cada proceso
-                    for (int x = 0; x < (cantidadcola - 1); x++)
-                    {
-                        for (int y = (x + 1); y < cantidadcola; y++)
-                        {
-                            if (rafagas[(rafagas_actuales[colaaccpu[x]] - 1)][colaaccpu[x]] > rafagas[(rafagas_actuales[colaaccpu[y]] - 1)][colaaccpu[y]])
-                            {
-                                temporal = colaaccpu[x];
-                                colaaccpu[x] = colaaccpu[y];
-                                colaaccpu[y] = temporal;
-                                modificada = true;
-                            }
-                        }
-                    }
-                    if (modificada)
-                    {
-                        CPU.Clear();
-                        for (int x = 0; x < cantidadcola; x++)
-                        {
-                            CPU.Enqueue(colaaccpu[x]);
-                        }
-                    }
-                }
-            }
-        }
-        public bool agregarprocesoE(int num_proceso)
-        {
-            if (rafagas[1][num_proceso] != 0)
-            {
-                //Tendra en cuenta el valor del arreglo politica para definir el criterio de ordenacion de la cola de listos
-                Entrada.Enqueue(num_proceso);
-                hayarriboE = true;
-                bool modificada = false;
-                bool modificadab = false;
-                int temporal = -1;
-                int temporal2 = -1;
-                //Si se implementa politica SJF o SRTF se ordena la cola de listos
-                if (politicaES == SJF || politicaES == SRTF)
-                {
-                    int[] colaentrada = Entrada.ToArray();
-                    int[] colabentrada = BEntrada.ToArray();
-                    int cantidadcola = colaentrada.Length;
-                    int cantidadcolab = colabentrada.Length;
-                    //Ordena la cola de listos teniendo en cuenta la primera rafaga de cada proceso
-                    for (int x = 0; x < (cantidadcola - 1); x++)
-                    {
-                        for (int y = (x + 1); y < cantidadcola; y++)
-                        {
-                            if (rafagas[1][colaentrada[x]] > rafagas[1][colaentrada[y]])
-                            {
-                                temporal = colaentrada[x];
-                                colaentrada[x] = colaentrada[y];
-                                colaentrada[y] = temporal;
-                                modificada = true;
-                            }
-                        }
-                    }
-                    for (int x = 0; x < (cantidadcolab - 1); x++)
-                    {
-                        for (int y = (x + 1); y < cantidadcolab; y++)
-                        {
-                            if (rafagas[1][colabentrada[x]] > rafagas[1][colabentrada[y]])
-                            {
-                                temporal2 = colabentrada[x];
-                                colabentrada[x] = colabentrada[y];
-                                colabentrada[y] = temporal2;
-                                modificadab = true;
-                            }
-                        }
-                    }
-                    if (modificada)
-                    {
-                        Entrada.Clear();
-                        for (int x = 0; x < cantidadcola; x++)
-                        {
-                            Entrada.Enqueue(colaentrada[x]);
-                        }
-                    }
-                    if (modificadab)
-                    {
-                        BEntrada.Clear();
-                        for (int x = 0; x < cantidadcolab; x++)
-                        {
-                            BEntrada.Enqueue(colabentrada[x]);
-                        }
-                    }
-                }
-                return true;
+                Gestormemoria.tamañomemoria = temporal;
+                BotTamMem.Text = "Tamaño de memoria ("+ Gestormemoria.tamañomemoria + " KB)";
             }
             else
             {
-                return false;
+                dialogoS.error = true;
+                MessageBox.Show("Debe ingresar un tamaño de memoria mayor que 0");
             }
-        }
-        public bool agregarprocesoS(int num_proceso)
+            dialogoS.Texto.Text = Gestormemoria.tamañomemoria.ToString();
+        } 
+        private void cambiarTamañoMemoriaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (rafagas[3][num_proceso] != 0)
-            {
-                //Tendra en cuenta el valor del arreglo politica para definir el criterio de ordenacion de la cola de listos
-                Salida.Enqueue(num_proceso);
-                hayarriboS = true;
-                bool modificada = false;
-                bool modificadab = false;
-                int temporal = -1;
-                int temporal2 = -1;
-                //Si se implementa politica SJF o SRTF se ordena la cola de listos
-                if (politicaES == SJF || politicaES == SRTF)
-                {
-                    int[] colasalida = Salida.ToArray();
-                    int[] colabsalida = BSalida.ToArray();
-                    int cantidadcola = colasalida.Length;
-                    int cantidadcolab = colabsalida.Length;
-                    //Ordena la cola de listos teniendo en cuenta la primera rafaga de cada proceso
-                    for (int x = 0; x < (cantidadcola - 1); x++)
-                    {
-                        for (int y = (x + 1); y < cantidadcola; y++)
-                        {
-                            if (rafagas[3][colasalida[x]] > rafagas[3][colasalida[y]])
-                            {
-                                temporal = colasalida[x];
-                                colasalida[x] = colasalida[y];
-                                colasalida[y] = temporal;
-                                modificada = true;
-                            }
-                        }
-                    }
-                    for (int x = 0; x < (cantidadcolab - 1); x++)
-                    {
-                        for (int y = (x + 1); y < cantidadcolab; y++)
-                        {
-                            if (rafagas[3][colabsalida[x]] > rafagas[3][colabsalida[y]])
-                            {
-                                temporal2 = colabsalida[x];
-                                colabsalida[x] = colabsalida[y];
-                                colabsalida[y] = temporal2;
-                                modificadab = true;
-                            }
-                        }
-                    }
-                    if (modificada)
-                    {
-                        Salida.Clear();
-                        for (int x = 0; x < cantidadcola; x++)
-                        {
-                            Salida.Enqueue(colasalida[x]);
-                        }
-                    }
-                    if (modificadab)
-                    {
-                        BSalida.Clear();
-                        for (int x = 0; x < cantidadcolab; x++)
-                        {
-                            BSalida.Enqueue(colabsalida[x]);
-                        }
-                    }
-                }
-                return true;
-            }
-            else { return false; }
+            dialogoS = new DialogoSimple();
+            dialogoS.Text = "Tamaño de memoria";
+            dialogoS.Texto.Text = Gestormemoria.tamañomemoria.ToString();
+            dialogoS.Etiqueta.Text = "Tamaño de memoria (KB)";
+            dialogoS.BotonEst.Text = "Establecer este tamaño";
+            dialogoS.mensaje = "Debe ingresar un numero para el tamaño de memoria";
+            dialogoS.manejador = definirtamaño;
+            dialogoS.bufer = Gestormemoria.tamañomemoria;
+            dialogoS.Show();
         }
-        int rafaga;
-        int proceso;
-        int trafaga;
-        private void ejecutandoCPU()
+
+        private void organizarParticionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {            
+            dialogoConfPF = new ConfPartFijas2(Gestormemoria);
+            dialogoConfPF.manejadormem = Gestormemoria.ConfigurarConPartFijo;
+            dialogoConfPF.Show();
+        }
+        private void TipoPart_Click(object sender, EventArgs e)
         {
-            proceso = CPU.Peek();
-            CPU.Dequeue();
-            trafaga = rafagas[(rafagas_actuales[proceso] - 1)][proceso];
-            // MessageBox.Show("Se inicia la ejecucion de " +proceso+" en instante "+instante);
-            uCPU = proceso;
-            //Descuenta el ciclo de reloj en curso
-            //Si la rafaga es la primera almacena recuerda el instante de primer respuesta
-            if (esprimerarespuesta[proceso])
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            if (!ts.Checked)
             {
-                esprimerarespuesta[proceso] = false;
-                tiemposprimerrespuesta[proceso] = instante;
+                ts.Checked = true;
             }
-            rafagas_anteriores[proceso] = rafagas_actuales[proceso];
-            rafaga = rafagas_actuales[proceso];
-            
-            if (politica == RR)
+            if (PartFijas != ts)
             {
-                if (tiempoquantum < trafaga)
-                {
-                    TRestanteCPU = tiempoquantum - 1;
-                    rafagas[(rafagas_actuales[proceso] - 1)][proceso] = trafaga - tiempoquantum;
-                    //Recuerda que rafaga de CPU debera ejecutar en la proxima
-                }
-                else
-                {
-                    TRestanteCPU = trafaga - 1;
-                    rafagas[(rafagas_actuales[proceso] - 1)][proceso] = 0;
-                    //Recuerda que rafaga de CPU debera ejecutar en la proxima
-                    rafagas_actuales[proceso] += 2;
-                }
+                PartFijas.Checked = false;
             }
-            else
+            if (PartDin != ts)
             {
-                TRestanteCPU = trafaga - 1;
-                rafagas[(rafagas_actuales[proceso] - 1)][proceso] = 0;
-                //Recuerda que rafaga de CPU debera ejecutar en la proxima
-                rafagas_actuales[proceso] += 2;
+                PartDin.Checked = false;
             }
         }
-
-        private void ejecutarcpu()
+        private void TamPart_Click(object sender, EventArgs e)
         {
-            //Para el algoritmo SRTF existira una variable politica de tipo int que si es= a la constante SRTF en cada ciclo de ejecucion si arriba
-            //en la cola de planificacion un proceso con tiempo de irrupcion menor que el actualmente ejecutando
-            //En ese caso sacara de la ejecucion al proceso actual y lo ubicara en el lugar correspondiente en la cola
-            //Si no hay ningun proceso en ejecucion
-            if (uCPU == -1)
+            PartFijas.Checked = true;
+            PartDin.Checked = false;
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            if (!ts.Checked)
             {
-                //Si hay algun proceso en la cola de Listos lo pone en ejecucion
-                if (CPU.Count != 0)
-                {
-                    ejecutandoCPU();
-                }
+                ts.Checked = true;
             }
-            else {//Si ya hay algun proceso en ejecucion
-                //Determina si ya ha terminado su ejecucion 
-                if (TRestanteCPU == 0)
-                {
-                    rafaga = rafagas_actuales[uCPU];
-                    //Si no termino de ejecutar la rafaga actual y se usa politica Round Robin
-                    if (rafaga == rafagas_anteriores[uCPU] && politica == RR)
-                    {
-                        agregarproceso(uCPU);
-                    }
-                    else
-                    {
-                        //Si se termino de ejecutar la ultima rafaga del proceso recuerda el instante de finalizacion
-                        if (rafaga == 7)
-                        {
-                            tiemposfinalizacion[uCPU] = instante;
-                        }
-                        //Lo agrega a la cola de entrada o salida dependiendo de la rafaga de cpu que deba ejecutar luego
-                        else if (rafaga == 3)
-                        {
-                            //Determinael instante de finalizacion en CPU del proceso dependiendo del valor de las siguientes rafagas
-                            if (rafagas[2][uCPU] == 0 && rafagas[4][uCPU] == 0)
-                            {
-                                tiemposfinalizacion[uCPU] = instante;
-                            }
-                            BEntrada.Enqueue(uCPU);
-                            if (agregarprocesoE(uCPU))
-                            {
-                                tiemposarriboE[uCPU] = instante;
-                            }
-                            else 
-                            {
-                                BEntrada.Dequeue();
-                                if (rafagas[2][uCPU] == 0)
-                                {
-                                    BSalida.Enqueue(uCPU);
-                                    if (agregarprocesoS(uCPU))
-                                    {
-                                        tiemposarriboS[uCPU] = instante;
-                                    }
-                                    else
-                                    {
-                                        BSalida.Dequeue();
-                                        if (rafagas[4][uCPU] != 0)
-                                        {
-                                            rafagas_actuales[uCPU] += 2;
-                                            agregarproceso(uCPU);
-                                        }
-                                    }
-                                } else
-                                {
-                                    agregarproceso(uCPU);
-                                }      
-                            }
-
-                            //Informa de un nuevo arribo a la cola de entrada
-                        }
-                        else if (rafaga == 5)
-                        {
-                            //Determinael instante de finalizacion en CPU del proceso dependiendo del valor de las siguientes rafagas
-                            if (rafagas[4][uCPU] == 0)
-                            {
-                                tiemposfinalizacion[uCPU] = instante;
-                            }
-                            BSalida.Enqueue(uCPU);
-                            if (agregarprocesoS(uCPU))
-                            {
-                                tiemposarriboS[uCPU] = instante;
-                            }
-                            else
-                            {
-                                BSalida.Dequeue();
-                                if (rafagas[4][uCPU] != 0)
-                                {
-                                    agregarproceso(uCPU);
-                                }
-                            }
-                            //Informa de un nuevo arribo a la cola de salida
-                        }
-                    }
-                    //Si hay algun proceso en la cola de Listos lo pone en ejecucion
-                    //Orden FIFO
-                    if (CPU.Count != 0)
-                    {
-                        ejecutandoCPU();
-                    }
-                    else
-                    {//Si no hay ningun proceso en la cola restablece el valor del uso de CPU a 0
-                        uCPU = -1;
-                    }
-                }
-                else
-                {//En caso de que se este usando politica SRTF
-                   //Si no termino la ejecucion verifica si el primer proceso en la cola de listos arribo un proceso con tiempo de irrupcion menor
-                 //que el actualmente en ejecucion
-                    if (politica==SRTF && hayarribo)
-                    {
-                        hayarribo = false;
-                       // MessageBox.Show("Hola");
-                        if (CPU.Count!=0)
-                        {
-                            proceso = CPU.Peek();
-                            rafaga = rafagas[(rafagas_actuales[proceso] - 1)][proceso];
-                            if (rafaga < TRestanteCPU)
-                            {
-                                //Debera indicar que no termino la rafaga actual del proceso actualizando la cantidad de irrupciones pendientes
-                                rafagas_actuales[uCPU] -= 2;
-                                //MessageBox.Show("El proceso " + uCPU + " sale de ejecucion en el instante " + instante + " con la rafaga " + rafagas_actuales[uCPU]+"pendiente de terminar con "+ TRestanteCPU+" irrupciones");
-                                rafagas[(rafagas_actuales[uCPU] - 1)][uCPU] = TRestanteCPU;
-                                //Saca el nuevo proceso a ejecutar
-                                CPU.Dequeue();
-                                //Ordena la cola de listos 
-                                agregarproceso(uCPU);
-                                //Inicia la ejecucion del nuevo proceso
-                                uCPU = proceso;
-                                //Descuenta el ciclo de reloj en curso
-                                rafaga = rafagas_actuales[proceso];
-                                //Si la rafaga es la primera almacena recuerda el instante de primer respuesta
-                                if (rafaga == 1)
-                                {
-                                    tiemposprimerrespuesta[proceso] = instante;
-                                }
-                                TRestanteCPU = rafagas[(rafagas_actuales[proceso] - 1)][proceso] - 1;
-                                rafagas[(rafagas_actuales[proceso] - 1)][proceso] = 0;
-                                //Recuerda que rafaga de CPU debera ejecutar en la proxima
-                                rafagas_actuales[proceso] += 2;
-
-                            }
-                            else
-                            {
-                                TRestanteCPU--;
-                            }
-                        }
-                        //MessageBox.Show("Chau.El proceso actualmente en ejecucion es "+(uCPU+1)+".La rafaga actual es "+ rafagas_actuales[uCPU]+" con " + rafagas[(rafagas_actuales[uCPU] - 1)][uCPU]+"irrupciones pendientes");
-                        //MessageBox.Show("Existen "+CPU.Count+" en la cola de listos");
-                        else
-                        {
-                            TRestanteCPU--;
-                        }
-
-                    }
-                    else
-                    {
-                        //Sino simplemente continua con la ejecucion
-                        TRestanteCPU--;
-                        //MessageBox.Show("El proceso " + uCPU + " en el instante " + instante + "le quedan " + TRestanteCPU + " irrupciones");
-                    }
-                }
+            if (DifTamPart != ts)
+            {
+                DifTamPart.Checked = false;
+            }
+            if (IgTamPart != ts)
+            {
+                IgTamPart.Checked = false;
             }
         }
-        private void ejecutandoEntrada()
+        private void Cantidadcolas_Click(object sender, EventArgs e)
         {
-            proceso = Entrada.Peek();
-            //Determina si es la primera respuesta
-            //Condicional util para politica RR
-            if (esprimerarespuestaE[proceso])
+            IgTamPart.Checked = false;
+            DifTamPart.Checked = true;
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            if (!ts.Checked)
             {
-                esprimerarespuestaE[proceso] = false;
-                tiemposprimerrespuestaE[proceso] = instante;
+                ts.Checked = true;
             }
-            trafaga = rafagas[1][proceso];
-            //MessageBox.Show("Se inicia la ejecucion en entrada de " + proceso + " en instante " + instante);
-            Entrada.Dequeue();
-            UEntrada = proceso;
-            if (politicaES == RR)
+            if (UnaCola != ts)
             {
-                if (tiempoquantumES < trafaga)
-                {
-                    TRestanteEntrada = tiempoquantumES - 1;
-                    rafagas[1][proceso] = trafaga - tiempoquantumES;
-                }
-                else
-                {
-                    TRestanteEntrada = trafaga - 1;
-                    rafagas[1][proceso] = 0;
-                }
+                UnaCola.Checked = false;
             }
-            else
+            if (UnaColaPP != ts)
             {
-                TRestanteEntrada = trafaga - 1;
-                rafagas[1][proceso] = 0;
+                UnaColaPP.Checked = false;
             }
         }
-        private void ejecutarEntrada()
+
+        private void configurarMismT(object sender, EventArgs e)
         {
-            //Para el algoritmo SRTF existira una variable politica de tipo int que si es= a la constante SRTF en cada ciclo de ejecucion si arriba
-            //en la cola de planificacion un proceso con tiempo de irrupcion menor que el actualmente ejecutando
-            //En ese caso sacara de la ejecucion al proceso actual y lo ubicara en el lugar correspondiente en la cola
-            //Si no hay ningun proceso en ejecucion de entrada
-            if (UEntrada == -1)
-            {
-                //Si hay algun proceso en la cola de Entrada lo pone en ejecucion
-                if (Entrada.Count != 0)
-                {
-                    ejecutandoEntrada();
-                }
-            }
-            else {//Si ya hay algun proceso en ejecucion
-                //Determina si ya ha terminado su ejecucion 
-                if (TRestanteEntrada == 0)
-                {
-                    if (rafagas[1][UEntrada] != 0 && politicaES == RR)
-                    {
-                        agregarprocesoE(UEntrada);
-                    }
-                    else
-                    {
-                        tiemposfinalizacionE[UEntrada] = instante;
-                        //Desbloquea el proceso
-                        BEntrada.Dequeue();
-                        //Lo agrega a la cola de CPU
-                        agregarproceso(UEntrada);
-                    }
-                    //Si hay algun proceso en la cola de Entrada lo pone en ejecucion
-                    //Orden FIFO
-                    if (Entrada.Count != 0)
-                    {
-                        ejecutandoEntrada();
-                    }
-                    else
-                    {//Si no hay ningun proceso en la cola restablece el valor del uso de Entrada a 0
-                        UEntrada = -1;
-                    }
-                }
-                else
-                {//En caso de que se este usando politica SRTF
-                 //Si no termino la ejecucion verifica si el primer proceso en la cola de listos arribo un proceso con tiempo de irrupcion menor
-                 //que el actualmente en ejecucion
-                    if (politicaES == SRTF && hayarriboE)
-                    {
-                        hayarriboE = false;
-                        // MessageBox.Show("Hola");
-                        if (Entrada.Count != 0)
-                        {
-                            proceso = Entrada.Peek();
-                            rafaga = rafagas[1][proceso];
-                            if (rafaga < TRestanteEntrada)
-                            {
-                                //Debera indicar que no termino la rafaga actual del proceso actualizando la cantidad de irrupciones pendientes
-                                rafagas[1][UEntrada] = TRestanteEntrada;
-                                //Saca el nuevo proceso a ejecutar
-                                tiemposprimerrespuestaE[proceso] = instante;
-                                //Ordena la cola de listos 
-                                agregarprocesoE(UEntrada);
-                                Entrada.Dequeue();
-                                //Inicia la ejecucion del nuevo proceso
-                                UEntrada = proceso;
-                                //Descuenta el ciclo de reloj en curso
-                                TRestanteEntrada = rafagas[1][proceso] - 1;
-                                rafagas[1][proceso] = 0;
-
-                            }
-                            else
-                            {
-                                TRestanteEntrada--;
-                            }
-                        }
-                        else
-                        {
-                            TRestanteEntrada--;
-                        }
-
-                    }
-                    else
-                    {
-                        //Sino simplemente continua con la ejecucion
-                        TRestanteEntrada--;
-                    }
-                }
-            }
+            IgTamPart.Checked = true;
+            DifTamPart.Checked = false;
         }
-        private void ejecutandoSalida()
+
+        private void Menu_MouseEnter(object sender, EventArgs e)
         {
-            proceso = Salida.Peek();
-            if (esprimerarespuestaS[proceso])
-            {
-                esprimerarespuestaS[proceso] = false;
-                tiemposprimerrespuestaS[proceso] = instante;
-            }
-            trafaga = rafagas[3][proceso];
-            //MessageBox.Show("Se inicia la ejecucion en salida de " + proceso + " en instante " + instante);
-            Salida.Dequeue();
-            USalida = proceso;
-            if (politicaES == RR)
-            {
-                if (tiempoquantumES < trafaga)
-                {
-                    TRestanteSalida = tiempoquantumES - 1;
-                    rafagas[3][proceso] = trafaga - tiempoquantumES;
-                }
-                else
-                {
-                    TRestanteSalida = trafaga - 1;
-                    rafagas[3][proceso] = 0;
-                }
-            }
-            else
-            {
-                TRestanteSalida = trafaga - 1;
-                rafagas[3][proceso] = 0;
-            }
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            ts.ForeColor = Color.RoyalBlue;
+            ts.BackColor = Color.Cyan;
         }
-        private void ejecutarSalida()
+
+        private void Menu_MouseLeave(object sender, EventArgs e)
         {
-            //Para el algoritmo SRTF existira una variable politica de tipo int que si es= a la constante SRTF en cada ciclo de ejecucion si arriba
-            //en la cola de planificacion un proceso con tiempo de irrupcion menor que el actualmente ejecutando
-            //En ese caso sacara de la ejecucion al proceso actual y lo ubicara en el lugar correspondiente en la cola
-            int rafaga;
-            int proceso;
-            //Si no hay ningun proceso en ejecucion de salida
-            if (USalida == -1)
-            {
-                //Si hay algun proceso en la cola de Salida lo pone en ejecucion
-                //Orden FIFO
-                if (Salida.Count != 0)
-                {
-                    ejecutandoSalida();
-                }
-            }
-            else {//Si ya hay algun proceso en ejecucion
-                //Determina si ya ha terminado su ejecucion 
-                if (TRestanteSalida == 0)
-                {
-                    if (rafagas[3][USalida] != 0 && politicaES == RR)
-                    {
-                        agregarprocesoS(USalida);
-                    }
-                    else
-                    {
-                        tiemposfinalizacionS[USalida] = instante;
-                        //Desbloquea el proceso
-                        BSalida.Dequeue();
-                        //Lo agrega a la cola de CPU
-                        agregarproceso(USalida);
-                    }
-                    //Si hay algun proceso en la cola de Salida lo pone en ejecucion
-                    //Orden FIFO
-                    if (Salida.Count != 0)
-                    {
-                        ejecutandoSalida();
-                    }
-                    else
-                    {//Si no hay ningun proceso en la cola restablece el valor del uso de Salida a 0
-                        USalida = -1;
-                    }
-                }
-                else
-                {//En caso de que se este usando politica SRTF
-                 //Si no termino la ejecucion verifica si el primer proceso en la cola de listos arribo un proceso con tiempo de irrupcion menor
-                 //que el actualmente en ejecucion
-                    if (politicaES == SRTF && hayarriboS)
-                    {
-                        hayarriboS = false;
-                        // MessageBox.Show("Hola");
-                        if (Salida.Count != 0)
-                        {
-                            proceso = Salida.Peek();
-                            rafaga = rafagas[3][proceso];
-                            if (rafaga < TRestanteSalida)
-                            {
-                                //Debera indicar que no termino la rafaga actual del proceso actualizando la cantidad de irrupciones pendientes
-                                rafagas[3][USalida] = TRestanteSalida;
-                                //Saca el nuevo proceso a ejecutar
-                                tiemposprimerrespuestaS[proceso] = instante;
-                                //Ordena la cola de listos 
-                                agregarprocesoS(USalida);
-                                Salida.Dequeue();
-                                //Inicia la ejecucion del nuevo proceso
-                                USalida = proceso;
-                                //Descuenta el ciclo de reloj en curso
-                                TRestanteSalida = rafagas[3][proceso] - 1;
-                                rafagas[3][proceso] = 0;
-
-                            }
-                            else
-                            {
-                                TRestanteSalida--;
-                            }
-                        }
-                        else
-                        {
-                            TRestanteSalida--;
-                        }
-
-                    }
-                    else
-                    {
-                        //Sino simplemente continua con la ejecucion
-                        TRestanteSalida--;
-                    }
-                }
-            }
-        }
-
-        public void ejecutar(int instant)
-        {// rafagas[rafaga][num_proceso]
-            instante = instant;
-            ejecutarcpu();
-            ejecutarEntrada();
-            ejecutarSalida();
-            //Verifica si la CPU esta ociosa para atender procesos desbloqueados
-             if (uCPU==-1)
-            {
-                ejecutarcpu();
-            }
-        }
-        public bool noterminado()
-        {
-            if (CPU.Count == 0 && Entrada.Count == 0 && Salida.Count == 0 && uCPU == -1 && UEntrada == -1 && USalida == -1)
-            {
-                return false;
-            }
-            return true;
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            ts.BackColor = Color.RoyalBlue;
+            ts.ForeColor = Color.Cyan;
         }
     }
+    
 }
