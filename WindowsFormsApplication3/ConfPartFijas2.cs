@@ -25,7 +25,7 @@ namespace WindowsFormsApplication3
         public Del manejadormem;
         public ConfPartFijas2(Memoria memac)
         {
-            sumatamor = 0;
+            sumatamor = 0;  
             memoriaactual = memac;
             InitializeComponent();
             particionesor = memoriaactual.particionesmem;

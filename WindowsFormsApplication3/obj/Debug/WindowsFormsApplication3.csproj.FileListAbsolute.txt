@@ -37,4 +37,4 @@ C:\Users\GerardoAugusto\Desktop\Planificadorprocesos\Planificadorprocesos\Window
 C:\Users\GerardoAugusto\Desktop\Planificadorprocesos\Planificadorprocesos\WindowsFormsApplication3\obj\Debug\Planificadorprocesos.Properties.Resources.resources
 C:\Users\GerardoAugusto\Desktop\Planificadorprocesos\Planificadorprocesos\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
 C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.ConfPartFijas2.resources
-C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.ConfPartfijas.resources
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.DialogoPartIgtam.resources

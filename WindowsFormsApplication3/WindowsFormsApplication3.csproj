@@ -46,17 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfPartfijas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConfPartfijas.Designer.cs">
-      <DependentUpon>ConfPartfijas.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConfPartFijas2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConfPartFijas2.Designer.cs">
       <DependentUpon>ConfPartFijas2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogoPartIgtam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogoPartIgtam.Designer.cs">
+      <DependentUpon>DialogoPartIgtam.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -75,11 +75,11 @@
     <Compile Include="PlanificadorCP.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ConfPartfijas.resx">
-      <DependentUpon>ConfPartfijas.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ConfPartFijas2.resx">
       <DependentUpon>ConfPartFijas2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogoPartIgtam.resx">
+      <DependentUpon>DialogoPartIgtam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

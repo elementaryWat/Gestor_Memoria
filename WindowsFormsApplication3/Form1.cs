@@ -15,6 +15,7 @@ namespace WindowsFormsApplication3
     public partial class Form1 : Form
     {
         DialogoSimple dialogoS;
+        DialogoPartIgtam DialogoP;
         ConfPartFijas2 dialogoConfPF;
         Memoria Gestormemoria;
         public Form1()
@@ -743,8 +744,15 @@ namespace WindowsFormsApplication3
             int temporal = dialogoS.bufer;
             if (temporal > 0)
             {
-                Gestormemoria.tamañomemoria = temporal;
-                BotTamMem.Text = "Tamaño de memoria ("+ Gestormemoria.tamañomemoria + " KB)";
+                if((temporal % 2)==0)
+                {
+                    Gestormemoria.tamañomemoria = temporal;
+                    BotTamMem.Text = "Tamaño de memoria (" + Gestormemoria.tamañomemoria + " KB)";
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar un tamaño de memoria par");
+                }
             }
             else
             {
@@ -767,7 +775,8 @@ namespace WindowsFormsApplication3
         }
 
         private void organizarParticionesToolStripMenuItem_Click(object sender, EventArgs e)
-        {            
+        {
+            Gestormemoria.Tampart = Memoria.Opcionestam.DIFTAM;
             dialogoConfPF = new ConfPartFijas2(Gestormemoria);
             dialogoConfPF.manejadormem = Gestormemoria.ConfigurarConPartFijo;
             dialogoConfPF.Show();
@@ -787,6 +796,14 @@ namespace WindowsFormsApplication3
             {
                 PartDin.Checked = false;
             }
+            if (ts == PartFijas)
+            {
+                Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTFIJO;
+            }
+            if (ts == PartDin)
+            {
+                Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTDIN;
+            }
         }
         private void TamPart_Click(object sender, EventArgs e)
         {
@@ -805,12 +822,21 @@ namespace WindowsFormsApplication3
             {
                 IgTamPart.Checked = false;
             }
+            if (ts== IgTamPart)
+            {
+                Gestormemoria.Tampart = Memoria.Opcionestam.MISMTAM;
+            }
+            if (ts == DifTamPart)
+            {
+                Gestormemoria.Tampart = Memoria.Opcionestam.DIFTAM;
+            }
         }
         private void Cantidadcolas_Click(object sender, EventArgs e)
         {
             IgTamPart.Checked = false;
             DifTamPart.Checked = true;
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            //Solo permite la seleccion de una opcion
             if (!ts.Checked)
             {
                 ts.Checked = true;
@@ -823,12 +849,31 @@ namespace WindowsFormsApplication3
             {
                 UnaColaPP.Checked = false;
             }
+            //Configura la memoria
+            if (ts==UnaCola)
+            {
+                Gestormemoria.CantCol = Memoria.OpcionesCol.UNA;
+            }
+            if (ts == UnaColaPP)
+            {
+                Gestormemoria.CantCol = Memoria.OpcionesCol.UNAxPART;
+            }
+            Gestormemoria.cambiarcolas();
         }
 
         private void configurarMismT(object sender, EventArgs e)
         {
+            DialogoP = new DialogoPartIgtam(Gestormemoria);
             IgTamPart.Checked = true;
             DifTamPart.Checked = false;
+            Gestormemoria.Tampart = Memoria.Opcionestam.MISMTAM;
+            DialogoP.Show();
+        }
+        private void configurarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PartDin.Checked = true;
+            PartFijas.Checked = false;
+            Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTDIN;
         }
 
         private void Menu_MouseEnter(object sender, EventArgs e)
@@ -844,6 +889,8 @@ namespace WindowsFormsApplication3
             ts.BackColor = Color.RoyalBlue;
             ts.ForeColor = Color.Cyan;
         }
+
+        
     }
     
 }

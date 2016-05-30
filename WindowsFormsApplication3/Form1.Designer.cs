@@ -1053,6 +1053,7 @@
             this.configurarToolStripMenuItem.Name = "configurarToolStripMenuItem";
             this.configurarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.configurarToolStripMenuItem.Text = "Configurar";
+            this.configurarToolStripMenuItem.Click += new System.EventHandler(this.configurarToolStripMenuItem_Click);
             this.configurarToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.configurarToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
