@@ -70,6 +70,7 @@
             this.DatosFlow = new System.Windows.Forms.DataGridView();
             this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Arribo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Entrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPU2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -151,10 +152,17 @@
             this.configurarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.DifTamPart = new System.Windows.Forms.ToolStripMenuItem();
             this.UnaCola = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConrecorPF = new System.Windows.Forms.ToolStripMenuItem();
+            this.SinrecorPF = new System.Windows.Forms.ToolStripMenuItem();
             this.UnaColaPP = new System.Windows.Forms.ToolStripMenuItem();
             this.organizarParticionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PartDin = new System.Windows.Forms.ToolStripMenuItem();
-            this.configurarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conRecorPD = new System.Windows.Forms.ToolStripMenuItem();
+            this.sinRecorPD = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bESTFITcOL = new System.Windows.Forms.ToolStripMenuItem();
+            this.wORSTFITcOL = new System.Windows.Forms.ToolStripMenuItem();
+            this.fIRSTFITcOL = new System.Windows.Forms.ToolStripMenuItem();
             this.planificadorLargoPlazoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Politica1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -203,6 +211,7 @@
             this.USalida});
             this.FlujoEjec.Location = new System.Drawing.Point(-17, 22);
             this.FlujoEjec.Name = "FlujoEjec";
+            this.FlujoEjec.ReadOnly = true;
             this.FlujoEjec.Size = new System.Drawing.Size(1046, 374);
             this.FlujoEjec.TabIndex = 0;
             // 
@@ -210,6 +219,7 @@
             // 
             this.Tiempo.HeaderText = "Tiempo";
             this.Tiempo.Name = "Tiempo";
+            this.Tiempo.ReadOnly = true;
             // 
             // Listo
             // 
@@ -217,6 +227,7 @@
             this.Listo.DefaultCellStyle = dataGridViewCellStyle1;
             this.Listo.HeaderText = "Listo";
             this.Listo.Name = "Listo";
+            this.Listo.ReadOnly = true;
             // 
             // Ejecucion
             // 
@@ -224,6 +235,7 @@
             this.Ejecucion.DefaultCellStyle = dataGridViewCellStyle2;
             this.Ejecucion.HeaderText = "Ejecucion";
             this.Ejecucion.Name = "Ejecucion";
+            this.Ejecucion.ReadOnly = true;
             // 
             // Bloqueado
             // 
@@ -231,6 +243,7 @@
             this.Bloqueado.DefaultCellStyle = dataGridViewCellStyle3;
             this.Bloqueado.HeaderText = "Bloqueado";
             this.Bloqueado.Name = "Bloqueado";
+            this.Bloqueado.ReadOnly = true;
             // 
             // ColaCPU
             // 
@@ -238,6 +251,7 @@
             this.ColaCPU.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColaCPU.HeaderText = "Cola de CPU";
             this.ColaCPU.Name = "ColaCPU";
+            this.ColaCPU.ReadOnly = true;
             // 
             // CEntrada
             // 
@@ -245,6 +259,7 @@
             this.CEntrada.DefaultCellStyle = dataGridViewCellStyle5;
             this.CEntrada.HeaderText = "Cola de Entrada";
             this.CEntrada.Name = "CEntrada";
+            this.CEntrada.ReadOnly = true;
             // 
             // CSalida
             // 
@@ -252,6 +267,7 @@
             this.CSalida.DefaultCellStyle = dataGridViewCellStyle6;
             this.CSalida.HeaderText = "Cola de Salida";
             this.CSalida.Name = "CSalida";
+            this.CSalida.ReadOnly = true;
             // 
             // UCPU
             // 
@@ -259,6 +275,7 @@
             this.UCPU.DefaultCellStyle = dataGridViewCellStyle7;
             this.UCPU.HeaderText = "Uso de CPU";
             this.UCPU.Name = "UCPU";
+            this.UCPU.ReadOnly = true;
             // 
             // UEntrada
             // 
@@ -266,6 +283,7 @@
             this.UEntrada.DefaultCellStyle = dataGridViewCellStyle8;
             this.UEntrada.HeaderText = "Uso de Entrada";
             this.UEntrada.Name = "UEntrada";
+            this.UEntrada.ReadOnly = true;
             // 
             // USalida
             // 
@@ -273,6 +291,7 @@
             this.USalida.DefaultCellStyle = dataGridViewCellStyle9;
             this.USalida.HeaderText = "Uso de Salida";
             this.USalida.Name = "USalida";
+            this.USalida.ReadOnly = true;
             // 
             // DatosFlow
             // 
@@ -280,14 +299,15 @@
             this.DatosFlow.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Proceso,
             this.Arribo,
+            this.Tam,
             this.CPU,
             this.Entrada,
             this.CPU2,
             this.Salida,
             this.CPU3});
-            this.DatosFlow.Location = new System.Drawing.Point(262, 26);
+            this.DatosFlow.Location = new System.Drawing.Point(218, 27);
             this.DatosFlow.Name = "DatosFlow";
-            this.DatosFlow.Size = new System.Drawing.Size(747, 153);
+            this.DatosFlow.Size = new System.Drawing.Size(854, 153);
             this.DatosFlow.TabIndex = 1;
             this.DatosFlow.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DatosFlow_KeyUp);
             // 
@@ -298,8 +318,13 @@
             // 
             // Arribo
             // 
-            this.Arribo.HeaderText = "Arribo";
+            this.Arribo.HeaderText = "Arribo a memoria";
             this.Arribo.Name = "Arribo";
+            // 
+            // Tam
+            // 
+            this.Tam.HeaderText = "Tamaño(KB)";
+            this.Tam.Name = "Tam";
             // 
             // CPU
             // 
@@ -729,7 +754,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(21, 93);
+            this.groupBox1.Location = new System.Drawing.Point(12, 93);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 86);
             this.groupBox1.TabIndex = 10;
@@ -746,7 +771,7 @@
             this.PromRaf2CPU,
             this.PromSalida,
             this.PromRaf3CPU});
-            this.Promediosrafagas.Location = new System.Drawing.Point(365, 185);
+            this.Promediosrafagas.Location = new System.Drawing.Point(416, 187);
             this.Promediosrafagas.Name = "Promediosrafagas";
             this.Promediosrafagas.Size = new System.Drawing.Size(644, 90);
             this.Promediosrafagas.TabIndex = 17;
@@ -792,7 +817,7 @@
             this.planificadorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1072, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1081, 24);
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -839,7 +864,7 @@
             this.ejercicio7ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio7ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio7ToolStripMenuItem.Name = "ejercicio7ToolStripMenuItem";
-            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.ejercicio7ToolStripMenuItem.Text = "Ejercicio 7";
             this.ejercicio7ToolStripMenuItem.Click += new System.EventHandler(this.DatosEjer7_Inicio);
             this.ejercicio7ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -999,6 +1024,9 @@
             // 
             this.UnaCola.BackColor = System.Drawing.Color.RoyalBlue;
             this.UnaCola.CheckOnClick = true;
+            this.UnaCola.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ConrecorPF,
+            this.SinrecorPF});
             this.UnaCola.ForeColor = System.Drawing.Color.Cyan;
             this.UnaCola.Name = "UnaCola";
             this.UnaCola.Size = new System.Drawing.Size(191, 22);
@@ -1006,6 +1034,32 @@
             this.UnaCola.Click += new System.EventHandler(this.Cantidadcolas_Click);
             this.UnaCola.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.UnaCola.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // ConrecorPF
+            // 
+            this.ConrecorPF.BackColor = System.Drawing.Color.RoyalBlue;
+            this.ConrecorPF.Checked = true;
+            this.ConrecorPF.CheckOnClick = true;
+            this.ConrecorPF.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ConrecorPF.ForeColor = System.Drawing.Color.Cyan;
+            this.ConrecorPF.Name = "ConrecorPF";
+            this.ConrecorPF.Size = new System.Drawing.Size(188, 22);
+            this.ConrecorPF.Text = "Con recorrido de cola";
+            this.ConrecorPF.Click += new System.EventHandler(this.Tiporecorridocolas);
+            this.ConrecorPF.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.ConrecorPF.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // SinrecorPF
+            // 
+            this.SinrecorPF.BackColor = System.Drawing.Color.RoyalBlue;
+            this.SinrecorPF.CheckOnClick = true;
+            this.SinrecorPF.ForeColor = System.Drawing.Color.Cyan;
+            this.SinrecorPF.Name = "SinrecorPF";
+            this.SinrecorPF.Size = new System.Drawing.Size(188, 22);
+            this.SinrecorPF.Text = "Sin recorrido de cola";
+            this.SinrecorPF.Click += new System.EventHandler(this.Tiporecorridocolas);
+            this.SinrecorPF.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.SinrecorPF.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // UnaColaPP
             // 
@@ -1037,7 +1091,12 @@
             this.PartDin.BackColor = System.Drawing.Color.RoyalBlue;
             this.PartDin.CheckOnClick = true;
             this.PartDin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configurarToolStripMenuItem});
+            this.conRecorPD,
+            this.sinRecorPD,
+            this.toolStripSeparator2,
+            this.bESTFITcOL,
+            this.wORSTFITcOL,
+            this.fIRSTFITcOL});
             this.PartDin.ForeColor = System.Drawing.Color.Cyan;
             this.PartDin.Name = "PartDin";
             this.PartDin.Size = new System.Drawing.Size(189, 22);
@@ -1046,16 +1105,76 @@
             this.PartDin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.PartDin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
-            // configurarToolStripMenuItem
+            // conRecorPD
             // 
-            this.configurarToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
-            this.configurarToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
-            this.configurarToolStripMenuItem.Name = "configurarToolStripMenuItem";
-            this.configurarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.configurarToolStripMenuItem.Text = "Configurar";
-            this.configurarToolStripMenuItem.Click += new System.EventHandler(this.configurarToolStripMenuItem_Click);
-            this.configurarToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.configurarToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            this.conRecorPD.BackColor = System.Drawing.Color.RoyalBlue;
+            this.conRecorPD.Checked = true;
+            this.conRecorPD.CheckOnClick = true;
+            this.conRecorPD.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.conRecorPD.ForeColor = System.Drawing.Color.Cyan;
+            this.conRecorPD.Name = "conRecorPD";
+            this.conRecorPD.Size = new System.Drawing.Size(188, 22);
+            this.conRecorPD.Text = "Con recorrido de cola";
+            this.conRecorPD.Click += new System.EventHandler(this.TiporecorPD_Click);
+            this.conRecorPD.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.conRecorPD.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // sinRecorPD
+            // 
+            this.sinRecorPD.BackColor = System.Drawing.Color.RoyalBlue;
+            this.sinRecorPD.CheckOnClick = true;
+            this.sinRecorPD.ForeColor = System.Drawing.Color.Cyan;
+            this.sinRecorPD.Name = "sinRecorPD";
+            this.sinRecorPD.Size = new System.Drawing.Size(188, 22);
+            this.sinRecorPD.Text = "Sin recorrido de cola";
+            this.sinRecorPD.Click += new System.EventHandler(this.TiporecorPD_Click);
+            this.sinRecorPD.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.sinRecorPD.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.toolStripSeparator2.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(185, 6);
+            // 
+            // bESTFITcOL
+            // 
+            this.bESTFITcOL.BackColor = System.Drawing.Color.RoyalBlue;
+            this.bESTFITcOL.Checked = true;
+            this.bESTFITcOL.CheckOnClick = true;
+            this.bESTFITcOL.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.bESTFITcOL.ForeColor = System.Drawing.Color.Cyan;
+            this.bESTFITcOL.Name = "bESTFITcOL";
+            this.bESTFITcOL.Size = new System.Drawing.Size(188, 22);
+            this.bESTFITcOL.Text = "BEST-FIT";
+            this.bESTFITcOL.Click += new System.EventHandler(this.AlgoritCol_Click);
+            this.bESTFITcOL.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.bESTFITcOL.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // wORSTFITcOL
+            // 
+            this.wORSTFITcOL.BackColor = System.Drawing.Color.RoyalBlue;
+            this.wORSTFITcOL.CheckOnClick = true;
+            this.wORSTFITcOL.ForeColor = System.Drawing.Color.Cyan;
+            this.wORSTFITcOL.Name = "wORSTFITcOL";
+            this.wORSTFITcOL.Size = new System.Drawing.Size(188, 22);
+            this.wORSTFITcOL.Text = "WORST-FIT";
+            this.wORSTFITcOL.Click += new System.EventHandler(this.AlgoritCol_Click);
+            this.wORSTFITcOL.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.wORSTFITcOL.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // fIRSTFITcOL
+            // 
+            this.fIRSTFITcOL.BackColor = System.Drawing.Color.RoyalBlue;
+            this.fIRSTFITcOL.CheckOnClick = true;
+            this.fIRSTFITcOL.ForeColor = System.Drawing.Color.Cyan;
+            this.fIRSTFITcOL.Name = "fIRSTFITcOL";
+            this.fIRSTFITcOL.Size = new System.Drawing.Size(188, 22);
+            this.fIRSTFITcOL.Text = "FIRST-FIT";
+            this.fIRSTFITcOL.Click += new System.EventHandler(this.AlgoritCol_Click);
+            this.fIRSTFITcOL.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.fIRSTFITcOL.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // planificadorLargoPlazoToolStripMenuItem
             // 
@@ -1078,7 +1197,7 @@
             this.Politica4});
             this.politicaToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem1.Name = "politicaToolStripMenuItem1";
-            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
             this.politicaToolStripMenuItem1.Text = "Politica";
             this.politicaToolStripMenuItem1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaToolStripMenuItem1.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1167,7 +1286,7 @@
             this.politicaESRR});
             this.politicaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem.Name = "politicaToolStripMenuItem";
-            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.politicaToolStripMenuItem.Text = "Politica";
             this.politicaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1240,7 +1359,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1072, 660);
+            this.ClientSize = new System.Drawing.Size(1081, 660);
             this.Controls.Add(this.Promediosrafagas);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.estadisticass);
@@ -1248,7 +1367,11 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1097, 699);
+            this.MinimumSize = new System.Drawing.Size(1097, 699);
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Planificador de procesos";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).EndInit();
@@ -1278,13 +1401,6 @@
 
         private System.Windows.Forms.DataGridView FlujoEjec;
         private System.Windows.Forms.DataGridView DatosFlow;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Arribo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CPU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Entrada;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CPU2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Salida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CPU3;
         private System.Windows.Forms.TabControl estadisticass;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -1382,13 +1498,28 @@
         private System.Windows.Forms.ToolStripMenuItem organizacionMemoriaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PartFijas;
         private System.Windows.Forms.ToolStripMenuItem PartDin;
-        private System.Windows.Forms.ToolStripMenuItem configurarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem IgTamPart;
         private System.Windows.Forms.ToolStripMenuItem DifTamPart;
         private System.Windows.Forms.ToolStripMenuItem UnaCola;
         private System.Windows.Forms.ToolStripMenuItem UnaColaPP;
         private System.Windows.Forms.ToolStripMenuItem configurarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem organizarParticionesToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Arribo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CPU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Entrada;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CPU2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Salida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CPU3;
+        private System.Windows.Forms.ToolStripMenuItem ConrecorPF;
+        private System.Windows.Forms.ToolStripMenuItem SinrecorPF;
+        private System.Windows.Forms.ToolStripMenuItem conRecorPD;
+        private System.Windows.Forms.ToolStripMenuItem sinRecorPD;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem bESTFITcOL;
+        private System.Windows.Forms.ToolStripMenuItem wORSTFITcOL;
+        private System.Windows.Forms.ToolStripMenuItem fIRSTFITcOL;
     }
 }
 

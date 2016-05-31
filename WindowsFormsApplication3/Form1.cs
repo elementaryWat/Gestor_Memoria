@@ -75,6 +75,7 @@ namespace WindowsFormsApplication3
             configuraciones.Add(pendsalida);
             configuraciones.Add(pend3CPU);
             ordenador = new Computador(cantidad,configuraciones.ToArray());
+            Gestormemoria.definirordenador(ordenador);
         }
         private bool haynoarribados()
         {
@@ -869,13 +870,25 @@ namespace WindowsFormsApplication3
             Gestormemoria.Tampart = Memoria.Opcionestam.MISMTAM;
             DialogoP.Show();
         }
-        private void configurarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Tiporecorridocolas(object sender, EventArgs e)
         {
-            PartDin.Checked = true;
-            PartFijas.Checked = false;
-            Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTDIN;
+            UnaCola.Checked = true;
+            UnaColaPP.Checked = false;
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            //Solo permite la seleccion de una opcion
+            if (!ts.Checked)
+            {
+                ts.Checked = true;
+            }
+            if (ConrecorPF != ts)
+            {
+                ConrecorPF.Checked = false;
+            }
+            if (SinrecorPF != ts)
+            {
+                SinrecorPF.Checked = false;
+            }
         }
-
         private void Menu_MouseEnter(object sender, EventArgs e)
         {
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
@@ -890,7 +903,49 @@ namespace WindowsFormsApplication3
             ts.ForeColor = Color.Cyan;
         }
 
-        
+        private void TiporecorPD_Click(object sender, EventArgs e)
+        {
+            PartDin.Checked = true;
+            PartFijas.Checked = false;
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            //Solo permite la seleccion de una opcion
+            if (!ts.Checked)
+            {
+                ts.Checked = true;
+            }
+            if (conRecorPD != ts)
+            {
+                conRecorPD.Checked = false;
+            }
+            if (sinRecorPD != ts)
+            {
+                sinRecorPD.Checked = false;
+            }
+        }
+
+        private void AlgoritCol_Click(object sender, EventArgs e)
+        {
+            PartDin.Checked = true;
+            PartFijas.Checked = false;
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            //Solo permite la seleccion de una opcion
+            if (!ts.Checked)
+            {
+                ts.Checked = true;
+            }
+            if (bESTFITcOL != ts)
+            {
+                bESTFITcOL.Checked = false;
+            }
+            if (wORSTFITcOL != ts)
+            {
+                wORSTFITcOL.Checked = false;
+            }
+            if (fIRSTFITcOL != ts)
+            {
+                fIRSTFITcOL.Checked = false;
+            }
+        }
     }
     
 }

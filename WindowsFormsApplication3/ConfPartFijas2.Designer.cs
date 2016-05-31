@@ -130,6 +130,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ConfPartFijas2";
             this.Text = "Configuracion de particiones fijas";
+            this.Load += new System.EventHandler(this.ConfPartFijas2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Tampartic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

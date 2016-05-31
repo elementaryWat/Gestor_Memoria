@@ -42,6 +42,7 @@ namespace WindowsFormsApplication3
             {
                 memoriactual.tam1part = tamp;
                 memoriactual.cantpart = bufer;
+                memoriactual.vaciarmemoria();
                 Hide();
             }
             else

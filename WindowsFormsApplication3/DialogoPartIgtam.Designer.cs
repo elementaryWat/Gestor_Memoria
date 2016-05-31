@@ -99,9 +99,9 @@
             this.Tampart.ForeColor = System.Drawing.Color.Aquamarine;
             this.Tampart.Location = new System.Drawing.Point(12, 50);
             this.Tampart.Name = "Tampart";
-            this.Tampart.Size = new System.Drawing.Size(150, 16);
+            this.Tampart.Size = new System.Drawing.Size(166, 16);
             this.Tampart.TabIndex = 8;
-            this.Tampart.Text = "Cantidad de particiones";
+            this.Tampart.Text = "Tamaño de cada particion";
             // 
             // DialogoPartIgtam
             // 

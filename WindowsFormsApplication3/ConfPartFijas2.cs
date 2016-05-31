@@ -180,5 +180,10 @@ namespace WindowsFormsApplication3
                 SumaAct.ForeColor = Color.White;
             }
         }
+
+        private void ConfPartFijas2_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
