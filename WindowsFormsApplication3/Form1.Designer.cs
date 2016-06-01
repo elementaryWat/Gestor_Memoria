@@ -28,17 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -55,18 +44,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.FlujoEjec = new System.Windows.Forms.DataGridView();
-            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Listo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ejecucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bloqueado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColaCPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CSalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UCPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.USalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatosFlow = new System.Windows.Forms.DataGridView();
             this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Arribo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -177,6 +169,18 @@
             this.politicaESSRTF = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaESRR = new System.Windows.Forms.ToolStripMenuItem();
             this.tiempoQuantumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nuevos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Listo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ejecucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bloqueado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColaCPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CSalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UsoMem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UCPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -197,101 +201,29 @@
             // 
             // FlujoEjec
             // 
+            this.FlujoEjec.AllowUserToAddRows = false;
+            this.FlujoEjec.AllowUserToDeleteRows = false;
+            this.FlujoEjec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.FlujoEjec.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.FlujoEjec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.FlujoEjec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tiempo,
+            this.Nuevos,
             this.Listo,
             this.Ejecucion,
             this.Bloqueado,
             this.ColaCPU,
             this.CEntrada,
             this.CSalida,
+            this.UsoMem,
             this.UCPU,
             this.UEntrada,
             this.USalida});
-            this.FlujoEjec.Location = new System.Drawing.Point(-17, 22);
+            this.FlujoEjec.Location = new System.Drawing.Point(-9, 0);
             this.FlujoEjec.Name = "FlujoEjec";
             this.FlujoEjec.ReadOnly = true;
-            this.FlujoEjec.Size = new System.Drawing.Size(1046, 374);
+            this.FlujoEjec.Size = new System.Drawing.Size(1134, 345);
             this.FlujoEjec.TabIndex = 0;
-            // 
-            // Tiempo
-            // 
-            this.Tiempo.HeaderText = "Tiempo";
-            this.Tiempo.Name = "Tiempo";
-            this.Tiempo.ReadOnly = true;
-            // 
-            // Listo
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Listo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Listo.HeaderText = "Listo";
-            this.Listo.Name = "Listo";
-            this.Listo.ReadOnly = true;
-            // 
-            // Ejecucion
-            // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Ejecucion.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Ejecucion.HeaderText = "Ejecucion";
-            this.Ejecucion.Name = "Ejecucion";
-            this.Ejecucion.ReadOnly = true;
-            // 
-            // Bloqueado
-            // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Bloqueado.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Bloqueado.HeaderText = "Bloqueado";
-            this.Bloqueado.Name = "Bloqueado";
-            this.Bloqueado.ReadOnly = true;
-            // 
-            // ColaCPU
-            // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ColaCPU.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColaCPU.HeaderText = "Cola de CPU";
-            this.ColaCPU.Name = "ColaCPU";
-            this.ColaCPU.ReadOnly = true;
-            // 
-            // CEntrada
-            // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.CEntrada.DefaultCellStyle = dataGridViewCellStyle5;
-            this.CEntrada.HeaderText = "Cola de Entrada";
-            this.CEntrada.Name = "CEntrada";
-            this.CEntrada.ReadOnly = true;
-            // 
-            // CSalida
-            // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.CSalida.DefaultCellStyle = dataGridViewCellStyle6;
-            this.CSalida.HeaderText = "Cola de Salida";
-            this.CSalida.Name = "CSalida";
-            this.CSalida.ReadOnly = true;
-            // 
-            // UCPU
-            // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.UCPU.DefaultCellStyle = dataGridViewCellStyle7;
-            this.UCPU.HeaderText = "Uso de CPU";
-            this.UCPU.Name = "UCPU";
-            this.UCPU.ReadOnly = true;
-            // 
-            // UEntrada
-            // 
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.UEntrada.DefaultCellStyle = dataGridViewCellStyle8;
-            this.UEntrada.HeaderText = "Uso de Entrada";
-            this.UEntrada.Name = "UEntrada";
-            this.UEntrada.ReadOnly = true;
-            // 
-            // USalida
-            // 
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.USalida.DefaultCellStyle = dataGridViewCellStyle9;
-            this.USalida.HeaderText = "Uso de Salida";
-            this.USalida.Name = "USalida";
-            this.USalida.ReadOnly = true;
             // 
             // DatosFlow
             // 
@@ -360,7 +292,7 @@
             this.estadisticass.Location = new System.Drawing.Point(-1, 283);
             this.estadisticass.Name = "estadisticass";
             this.estadisticass.SelectedIndex = 0;
-            this.estadisticass.Size = new System.Drawing.Size(1077, 371);
+            this.estadisticass.Size = new System.Drawing.Size(1139, 371);
             this.estadisticass.TabIndex = 4;
             // 
             // tabPage1
@@ -371,7 +303,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1069, 345);
+            this.tabPage1.Size = new System.Drawing.Size(1131, 345);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Datos Ejecucion";
             // 
@@ -384,7 +316,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1069, 345);
+            this.tabPage2.Size = new System.Drawing.Size(1221, 345);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Estadisticas CPU";
             // 
@@ -440,22 +372,22 @@
             // 
             // Tiemporetorno
             // 
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Aquamarine;
-            this.Tiemporetorno.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.Aquamarine;
+            this.Tiemporetorno.DefaultCellStyle = dataGridViewCellStyle12;
             this.Tiemporetorno.HeaderText = "Tiempo retorno(TR) ";
             this.Tiemporetorno.Name = "Tiemporetorno";
             // 
             // Tiempoirrupcion
             // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Lime;
-            this.Tiempoirrupcion.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.Lime;
+            this.Tiempoirrupcion.DefaultCellStyle = dataGridViewCellStyle13;
             this.Tiempoirrupcion.HeaderText = "Tiempo de irrupcion (TI)";
             this.Tiempoirrupcion.Name = "Tiempoirrupcion";
             // 
             // Tiempoespera
             // 
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Tiempoespera.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Tiempoespera.DefaultCellStyle = dataGridViewCellStyle14;
             this.Tiempoespera.HeaderText = "Tiempo de espera (TR-TI)";
             this.Tiempoespera.Name = "Tiempoespera";
             // 
@@ -466,15 +398,15 @@
             // 
             // Tiempoarribo
             // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.Lime;
-            this.Tiempoarribo.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.Lime;
+            this.Tiempoarribo.DefaultCellStyle = dataGridViewCellStyle15;
             this.Tiempoarribo.HeaderText = "Tiempo de arribo (TA)";
             this.Tiempoarribo.Name = "Tiempoarribo";
             // 
             // Tiempoderetorno
             // 
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Tiempoderetorno.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Tiempoderetorno.DefaultCellStyle = dataGridViewCellStyle16;
             this.Tiempoderetorno.HeaderText = "Tiempo retorno(Tt-TA) ";
             this.Tiempoderetorno.Name = "Tiempoderetorno";
             // 
@@ -485,8 +417,8 @@
             // 
             // Tiemporespuesta
             // 
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Tiemporespuesta.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Tiemporespuesta.DefaultCellStyle = dataGridViewCellStyle17;
             this.Tiemporespuesta.HeaderText = "Tiempo de respuesta (PR-TA)";
             this.Tiemporespuesta.Name = "Tiemporespuesta";
             // 
@@ -498,7 +430,7 @@
             this.tabPage3.ForeColor = System.Drawing.Color.Firebrick;
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1069, 345);
+            this.tabPage3.Size = new System.Drawing.Size(1221, 345);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Estadisticas Entrada";
             // 
@@ -554,22 +486,22 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Aquamarine;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.Aquamarine;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewTextBoxColumn2.HeaderText = "Tiempo retorno(TR) ";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // dataGridViewTextBoxColumn3
             // 
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.Lime;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.Lime;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridViewTextBoxColumn3.HeaderText = "Tiempo de irrupcion (TI)";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // dataGridViewTextBoxColumn5
             // 
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridViewTextBoxColumn5.HeaderText = "Tiempo de espera (TR-TI)";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
@@ -580,15 +512,15 @@
             // 
             // dataGridViewTextBoxColumn8
             // 
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.Lime;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.Lime;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridViewTextBoxColumn8.HeaderText = "Tiempo de arribo (TA)";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
             // dataGridViewTextBoxColumn10
             // 
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridViewTextBoxColumn10.HeaderText = "Tiempo retorno(Tt-TA) ";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             // 
@@ -599,8 +531,8 @@
             // 
             // dataGridViewTextBoxColumn12
             // 
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridViewTextBoxColumn12.HeaderText = "Tiempo de respuesta (PR-TA)";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             // 
@@ -612,7 +544,7 @@
             this.tabPage4.ForeColor = System.Drawing.Color.Firebrick;
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1069, 345);
+            this.tabPage4.Size = new System.Drawing.Size(1221, 345);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Estadisticas Salida";
             // 
@@ -668,22 +600,22 @@
             // 
             // dataGridViewTextBoxColumn17
             // 
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.Aquamarine;
-            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.Aquamarine;
+            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridViewTextBoxColumn17.HeaderText = "Tiempo retorno(TR) ";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             // 
             // dataGridViewTextBoxColumn18
             // 
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.Lime;
-            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.Lime;
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle25;
             this.dataGridViewTextBoxColumn18.HeaderText = "Tiempo de irrupcion (TI)";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             // 
             // dataGridViewTextBoxColumn19
             // 
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle26;
             this.dataGridViewTextBoxColumn19.HeaderText = "Tiempo de espera (TR-TI)";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             // 
@@ -694,15 +626,15 @@
             // 
             // dataGridViewTextBoxColumn21
             // 
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.Lime;
-            this.dataGridViewTextBoxColumn21.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.Lime;
+            this.dataGridViewTextBoxColumn21.DefaultCellStyle = dataGridViewCellStyle27;
             this.dataGridViewTextBoxColumn21.HeaderText = "Tiempo de arribo (TA)";
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             // 
             // dataGridViewTextBoxColumn22
             // 
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dataGridViewTextBoxColumn22.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dataGridViewTextBoxColumn22.DefaultCellStyle = dataGridViewCellStyle28;
             this.dataGridViewTextBoxColumn22.HeaderText = "Tiempo retorno(Tt-TA) ";
             this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
             // 
@@ -713,8 +645,8 @@
             // 
             // dataGridViewTextBoxColumn24
             // 
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle29;
             this.dataGridViewTextBoxColumn24.HeaderText = "Tiempo de respuesta (PR-TA)";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             // 
@@ -817,7 +749,7 @@
             this.planificadorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1081, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1144, 24);
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -973,6 +905,7 @@
             this.PartFijas.Name = "PartFijas";
             this.PartFijas.Size = new System.Drawing.Size(189, 22);
             this.PartFijas.Text = "Particiones fijas";
+            this.PartFijas.CheckedChanged += new System.EventHandler(this.TipoPart_CheckedChanged);
             this.PartFijas.Click += new System.EventHandler(this.TipoPart_Click);
             this.PartFijas.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.PartFijas.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -987,6 +920,7 @@
             this.IgTamPart.Name = "IgTamPart";
             this.IgTamPart.Size = new System.Drawing.Size(182, 22);
             this.IgTamPart.Text = "Del mismo tamaño";
+            this.IgTamPart.CheckedChanged += new System.EventHandler(this.TamPart_CheckedChanged);
             this.IgTamPart.Click += new System.EventHandler(this.TamPart_Click);
             this.IgTamPart.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.IgTamPart.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1016,6 +950,7 @@
             this.DifTamPart.Name = "DifTamPart";
             this.DifTamPart.Size = new System.Drawing.Size(182, 22);
             this.DifTamPart.Text = "De diferente tamaño";
+            this.DifTamPart.CheckedChanged += new System.EventHandler(this.TamPart_CheckedChanged);
             this.DifTamPart.Click += new System.EventHandler(this.TamPart_Click);
             this.DifTamPart.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.DifTamPart.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1031,6 +966,7 @@
             this.UnaCola.Name = "UnaCola";
             this.UnaCola.Size = new System.Drawing.Size(191, 22);
             this.UnaCola.Text = "Una sola cola";
+            this.UnaCola.CheckedChanged += new System.EventHandler(this.Unacola_CheckedChanged);
             this.UnaCola.Click += new System.EventHandler(this.Cantidadcolas_Click);
             this.UnaCola.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.UnaCola.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1101,6 +1037,7 @@
             this.PartDin.Name = "PartDin";
             this.PartDin.Size = new System.Drawing.Size(189, 22);
             this.PartDin.Text = "Particiones dinamicas";
+            this.PartDin.CheckedChanged += new System.EventHandler(this.TipoPart_CheckedChanged);
             this.PartDin.Click += new System.EventHandler(this.TipoPart_Click);
             this.PartDin.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.PartDin.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1354,12 +1291,118 @@
             this.tiempoQuantumToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.tiempoQuantumToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
+            // Tiempo
+            // 
+            this.Tiempo.HeaderText = "Tiempo";
+            this.Tiempo.Name = "Tiempo";
+            this.Tiempo.ReadOnly = true;
+            this.Tiempo.Width = 67;
+            // 
+            // Nuevos
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Nuevos.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Nuevos.HeaderText = "Nuevos";
+            this.Nuevos.Name = "Nuevos";
+            this.Nuevos.ReadOnly = true;
+            this.Nuevos.Width = 69;
+            // 
+            // Listo
+            // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Listo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Listo.HeaderText = "Listo";
+            this.Listo.Name = "Listo";
+            this.Listo.ReadOnly = true;
+            this.Listo.Width = 54;
+            // 
+            // Ejecucion
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Ejecucion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Ejecucion.HeaderText = "Ejecucion";
+            this.Ejecucion.Name = "Ejecucion";
+            this.Ejecucion.ReadOnly = true;
+            this.Ejecucion.Width = 79;
+            // 
+            // Bloqueado
+            // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Bloqueado.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Bloqueado.HeaderText = "Bloqueado";
+            this.Bloqueado.Name = "Bloqueado";
+            this.Bloqueado.ReadOnly = true;
+            this.Bloqueado.Width = 83;
+            // 
+            // ColaCPU
+            // 
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.ColaCPU.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ColaCPU.HeaderText = "Cola de CPU";
+            this.ColaCPU.Name = "ColaCPU";
+            this.ColaCPU.ReadOnly = true;
+            this.ColaCPU.Width = 86;
+            // 
+            // CEntrada
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.CEntrada.DefaultCellStyle = dataGridViewCellStyle6;
+            this.CEntrada.HeaderText = "Cola de Entrada";
+            this.CEntrada.Name = "CEntrada";
+            this.CEntrada.ReadOnly = true;
+            this.CEntrada.Width = 99;
+            // 
+            // CSalida
+            // 
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.CSalida.DefaultCellStyle = dataGridViewCellStyle7;
+            this.CSalida.HeaderText = "Cola de Salida";
+            this.CSalida.Name = "CSalida";
+            this.CSalida.ReadOnly = true;
+            this.CSalida.Width = 92;
+            // 
+            // UsoMem
+            // 
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.UsoMem.DefaultCellStyle = dataGridViewCellStyle8;
+            this.UsoMem.HeaderText = "Uso de memoria";
+            this.UsoMem.Name = "UsoMem";
+            this.UsoMem.ReadOnly = true;
+            this.UsoMem.Width = 99;
+            // 
+            // UCPU
+            // 
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.UCPU.DefaultCellStyle = dataGridViewCellStyle9;
+            this.UCPU.HeaderText = "Uso de CPU";
+            this.UCPU.Name = "UCPU";
+            this.UCPU.ReadOnly = true;
+            this.UCPU.Width = 84;
+            // 
+            // UEntrada
+            // 
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.UEntrada.DefaultCellStyle = dataGridViewCellStyle10;
+            this.UEntrada.HeaderText = "Uso de Entrada";
+            this.UEntrada.Name = "UEntrada";
+            this.UEntrada.ReadOnly = true;
+            this.UEntrada.Width = 97;
+            // 
+            // USalida
+            // 
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.USalida.DefaultCellStyle = dataGridViewCellStyle11;
+            this.USalida.HeaderText = "Uso de Salida";
+            this.USalida.Name = "USalida";
+            this.USalida.ReadOnly = true;
+            this.USalida.Width = 90;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1081, 660);
+            this.ClientSize = new System.Drawing.Size(1144, 661);
             this.Controls.Add(this.Promediosrafagas);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.estadisticass);
@@ -1368,8 +1411,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1097, 699);
-            this.MinimumSize = new System.Drawing.Size(1097, 699);
+            this.MaximumSize = new System.Drawing.Size(1200, 710);
+            this.MinimumSize = new System.Drawing.Size(1100, 600);
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Planificador de procesos";
@@ -1421,16 +1464,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tiempo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Listo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ejecucion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Bloqueado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColaCPU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CEntrada;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CSalida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UCPU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UEntrada;
-        private System.Windows.Forms.DataGridViewTextBoxColumn USalida;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView EstadisticaspromedioE;
@@ -1520,6 +1553,18 @@
         private System.Windows.Forms.ToolStripMenuItem bESTFITcOL;
         private System.Windows.Forms.ToolStripMenuItem wORSTFITcOL;
         private System.Windows.Forms.ToolStripMenuItem fIRSTFITcOL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tiempo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nuevos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Listo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ejecucion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Bloqueado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColaCPU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CEntrada;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CSalida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UsoMem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UCPU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UEntrada;
+        private System.Windows.Forms.DataGridViewTextBoxColumn USalida;
     }
 }
 

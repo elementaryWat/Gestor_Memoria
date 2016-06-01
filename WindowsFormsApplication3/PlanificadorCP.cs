@@ -46,6 +46,11 @@ namespace WindowsFormsApplication3
             Entrada = new Queue<int>();
             Salida = new Queue<int>();
         }
+        public void definirmemoria(Memoria memac)
+        {
+            memoriaactual = memac;
+        }
+        Memoria memoriaactual;
         //Contadores auxiliares
         public int[] rafagas_actuales;
         public int[] rafagas_anteriores;
@@ -339,6 +344,7 @@ namespace WindowsFormsApplication3
                         if (rafaga == 7)
                         {
                             tiemposfinalizacion[uCPU] = instante;
+                            memoriaactual.liberarmemoria(uCPU);
                         }
                         //Lo agrega a la cola de entrada o salida dependiendo de la rafaga de cpu que deba ejecutar luego
                         else if (rafaga == 3)
@@ -347,6 +353,7 @@ namespace WindowsFormsApplication3
                             if (rafagas[2][uCPU] == 0 && rafagas[4][uCPU] == 0)
                             {
                                 tiemposfinalizacion[uCPU] = instante;
+                                memoriaactual.liberarmemoria(uCPU);
                             }
                             BEntrada.Enqueue(uCPU);
                             if (agregarprocesoE(uCPU))
@@ -387,6 +394,7 @@ namespace WindowsFormsApplication3
                             if (rafagas[4][uCPU] == 0)
                             {
                                 tiemposfinalizacion[uCPU] = instante;
+                                memoriaactual.liberarmemoria(uCPU);
                             }
                             BSalida.Enqueue(uCPU);
                             if (agregarprocesoS(uCPU))
