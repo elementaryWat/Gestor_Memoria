@@ -687,6 +687,8 @@ namespace WindowsFormsApplication3
             }
             FlujoEjec.Rows.Clear();
             usosmem.Clear();
+            particiones.Clear();
+            cantpartins.Clear();
             reloj =0;
             int cantidad = (DatosFlow.RowCount) - 1;
             if (cantidad==0)
