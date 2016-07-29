@@ -109,7 +109,7 @@ namespace WindowsFormsApplication3
                 {
                     int[] colaaccpu = CPU.ToArray();
                     int cantidadcola = colaaccpu.Length;
-                    //Ordena la cola de listos teniendo en cuenta la primera rafaga de cada proceso
+                    //Ordena la cola de listos teniendo en cuenta la rafaga actual de cada proceso
                     for (int x = 0; x < (cantidadcola - 1); x++)
                     {
                         for (int y = (x + 1); y < cantidadcola; y++)

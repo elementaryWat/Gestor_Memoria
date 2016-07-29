@@ -22,12 +22,12 @@ namespace WindowsFormsApplication3
         {
             memoriactual = memac;
             InitializeComponent();
-            TextoCP.Text = memoriactual.cantpart.ToString();
+            TextoCP.Text = memoriactual.cantpartig.ToString();
             Tampart.Text = "Tamaño de particion "+memoriactual.tam1part+" KB";
             EtTamMemoria.Text = "Tamaño de memoria = "+memoriactual.tamañomemoria+" KB";
             EtSumaPart.BackColor = Color.Lime;
             EtSumaPart.ForeColor = Color.Black;
-            EtSumaPart.Text = "Suma de tamaños de particiones=" + memoriactual.cantpart * memoriactual.tam1part ;
+            EtSumaPart.Text = "Suma de tamaños de particiones=" + memoriactual.cantpartig * memoriactual.tam1part ;
         }
 
         private void DialogoPlus_Load(object sender, EventArgs e)
@@ -41,7 +41,10 @@ namespace WindowsFormsApplication3
             if (!error)
             {
                 memoriactual.tam1part = tamp;
+                memoriactual.cantpartig = bufer;
                 memoriactual.cantpart = bufer;
+                memoriactual.cantpartfij = bufer;
+                memoriactual.mapamemoria = new int[bufer];
                 memoriactual.vaciarmemoria();
                 Hide();
             }

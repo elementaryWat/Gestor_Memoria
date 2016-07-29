@@ -28,6 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -46,19 +58,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.FlujoEjec = new System.Windows.Forms.DataGridView();
+            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nuevos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Listo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ejecucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bloqueado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColaCPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CSalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UsoMem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UCPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatosFlow = new System.Windows.Forms.DataGridView();
             this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Arribo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -169,18 +182,8 @@
             this.politicaESSRTF = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaESRR = new System.Windows.Forms.ToolStripMenuItem();
             this.tiempoQuantumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tiempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nuevos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Listo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ejecucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bloqueado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColaCPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CSalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UsoMem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UCPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.USalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MenuConMem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -197,6 +200,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Promediosrafagas)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.MenuConMem.SuspendLayout();
             this.SuspendLayout();
             // 
             // FlujoEjec
@@ -224,6 +228,112 @@
             this.FlujoEjec.ReadOnly = true;
             this.FlujoEjec.Size = new System.Drawing.Size(1134, 345);
             this.FlujoEjec.TabIndex = 0;
+            // 
+            // Tiempo
+            // 
+            this.Tiempo.HeaderText = "Tiempo";
+            this.Tiempo.Name = "Tiempo";
+            this.Tiempo.ReadOnly = true;
+            this.Tiempo.Width = 67;
+            // 
+            // Nuevos
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Nuevos.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Nuevos.HeaderText = "Nuevos";
+            this.Nuevos.Name = "Nuevos";
+            this.Nuevos.ReadOnly = true;
+            this.Nuevos.Width = 69;
+            // 
+            // Listo
+            // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Listo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Listo.HeaderText = "Listo";
+            this.Listo.Name = "Listo";
+            this.Listo.ReadOnly = true;
+            this.Listo.Width = 54;
+            // 
+            // Ejecucion
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Ejecucion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Ejecucion.HeaderText = "Ejecucion";
+            this.Ejecucion.Name = "Ejecucion";
+            this.Ejecucion.ReadOnly = true;
+            this.Ejecucion.Width = 79;
+            // 
+            // Bloqueado
+            // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Bloqueado.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Bloqueado.HeaderText = "Bloqueado";
+            this.Bloqueado.Name = "Bloqueado";
+            this.Bloqueado.ReadOnly = true;
+            this.Bloqueado.Width = 83;
+            // 
+            // ColaCPU
+            // 
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.ColaCPU.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ColaCPU.HeaderText = "Cola de CPU";
+            this.ColaCPU.Name = "ColaCPU";
+            this.ColaCPU.ReadOnly = true;
+            this.ColaCPU.Width = 86;
+            // 
+            // CEntrada
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.CEntrada.DefaultCellStyle = dataGridViewCellStyle6;
+            this.CEntrada.HeaderText = "Cola de Entrada";
+            this.CEntrada.Name = "CEntrada";
+            this.CEntrada.ReadOnly = true;
+            this.CEntrada.Width = 99;
+            // 
+            // CSalida
+            // 
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.CSalida.DefaultCellStyle = dataGridViewCellStyle7;
+            this.CSalida.HeaderText = "Cola de Salida";
+            this.CSalida.Name = "CSalida";
+            this.CSalida.ReadOnly = true;
+            this.CSalida.Width = 92;
+            // 
+            // UsoMem
+            // 
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.UsoMem.DefaultCellStyle = dataGridViewCellStyle8;
+            this.UsoMem.HeaderText = "Uso de memoria";
+            this.UsoMem.Name = "UsoMem";
+            this.UsoMem.ReadOnly = true;
+            this.UsoMem.Width = 99;
+            // 
+            // UCPU
+            // 
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.UCPU.DefaultCellStyle = dataGridViewCellStyle9;
+            this.UCPU.HeaderText = "Uso de CPU";
+            this.UCPU.Name = "UCPU";
+            this.UCPU.ReadOnly = true;
+            this.UCPU.Width = 84;
+            // 
+            // UEntrada
+            // 
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.UEntrada.DefaultCellStyle = dataGridViewCellStyle10;
+            this.UEntrada.HeaderText = "Uso de Entrada";
+            this.UEntrada.Name = "UEntrada";
+            this.UEntrada.ReadOnly = true;
+            this.UEntrada.Width = 97;
+            // 
+            // USalida
+            // 
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.USalida.DefaultCellStyle = dataGridViewCellStyle11;
+            this.USalida.HeaderText = "Uso de Salida";
+            this.USalida.Name = "USalida";
+            this.USalida.ReadOnly = true;
+            this.USalida.Width = 90;
             // 
             // DatosFlow
             // 
@@ -316,7 +426,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1221, 345);
+            this.tabPage2.Size = new System.Drawing.Size(1131, 345);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Estadisticas CPU";
             // 
@@ -430,7 +540,7 @@
             this.tabPage3.ForeColor = System.Drawing.Color.Firebrick;
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1221, 345);
+            this.tabPage3.Size = new System.Drawing.Size(1131, 345);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Estadisticas Entrada";
             // 
@@ -544,7 +654,7 @@
             this.tabPage4.ForeColor = System.Drawing.Color.Firebrick;
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1221, 345);
+            this.tabPage4.Size = new System.Drawing.Size(1131, 345);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Estadisticas Salida";
             // 
@@ -796,7 +906,7 @@
             this.ejercicio7ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio7ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio7ToolStripMenuItem.Name = "ejercicio7ToolStripMenuItem";
-            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejercicio7ToolStripMenuItem.Text = "Ejercicio 7";
             this.ejercicio7ToolStripMenuItem.Click += new System.EventHandler(this.DatosEjer7_Inicio);
             this.ejercicio7ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -958,7 +1068,9 @@
             // UnaCola
             // 
             this.UnaCola.BackColor = System.Drawing.Color.RoyalBlue;
+            this.UnaCola.Checked = true;
             this.UnaCola.CheckOnClick = true;
+            this.UnaCola.CheckState = System.Windows.Forms.CheckState.Checked;
             this.UnaCola.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ConrecorPF,
             this.SinrecorPF});
@@ -1000,9 +1112,7 @@
             // UnaColaPP
             // 
             this.UnaColaPP.BackColor = System.Drawing.Color.RoyalBlue;
-            this.UnaColaPP.Checked = true;
             this.UnaColaPP.CheckOnClick = true;
-            this.UnaColaPP.CheckState = System.Windows.Forms.CheckState.Checked;
             this.UnaColaPP.ForeColor = System.Drawing.Color.Cyan;
             this.UnaColaPP.Name = "UnaColaPP";
             this.UnaColaPP.Size = new System.Drawing.Size(191, 22);
@@ -1134,7 +1244,7 @@
             this.Politica4});
             this.politicaToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem1.Name = "politicaToolStripMenuItem1";
-            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.politicaToolStripMenuItem1.Text = "Politica";
             this.politicaToolStripMenuItem1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaToolStripMenuItem1.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1291,111 +1401,19 @@
             this.tiempoQuantumToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.tiempoQuantumToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
-            // Tiempo
+            // MenuConMem
             // 
-            this.Tiempo.HeaderText = "Tiempo";
-            this.Tiempo.Name = "Tiempo";
-            this.Tiempo.ReadOnly = true;
-            this.Tiempo.Width = 67;
+            this.MenuConMem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem});
+            this.MenuConMem.Name = "MenuConMem";
+            this.MenuConMem.Size = new System.Drawing.Size(276, 26);
             // 
-            // Nuevos
+            // verMapaDeMemoriaEnEsteInstanteToolStripMenuItem
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Nuevos.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Nuevos.HeaderText = "Nuevos";
-            this.Nuevos.Name = "Nuevos";
-            this.Nuevos.ReadOnly = true;
-            this.Nuevos.Width = 69;
-            // 
-            // Listo
-            // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Listo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Listo.HeaderText = "Listo";
-            this.Listo.Name = "Listo";
-            this.Listo.ReadOnly = true;
-            this.Listo.Width = 54;
-            // 
-            // Ejecucion
-            // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Ejecucion.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Ejecucion.HeaderText = "Ejecucion";
-            this.Ejecucion.Name = "Ejecucion";
-            this.Ejecucion.ReadOnly = true;
-            this.Ejecucion.Width = 79;
-            // 
-            // Bloqueado
-            // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.Bloqueado.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Bloqueado.HeaderText = "Bloqueado";
-            this.Bloqueado.Name = "Bloqueado";
-            this.Bloqueado.ReadOnly = true;
-            this.Bloqueado.Width = 83;
-            // 
-            // ColaCPU
-            // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ColaCPU.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ColaCPU.HeaderText = "Cola de CPU";
-            this.ColaCPU.Name = "ColaCPU";
-            this.ColaCPU.ReadOnly = true;
-            this.ColaCPU.Width = 86;
-            // 
-            // CEntrada
-            // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.CEntrada.DefaultCellStyle = dataGridViewCellStyle6;
-            this.CEntrada.HeaderText = "Cola de Entrada";
-            this.CEntrada.Name = "CEntrada";
-            this.CEntrada.ReadOnly = true;
-            this.CEntrada.Width = 99;
-            // 
-            // CSalida
-            // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.CSalida.DefaultCellStyle = dataGridViewCellStyle7;
-            this.CSalida.HeaderText = "Cola de Salida";
-            this.CSalida.Name = "CSalida";
-            this.CSalida.ReadOnly = true;
-            this.CSalida.Width = 92;
-            // 
-            // UsoMem
-            // 
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.UsoMem.DefaultCellStyle = dataGridViewCellStyle8;
-            this.UsoMem.HeaderText = "Uso de memoria";
-            this.UsoMem.Name = "UsoMem";
-            this.UsoMem.ReadOnly = true;
-            this.UsoMem.Width = 99;
-            // 
-            // UCPU
-            // 
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.UCPU.DefaultCellStyle = dataGridViewCellStyle9;
-            this.UCPU.HeaderText = "Uso de CPU";
-            this.UCPU.Name = "UCPU";
-            this.UCPU.ReadOnly = true;
-            this.UCPU.Width = 84;
-            // 
-            // UEntrada
-            // 
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.UEntrada.DefaultCellStyle = dataGridViewCellStyle10;
-            this.UEntrada.HeaderText = "Uso de Entrada";
-            this.UEntrada.Name = "UEntrada";
-            this.UEntrada.ReadOnly = true;
-            this.UEntrada.Width = 97;
-            // 
-            // USalida
-            // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.USalida.DefaultCellStyle = dataGridViewCellStyle11;
-            this.USalida.HeaderText = "Uso de Salida";
-            this.USalida.Name = "USalida";
-            this.USalida.ReadOnly = true;
-            this.USalida.Width = 90;
+            this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Name = "verMapaDeMemoriaEnEsteInstanteToolStripMenuItem";
+            this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Size = new System.Drawing.Size(275, 22);
+            this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Text = "Ver mapa de memoria en este instante";
+            this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Click += new System.EventHandler(this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1435,6 +1453,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Promediosrafagas)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.MenuConMem.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1565,6 +1584,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UCPU;
         private System.Windows.Forms.DataGridViewTextBoxColumn UEntrada;
         private System.Windows.Forms.DataGridViewTextBoxColumn USalida;
+        private System.Windows.Forms.ContextMenuStrip MenuConMem;
+        private System.Windows.Forms.ToolStripMenuItem verMapaDeMemoriaEnEsteInstanteToolStripMenuItem;
     }
 }
 

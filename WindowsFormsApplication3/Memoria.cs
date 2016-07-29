@@ -10,8 +10,13 @@ namespace WindowsFormsApplication3
     {
         public int tamañomemoria;
         public int cantpart;
+        public int cantpartig;
+        public int cantpartdif;
+        public int cantpartfij;
+        public int cantpartdin;
         public int[] particionesmem;
-        public int[] espocupados;
+        public int[] particionesmemfij;
+        public int[] particionesmemdin;
         public int[] mapamemoria;
         public int tam1part;
         public enum Tiposorgmem { PARTFIJO = 1, PARTDIN, PAGINADO }
@@ -38,17 +43,19 @@ namespace WindowsFormsApplication3
             RecorColPD = TiposrecCol.Conrecor;
             RecorColPF = TiposrecCol.Conrecor;
             cantpart = 2;
+            cantpartdif = 2;
+            cantpartig = 2;
             tamañomemoria = tammem;
             tam1part = tamañomemoria / cantpart;
             int tamp = tamañomemoria / cantpart;
             particionesmem = new int[cantpart];
-            espocupados = new int[cantpart];
             mapamemoria = new int[cantpart];
             vaciarmemoria();
             Queue<int> cola = new Queue<int>();
             ListaColas.Add(cola);
             particionesmem[0] = 48;
             particionesmem[1] = 80;
+            particionesmemfij = (int[])particionesmem.Clone();
         }
         public void definirtamproc(int[] tamproc)
         {
@@ -77,10 +84,12 @@ namespace WindowsFormsApplication3
         }
         public void ConfigurarConPartFijo(ConfPartFijas2 newconf)
         {
-            particionesmem = newconf.particionesnu;
+            particionesmem = (int[])newconf.particionesnu.Clone();
+            particionesmemfij = (int[])newconf.particionesnu.Clone();
             cantpart = newconf.cantpart;
+            cantpartdif= newconf.cantpart;
+            cantpartfij = newconf.cantpart;
             mapamemoria = new int[cantpart];
-            espocupados = new int[cantpart];
             ordenarparticiones();
             vaciarmemoria();
         }
@@ -89,15 +98,16 @@ namespace WindowsFormsApplication3
         public void cambiarcolas()
         {
             ListaColas.Clear();
-            Queue<int> cola = new Queue<int>();
             if (CantCol== OpcionesCol.UNA || Tampart== Opcionestam.MISMTAM)
             {
+                Queue<int> cola = new Queue<int>();
                 ListaColas.Add(cola);
             }
             if (CantCol==OpcionesCol.UNAxPART)
             {
                 for (int x = 0; x < cantpart; x++)
                 {
+                    Queue<int> cola = new Queue<int>();
                     ListaColas.Add(cola);
                 }
             }
@@ -141,10 +151,9 @@ namespace WindowsFormsApplication3
             for (int x = 0; x < cantpart; x++)
             {
                 mapamemoria[x] = -1;
-                espocupados[x] = 0;
-            }
+            }   
         }
-        public int[]obtenerusomemoria()
+        public int[] obtenerusomemoria()
         {
             List<int> usandomemoria = new List<int>();
             switch (organizacionmem)
@@ -199,6 +208,9 @@ namespace WindowsFormsApplication3
                 case Tiposorgmem.PARTFIJO:
                     agregaraparticion_fija(id_proceso);
                     break;
+                case Tiposorgmem.PARTDIN:
+                    ListaColas[0].Enqueue(id_proceso);
+                    break;
             }
         }
         public void liberarmemoria(int id_proceso)
@@ -206,11 +218,77 @@ namespace WindowsFormsApplication3
             int indice;
             indice = Array.IndexOf(mapamemoria, id_proceso);
             //Busca la ubicacion del proceso en memoria y libera ese espacio
-            while (indice!=-1)
+            if (indice!=-1)
             {
-                mapamemoria[indice] = -1;
-                espocupados[indice] = 0;
-                indice = Array.IndexOf(mapamemoria,id_proceso,indice + 1);
+                switch (organizacionmem)
+                {
+                    case Tiposorgmem.PARTDIN:
+                        mapamemoria[indice] = -1;
+                        //Cantidad de espacio sin ocupar adyacente a bloque a eliminar
+                        int cantidades=particionesmem[indice];
+                        //Bloques inicial y final actual de nuevo bloque de mapa de memoria
+                        int bloqueina = indice;
+                        int bloqueins = indice;
+                        //Cantidad de bloques a combinar en uno nuevo
+                        int cantael = 0;
+                        //Verifica si los bloques adyacentes estan libres o no para unirlos dentro de un mismo bloque
+                        //En primer lugar verifica bloques antes del bloque a liberar
+                        for (int i = (indice - 1); i >= 0; i--)
+                        {
+                            if (mapamemoria[i] == -1)
+                            {
+                                cantidades += particionesmem[i];
+                                bloqueina = i;
+                                cantael++;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        for (int i = (indice + 1); i < cantpart; i++)
+                        {
+                            if (mapamemoria[i] == -1)
+                            {
+                                cantidades += particionesmem[i];
+                                bloqueins = i;
+                                cantael++;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (cantael > 0)
+                        {
+                            int[] backmapamemoria = (int[])mapamemoria.Clone();
+                            int[] backmaparticionesmem = (int[])particionesmem.Clone();
+                            cantpart -= cantael;
+                            mapamemoria = new int[cantpart];
+                            particionesmem = new int[cantpart];
+                            vaciarmemoria();
+                            for (int h = 0; h < bloqueina; h++)
+                            {
+                                mapamemoria[h] = backmapamemoria[h];
+                                particionesmem[h] = backmaparticionesmem[h];
+                            }
+                            mapamemoria[bloqueina] = -1;
+                            particionesmem[bloqueina] = cantidades;
+                            for (int h = bloqueina + 1; h < cantpart; h++)
+                            {
+                                mapamemoria[h] = backmapamemoria[h + cantael];
+                                particionesmem[h] = backmaparticionesmem[h + cantael];
+                            }
+                        }
+                        break;
+                    case Tiposorgmem.PARTFIJO:
+                        while (indice != -1)
+                        {
+                            mapamemoria[indice] = -1;
+                            indice = Array.IndexOf(mapamemoria, id_proceso, indice + 1);
+                        }
+                        break;
+                }
             }
         }
         public void asignarmemoria()
@@ -219,6 +297,9 @@ namespace WindowsFormsApplication3
             {
                 case Tiposorgmem.PARTFIJO:
                     asignarparticion_fija();
+                    break;
+                case Tiposorgmem.PARTDIN:
+                    asignarbloque();
                     break;
             }
         }
@@ -236,7 +317,7 @@ namespace WindowsFormsApplication3
                     {
                         //Si la partcion actual tiene el tamaño suficiente para contener al proceso
                         if (tamaniosproc[id_proceso] <= particionesmem[i])
-                        {
+                        { 
                             ListaColas[i].Enqueue(id_proceso);
                             asignado = true;
                         }
@@ -246,6 +327,68 @@ namespace WindowsFormsApplication3
                         }
                     }
                     break;
+            }
+        }
+        private void asignarbloque()
+        {
+            if (RecorColPD == TiposrecCol.Sinrecor)
+            {
+                asigbloqaproc(ListaColas[0].Peek());
+            }
+            else if (RecorColPD == TiposrecCol.Conrecor)
+            {
+                int[] colamem = ListaColas[0].ToArray();
+                int longcolm = colamem.Length;
+                for (int i = 0; i < longcolm; i++)
+                {
+                    asigbloqaproc(colamem[i]);
+                }
+            }
+        }
+        private void asigbloqaproc(int id_proceso)
+        {
+            bool asignado = false;
+            int[] backmapamemoria = (int[])mapamemoria.Clone();
+            int[] backmaparticionesmem = (int[])particionesmem.Clone();
+            for (int i=0;i<cantpart;i++)
+            {
+                if (mapamemoria[i] == -1 && tamaniosproc[id_proceso] <=particionesmem[i])
+                {
+                    if (particionesmem[i] == tamaniosproc[id_proceso])
+                    {
+                        mapamemoria[i] = id_proceso;
+                    }
+                    else
+                    {
+                        cantpart++;
+                        mapamemoria = new int[cantpart];
+                        particionesmem = new int[cantpart];
+                        vaciarmemoria();
+                        for (int h=0;h<i;h++)
+                        {
+                            mapamemoria[h] = backmapamemoria[h];
+                            particionesmem[h] = backmaparticionesmem[h];
+                        }
+                        mapamemoria[i] = id_proceso;
+                        mapamemoria[i+1] = backmapamemoria[i];
+                        particionesmem[i] = tamaniosproc[id_proceso];
+                        particionesmem[i+1] = backmaparticionesmem[i]-tamaniosproc[id_proceso];
+                        for (int h = i+2; h < cantpart; h++)
+                        {
+                            mapamemoria[h] = backmapamemoria[h-1];
+                            particionesmem[h] = backmaparticionesmem[h-1];
+                        }
+
+                    }
+                    
+                    ListaColas[0].Dequeue();
+                    compactual.agregarproceso(id_proceso);
+                    asignado = true;
+                }
+                if (asignado)
+                {
+                    break;
+                }
             }
         }
         private void asignarparticion_fija()
@@ -294,7 +437,6 @@ namespace WindowsFormsApplication3
                     mapamemoria[h] = id_proceso;
                     ListaColas[0].Dequeue();
                     compactual.agregarproceso(id_proceso);
-                    espocupados[h] = tamaniosproc[id_proceso];
                     asignado = true;
                 }
                 if (asignado)
@@ -316,12 +458,9 @@ namespace WindowsFormsApplication3
                         ListaColas[i].Dequeue();
                         mapamemoria[i] = procesonuevo;
                         compactual.agregarproceso(procesonuevo);
-                        espocupados[i] = tamaniosproc[procesonuevo];
                     }
                 }
             }
         }
-        
-
     }
 }

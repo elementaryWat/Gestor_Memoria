@@ -28,8 +28,8 @@ namespace WindowsFormsApplication3
             sumatamor = 0;  
             memoriaactual = memac;
             InitializeComponent();
-            particionesor = memoriaactual.particionesmem;
-            cantpart = memoriaactual.cantpart;
+            particionesor = memoriaactual.particionesmemfij;
+            cantpart = memoriaactual.cantpartdif;
             Cantpart.Text = cantpart.ToString();
             Tamactual.Text = "Tamaño actual de memoria = " + memoriaactual.tamañomemoria + " KB";
             Tampartic.Rows.Clear();
@@ -68,6 +68,7 @@ namespace WindowsFormsApplication3
                     for (int i=0;i<temporal;i++)
                     {
                         sumatamnu += tamp;
+                        particionesnu[i] = tamp;
                         string[] particion= {(i+1).ToString() , tamp.ToString() };
                         Tampartic.Rows.Add(particion);
                     }
@@ -90,7 +91,7 @@ namespace WindowsFormsApplication3
             }
             if (error)
             {
-                cantpart = memoriaactual.cantpart;
+                cantpart = memoriaactual.cantpartdif;
                 Cantpart.Text = cantpart.ToString();
                 Tampartic.Rows.Clear();
                 for (int x = 0; x < cantpart; x++)
@@ -130,10 +131,28 @@ namespace WindowsFormsApplication3
 
         private void Est_tamanios_Click(object sender, EventArgs e)
         {
+            bool partig = false;
+            for (int h = 0; h < cantpart; h++)
+            {
+                for (int i = (h + 1); i < cantpart; i++)
+                {
+                    if (particionesnu[i] == particionesnu[h])
+                    {
+                        MessageBox.Show("Existen dos o mas particiones del mismo tamaño!");
+                        error = true;
+                        partig = true;
+                        break;
+                    }
+                }
+                if (partig)
+                {
+                    break;
+                }
+            }
             if (!error)
             {
                 manejadormem(this);
-                Hide();
+                Dispose();
             }
             else
             {
