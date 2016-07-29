@@ -18,11 +18,17 @@ namespace WindowsFormsApplication3
         DialogoPartIgtam DialogoP;
         ConfPartFijas2 dialogoConfPF;
         Memoria Gestormemoria;
+        List<int[]> usosmem;
+        List<int[]> particiones;
+        List<int> cantpartins;
         public Form1()
         {
             InitializeComponent();
             dialogoS = new DialogoSimple();
             Gestormemoria = new Memoria(128);
+            usosmem = new List<int[]>();
+            particiones = new List<int[]>();
+            cantpartins = new List<int>();
             tiempoquantum =1;
             tiempoquantumES=1;
     }
@@ -42,8 +48,10 @@ namespace WindowsFormsApplication3
         public int tiempoquantum;
         public int tiempoquantumES;
         public int[] tamaniosproc;
+        public bool haydemasiadogrande;
         private void inicializar(int cantidad)
         {
+            haydemasiadogrande = false;
             //Lista de arreglos con las rafagas de los procesos
             List<int[]> configuraciones = new List<int[]>();
             tamaniosproc = new int[cantidad];
@@ -58,6 +66,10 @@ namespace WindowsFormsApplication3
             {
                 exProceso[x] = false;
                 tamaniosproc[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[2].Value.ToString()));
+                if (!Gestormemoria.tamanioadecuado(tamaniosproc[x]))
+                {
+                    haydemasiadogrande = true;
+                }
                 pend1CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[3].Value.ToString()));
                 pendentrada[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[4].Value.ToString()));
                 pend2CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[5].Value.ToString()));
@@ -164,6 +176,72 @@ namespace WindowsFormsApplication3
             }
         }
         int reloj;
+        int instanteseleccionado;
+        private void estinst(object sender, DataGridViewCellEventArgs e)
+        {
+           instanteseleccionado = e.RowIndex;
+        }
+
+        Usomemoria miusoprueba;
+        private void verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (miusoprueba != null)
+            {
+                miusoprueba.Dispose();
+            }
+            miusoprueba = new Usomemoria();
+            miusoprueba.Show();
+            int[] usomemactual = usosmem[instanteseleccionado];
+            int[] particionesactual = particiones[instanteseleccionado];
+            int cantpartactual = cantpartins[instanteseleccionado];
+            int tamanio = cantpartactual;
+            int alturatotal = 40 * tamanio;
+            int mentamanio;
+            mentamanio = 0;
+            if ((Gestormemoria.Tampart == Memoria.Opcionestam.DIFTAM && Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTFIJO) || Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTDIN)
+            {
+                mentamanio = particionesactual[0];
+                for (int i = 0; i < tamanio; i++)
+                {
+                    int tamaniopart = particionesactual[i];
+                    if (tamaniopart < mentamanio)
+                    {
+                        mentamanio = tamaniopart;
+                    }
+                }
+            }
+            
+            for (int i=0;i<tamanio;i++)
+            {
+                int tamparticion=0;
+                if ((Gestormemoria.Tampart == Memoria.Opcionestam.DIFTAM && Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTFIJO) || Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTDIN)
+                {
+                    tamparticion = particionesactual[i];
+                }
+                else if (Gestormemoria.Tampart == Memoria.Opcionestam.MISMTAM && Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTFIJO)
+                {
+                    tamparticion = Gestormemoria.tam1part;
+                }
+                if (usomemactual[i] != -1)
+                {
+                    int idproceso = Int32.Parse(DatosFlow.Rows[usomemactual[i]].Cells[0].Value.ToString());
+                    int tamanioproc = Int32.Parse(DatosFlow.Rows[usomemactual[i]].Cells[2].Value.ToString());
+                    string[] filaac = { idproceso.ToString(), "(" + tamanioproc + "/" + tamparticion + ")", (tamparticion - tamanioproc) + "/" + tamparticion };
+                    miusoprueba.Bloquesmem.Rows.Add(filaac);
+                }
+                else
+                {
+                    string[] filaac = { "-","0", tamparticion.ToString() };
+                    miusoprueba.Bloquesmem.Rows.Add(filaac);      
+                }
+                if ((Gestormemoria.Tampart == Memoria.Opcionestam.DIFTAM && Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTFIJO) || Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTDIN)
+                {
+                    int porcentaje = (particionesactual[i] * 100) / Gestormemoria.tamañomemoria;
+                    miusoprueba.Bloquesmem.Rows[miusoprueba.Bloquesmem.Rows.Count - 1].Height = (30 * porcentaje) / mentamanio;
+                }
+                
+            }
+        }
         private void imprimirestadisticas()
         {
             Promediosrafagas.Rows.Clear();
@@ -332,6 +410,7 @@ namespace WindowsFormsApplication3
         Queue<int> filasganttS = new Queue<int>();
         private void imprimir()
         {
+            //usosmem.Clear();
             //Imprime datos ejecucion 
             //Estados procesos
             /*---------------------------Bloqueado Entrada-----------------------------------------*/
@@ -453,6 +532,7 @@ namespace WindowsFormsApplication3
             /*-------------------------------------------------------------------------------------*/
             //Uso de recursos
             /*---------------------------Uso de memoria-----------------------------------------------------*/
+            int[] usomemactual= (int[])Gestormemoria.mapamemoria.Clone();
             string usomemoria = "";
             int[] usandomemoria = Gestormemoria.obtenerusomemoria();
             int cantidadusandom = usandomemoria.Length;
@@ -471,6 +551,9 @@ namespace WindowsFormsApplication3
                     }
                 }
             }
+            usosmem.Add((int[])usomemactual.Clone());
+            particiones.Add((int[])Gestormemoria.particionesmem.Clone());
+            cantpartins.Add((int)Gestormemoria.cantpart);
             /*-------------------------------------------------------------------------------------*/
             /*-------------------------------Uso de CPU-------------------------------------------*/
             string enejc = "";
@@ -535,6 +618,8 @@ namespace WindowsFormsApplication3
                 backenejcsal = enejcsal;
                 string[] row = { reloj.ToString(),colamemoria, colacpu, enejc, colaBE + "/" + colaBS, colacpu, colaE, colaS,usomemoria, enejc, enejcent, enejcsal };
                 FlujoEjec.Rows.Add(row);
+                FlujoEjec.Rows[FlujoEjec.Rows.Count - 1].ContextMenuStrip = MenuConMem;
+                FlujoEjec.CellClick += new DataGridViewCellEventHandler(estinst);
                 //Resalta filas para GANTT CPU
                 if (cambiarcolor && InstGant.Checked)
                 {
@@ -601,6 +686,7 @@ namespace WindowsFormsApplication3
                 politicaES = RR;              
             }
             FlujoEjec.Rows.Clear();
+            usosmem.Clear();
             reloj =0;
             int cantidad = (DatosFlow.RowCount) - 1;
             if (cantidad==0)
@@ -612,68 +698,81 @@ namespace WindowsFormsApplication3
                 {
                     if (noerror)
                     {
+                        bool primerarribo = true;
                         inicializar(cantidad);
-                        ordenador.politica = politica;
-                        ordenador.politicaES = politicaES;
-                        ordenador.tiempoquantum = tiempoquantum;
-                        ordenador.tiempoquantumES = tiempoquantumES;
-                        filasgantt.Clear();
-                        filasganttE.Clear();
-                        filasganttS.Clear();
-                        Gestormemoria.asignarmemoria();
-                        while (notermi())
+                        if (haydemasiadogrande)
                         {
-                            //MessageBox.Show("Hola");
-                            int[] respuesta = verificaraarribar(reloj);
-                            //Si hay algun proceso para arribar
-                            if (respuesta[0] != -1)
+                            MessageBox.Show("Existe uno o mas procesos que no caben en la memoria");
+                            noerror = false;
+                        }
+                        else
+                        {
+                            ordenador.politica = politica;
+                            ordenador.politicaES = politicaES;
+                            ordenador.tiempoquantum = tiempoquantum;
+                            ordenador.tiempoquantumES = tiempoquantumES;
+                            filasgantt.Clear();
+                            filasganttE.Clear();
+                            filasganttS.Clear();
+                            while (notermi())
                             {
-                                for (int x = 0; x < respuesta.Length; x++)
+                                //MessageBox.Show("Hola");
+                                int[] respuesta = verificaraarribar(reloj);
+                                //Si hay algun proceso para arribar
+                                if (respuesta[0] != -1)
                                 {
-                                    Gestormemoria.agregaracolanuevos(respuesta[x]);
+                                    for (int x = 0; x < respuesta.Length; x++)
+                                    {
+                                        Gestormemoria.agregaracolanuevos(respuesta[x]);
+                                    }
+                                    if (primerarribo)
+                                    {
+                                        primerarribo = false;
+                                        Gestormemoria.asignarmemoria();
+                                    }
                                 }
+                                //MessageBox.Show("Instante de tiempo "+reloj+" Cantidad de particiones"+Gestormemoria.cantpart);
+                                ordenador.ejecutar(reloj);
+                                Gestormemoria.asignarmemoria();
+                                imprimir();
+                                reloj++;
                             }
-                            
-                            ordenador.ejecutar(reloj);
-                            Gestormemoria.asignarmemoria();
-                            imprimir();
-                            reloj++;
-                        }
-                        imprimirestadisticas();
-                        int[] filagant=filasgantt.ToArray();
-                        DataGridViewCellStyle style = new DataGridViewCellStyle();
-                        style.BackColor = Color.Aquamarine;
-                        int[] filagantE = filasganttE.ToArray();
-                        DataGridViewCellStyle styleE = new DataGridViewCellStyle();
-                        styleE.BackColor = Color.LightGreen;
-                        int[] filagantS = filasganttS.ToArray();
-                        DataGridViewCellStyle styleS = new DataGridViewCellStyle();
-                        styleS.BackColor = Color.Orchid;
+                            imprimirestadisticas();
+                            int[] filagant = filasgantt.ToArray();
+                            DataGridViewCellStyle style = new DataGridViewCellStyle();
+                            style.BackColor = Color.Aquamarine;
+                            int[] filagantE = filasganttE.ToArray();
+                            DataGridViewCellStyle styleE = new DataGridViewCellStyle();
+                            styleE.BackColor = Color.LightGreen;
+                            int[] filagantS = filasganttS.ToArray();
+                            DataGridViewCellStyle styleS = new DataGridViewCellStyle();
+                            styleS.BackColor = Color.Orchid;
 
-                        for (int y=0;y< filagant.Length;y++)
-                        {
-                            FlujoEjec.Rows[filagant[y]].Cells[2].Style = style;
-                            FlujoEjec.Rows[filagant[y]].Cells[9].Style = style;
+                            for (int y = 0; y < filagant.Length; y++)
+                            {
+                                FlujoEjec.Rows[filagant[y]].Cells[3].Style = style;
+                                FlujoEjec.Rows[filagant[y]].Cells[9].Style = style;
+                            }
+                            for (int y = 0; y < filagantE.Length; y++)
+                            {
+                                FlujoEjec.Rows[filagantE[y]].Cells[10].Style = styleE;
+                            }
+                            for (int y = 0; y < filagantS.Length; y++)
+                            {
+                                FlujoEjec.Rows[filagantS[y]].Cells[11].Style = styleS;
+                            }
                         }
-                        for (int y = 0; y < filagantE.Length; y++)
-                        {
-                            FlujoEjec.Rows[filagantE[y]].Cells[10].Style = styleE;
-                        }
-                        for (int y = 0; y < filagantS.Length; y++)
-                        {
-                            FlujoEjec.Rows[filagantS[y]].Cells[11].Style = styleS;
-                        }
+                        
                     }
                 }
                 catch (FormatException)
                 {
                     MessageBox.Show("Se encontro caracteres no numericos en los datos de los procesos");
                 }
-                /*catch(NullReferenceException)
+                catch (NullReferenceException)
                 {
                     MessageBox.Show("Se encontro valores nulos en los datos de los procesos");
                 }
-                */
             }
             
         }
@@ -871,10 +970,19 @@ namespace WindowsFormsApplication3
             if (ts == PartFijas)
             {
                 Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTFIJO;
+                Gestormemoria.particionesmem = Gestormemoria.particionesmemfij;
+                Gestormemoria.cantpart = Gestormemoria.cantpartfij;
+                Gestormemoria.mapamemoria = new int[Gestormemoria.cantpart];
+                Gestormemoria.vaciarmemoria();
             }
             if (ts == PartDin)
             {
                 Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTDIN;
+                Gestormemoria.cantpart = 1;
+                Gestormemoria.particionesmem = new int[1];
+                Gestormemoria.particionesmem[0] = Gestormemoria.tamañomemoria;
+                Gestormemoria.mapamemoria = new int[1];
+                Gestormemoria.vaciarmemoria();
             }
         }
         private void TipoPart_CheckedChanged(object sender, EventArgs e)
@@ -883,10 +991,19 @@ namespace WindowsFormsApplication3
             if (ts == PartFijas)
             {
                 Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTFIJO;
+                Gestormemoria.particionesmem = Gestormemoria.particionesmemfij;
+                Gestormemoria.cantpart = Gestormemoria.cantpartfij;
+                Gestormemoria.mapamemoria = new int[Gestormemoria.cantpart];
+                Gestormemoria.vaciarmemoria();
             }
             if (ts == PartDin)
             {
                 Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTDIN;
+                Gestormemoria.cantpart = 1;
+                Gestormemoria.particionesmem = new int[1];
+                Gestormemoria.particionesmem[0] = Gestormemoria.tamañomemoria;
+                Gestormemoria.mapamemoria = new int[1];
+                Gestormemoria.vaciarmemoria();
             }
         }
         private void TamPart_Click(object sender, EventArgs e)
@@ -909,10 +1026,12 @@ namespace WindowsFormsApplication3
             if (ts== IgTamPart)
             {
                 Gestormemoria.Tampart = Memoria.Opcionestam.MISMTAM;
+                Gestormemoria.cantpart = Gestormemoria.cantpartig;
             }
             if (ts == DifTamPart)
             {
                 Gestormemoria.Tampart = Memoria.Opcionestam.DIFTAM;
+                Gestormemoria.cantpart = Gestormemoria.cantpartdif;
             }
         }
         private void TamPart_CheckedChanged(object sender, EventArgs e)
@@ -1085,6 +1204,7 @@ namespace WindowsFormsApplication3
             ts.BackColor = Color.RoyalBlue;
             ts.ForeColor = Color.Cyan;
         }
+
     }
     /*-----------------------------------------------------------------------------------------*/
 }
