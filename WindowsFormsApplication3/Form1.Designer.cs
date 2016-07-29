@@ -184,6 +184,7 @@
             this.tiempoQuantumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuConMem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejercicio8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -893,7 +894,8 @@
             // 
             this.datosDeInicioToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.datosDeInicioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ejercicio7ToolStripMenuItem});
+            this.ejercicio7ToolStripMenuItem,
+            this.ejercicio8ToolStripMenuItem});
             this.datosDeInicioToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.datosDeInicioToolStripMenuItem.Name = "datosDeInicioToolStripMenuItem";
             this.datosDeInicioToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
@@ -1040,7 +1042,7 @@
             this.configurarToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue;
             this.configurarToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
             this.configurarToolStripMenuItem1.Name = "configurarToolStripMenuItem1";
-            this.configurarToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.configurarToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
             this.configurarToolStripMenuItem1.Text = "Configurar..";
             this.configurarToolStripMenuItem1.Click += new System.EventHandler(this.configurarMismT);
             this.configurarToolStripMenuItem1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -1244,7 +1246,7 @@
             this.Politica4});
             this.politicaToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem1.Name = "politicaToolStripMenuItem1";
-            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
             this.politicaToolStripMenuItem1.Text = "Politica";
             this.politicaToolStripMenuItem1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaToolStripMenuItem1.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1414,6 +1416,15 @@
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Size = new System.Drawing.Size(275, 22);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Text = "Ver mapa de memoria en este instante";
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Click += new System.EventHandler(this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click);
+            // 
+            // ejercicio8ToolStripMenuItem
+            // 
+            this.ejercicio8ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.ejercicio8ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.ejercicio8ToolStripMenuItem.Name = "ejercicio8ToolStripMenuItem";
+            this.ejercicio8ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ejercicio8ToolStripMenuItem.Text = "Modelo Libro";
+            this.ejercicio8ToolStripMenuItem.Click += new System.EventHandler(this.ejercicio8ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1586,6 +1597,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn USalida;
         private System.Windows.Forms.ContextMenuStrip MenuConMem;
         private System.Windows.Forms.ToolStripMenuItem verMapaDeMemoriaEnEsteInstanteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ejercicio8ToolStripMenuItem;
     }
 }
 

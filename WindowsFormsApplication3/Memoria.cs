@@ -350,45 +350,77 @@ namespace WindowsFormsApplication3
             bool asignado = false;
             int[] backmapamemoria = (int[])mapamemoria.Clone();
             int[] backmaparticionesmem = (int[])particionesmem.Clone();
-            for (int i=0;i<cantpart;i++)
+            int mentamanio = -1;
+            int indment = 0;
+            int maxtamanio = -1;
+            int indmaxt = 0;
+            int primerlibre=-1;
+            bool enclibre=false;
+            for (int h=0;h<cantpart;h++)
             {
-                if (mapamemoria[i] == -1 && tamaniosproc[id_proceso] <=particionesmem[i])
+                if (mapamemoria[h] == -1 && tamaniosproc[id_proceso] <=particionesmem[h])
                 {
-                    if (particionesmem[i] == tamaniosproc[id_proceso])
+                    enclibre = true;
+                    if (particionesmem[h]< mentamanio || mentamanio==-1)
                     {
-                        mapamemoria[i] = id_proceso;
+                        mentamanio = particionesmem[h];
+                        indment = h;
                     }
-                    else
+                    if (particionesmem[h] > maxtamanio)
                     {
-                        cantpart++;
-                        mapamemoria = new int[cantpart];
-                        particionesmem = new int[cantpart];
-                        vaciarmemoria();
-                        for (int h=0;h<i;h++)
-                        {
-                            mapamemoria[h] = backmapamemoria[h];
-                            particionesmem[h] = backmaparticionesmem[h];
-                        }
-                        mapamemoria[i] = id_proceso;
-                        mapamemoria[i+1] = backmapamemoria[i];
-                        particionesmem[i] = tamaniosproc[id_proceso];
-                        particionesmem[i+1] = backmaparticionesmem[i]-tamaniosproc[id_proceso];
-                        for (int h = i+2; h < cantpart; h++)
-                        {
-                            mapamemoria[h] = backmapamemoria[h-1];
-                            particionesmem[h] = backmaparticionesmem[h-1];
-                        }
+                        maxtamanio = particionesmem[h];
+                        indmaxt = h;
+                    }
+                    if (primerlibre==-1)
+                    {
+                        primerlibre = h;
+                    }
+                }
+            }
+            if (enclibre)
+            {
+                int i = 0;
+                switch (AlgorCol)
+                {
+                    case AlgsCol.BESTFIT:
+                        i = indment;
+                        break;
+                    case AlgsCol.WORSTFIT:
+                        i = indmaxt;
+                        break;
+                    case AlgsCol.FIRSTFIT:
+                        i = primerlibre;
+                        break;
+                }
+                if (particionesmem[i] == tamaniosproc[id_proceso])
+                {
+                    mapamemoria[i] = id_proceso;
+                }
+                else
+                {
+                    cantpart++;
+                    mapamemoria = new int[cantpart];
+                    particionesmem = new int[cantpart];
+                    vaciarmemoria();
+                    for (int h = 0; h < i; h++)
+                    {
+                        mapamemoria[h] = backmapamemoria[h];
+                        particionesmem[h] = backmaparticionesmem[h];
+                    }
+                    mapamemoria[i] = id_proceso;
+                    mapamemoria[i + 1] = backmapamemoria[i];
+                    particionesmem[i] = tamaniosproc[id_proceso];
+                    particionesmem[i + 1] = backmaparticionesmem[i] - tamaniosproc[id_proceso];
+                    for (int h = i + 2; h < cantpart; h++)
+                    {
+                        mapamemoria[h] = backmapamemoria[h - 1];
+                        particionesmem[h] = backmaparticionesmem[h - 1];
+                    }
 
-                    }
-                    
-                    ListaColas[0].Dequeue();
-                    compactual.agregarproceso(id_proceso);
-                    asignado = true;
                 }
-                if (asignado)
-                {
-                    break;
-                }
+
+                ListaColas[0].Dequeue();
+                compactual.agregarproceso(id_proceso);
             }
         }
         private void asignarparticion_fija()
