@@ -146,7 +146,7 @@ namespace WindowsFormsApplication3
                 int temporal = -1;
                 int temporal2 = -1;
                 //Si se implementa politica SJF o SRTF se ordena la cola de listos
-                if (politicaES == SJF || politicaES == SRTF)
+                if (politicaES == SJF)
                 {
                     int[] colaentrada = Entrada.ToArray();
                     int[] colabentrada = BEntrada.ToArray();
@@ -215,7 +215,7 @@ namespace WindowsFormsApplication3
                 int temporal = -1;
                 int temporal2 = -1;
                 //Si se implementa politica SJF o SRTF se ordena la cola de listos
-                if (politicaES == SJF || politicaES == SRTF)
+                if (politicaES == SJF)
                 {
                     int[] colasalida = Salida.ToArray();
                     int[] colabsalida = BSalida.ToArray();
@@ -224,7 +224,7 @@ namespace WindowsFormsApplication3
                     //Ordena la cola de listos teniendo en cuenta la primera rafaga de cada proceso
                     for (int x = 0; x < (cantidadcola - 1); x++)
                     {
-                        for (int y = (x + 1); y < cantidadcola; y++)
+                        for (int y = (x + 1); y < cantidadcola; y++)    
                         {
                             if (rafagas[3][colasalida[x]] > rafagas[3][colasalida[y]])
                             {
@@ -496,30 +496,11 @@ namespace WindowsFormsApplication3
             //MessageBox.Show("Se inicia la ejecucion en entrada de " + proceso + " en instante " + instante);
             Entrada.Dequeue();
             UEntrada = proceso;
-            if (politicaES == RR)
-            {
-                if (tiempoquantumES < trafaga)
-                {
-                    TRestanteEntrada = tiempoquantumES - 1;
-                    rafagas[1][proceso] = trafaga - tiempoquantumES;
-                }
-                else
-                {
-                    TRestanteEntrada = trafaga - 1;
-                    rafagas[1][proceso] = 0;
-                }
-            }
-            else
-            {
-                TRestanteEntrada = trafaga - 1;
-                rafagas[1][proceso] = 0;
-            }
+            TRestanteEntrada = trafaga - 1;
+            rafagas[1][proceso] = 0;
         }
         private void ejecutarEntrada()
         {
-            //Para el algoritmo SRTF existira una variable politica de tipo int que si es= a la constante SRTF en cada ciclo de ejecucion si arriba
-            //en la cola de planificacion un proceso con tiempo de irrupcion menor que el actualmente ejecutando
-            //En ese caso sacara de la ejecucion al proceso actual y lo ubicara en el lugar correspondiente en la cola
             //Si no hay ningun proceso en ejecucion de entrada
             if (UEntrada == -1)
             {
@@ -529,22 +510,14 @@ namespace WindowsFormsApplication3
                     ejecutandoEntrada();
                 }
             }
-            else {//Si ya hay algun proceso en ejecucion
-                //Determina si ya ha terminado su ejecucion 
+            else {
                 if (TRestanteEntrada == 0)
                 {
-                    if (rafagas[1][UEntrada] != 0 && politicaES == RR)
-                    {
-                        agregarprocesoE(UEntrada);
-                    }
-                    else
-                    {
-                        tiemposfinalizacionE[UEntrada] = instante;
-                        //Desbloquea el proceso
-                        BEntrada.Dequeue();
-                        //Lo agrega a la cola de CPU
-                        agregarproceso(UEntrada);
-                    }
+                    tiemposfinalizacionE[UEntrada] = instante;
+                    //Desbloquea el proceso
+                    BEntrada.Dequeue();
+                    //Lo agrega a la cola de CPU
+                    agregarproceso(UEntrada);
                     //Si hay algun proceso en la cola de Entrada lo pone en ejecucion
                     //Orden FIFO
                     if (Entrada.Count != 0)
@@ -557,49 +530,8 @@ namespace WindowsFormsApplication3
                     }
                 }
                 else
-                {//En caso de que se este usando politica SRTF
-                 //Si no termino la ejecucion verifica si el primer proceso en la cola de listos arribo un proceso con tiempo de irrupcion menor
-                 //que el actualmente en ejecucion
-                    if (politicaES == SRTF && hayarriboE)
-                    {
-                        hayarriboE = false;
-                        // MessageBox.Show("Hola");
-                        if (Entrada.Count != 0)
-                        {
-                            proceso = Entrada.Peek();
-                            rafaga = rafagas[1][proceso];
-                            if (rafaga < TRestanteEntrada)
-                            {
-                                //Debera indicar que no termino la rafaga actual del proceso actualizando la cantidad de irrupciones pendientes
-                                rafagas[1][UEntrada] = TRestanteEntrada;
-                                //Saca el nuevo proceso a ejecutar
-                                tiemposprimerrespuestaE[proceso] = instante;
-                                //Ordena la cola de listos 
-                                agregarprocesoE(UEntrada);
-                                Entrada.Dequeue();
-                                //Inicia la ejecucion del nuevo proceso
-                                UEntrada = proceso;
-                                //Descuenta el ciclo de reloj en curso
-                                TRestanteEntrada = rafagas[1][proceso] - 1;
-                                rafagas[1][proceso] = 0;
-
-                            }
-                            else
-                            {
-                                TRestanteEntrada--;
-                            }
-                        }
-                        else
-                        {
-                            TRestanteEntrada--;
-                        }
-
-                    }
-                    else
-                    {
-                        //Sino simplemente continua con la ejecucion
-                        TRestanteEntrada--;
-                    }
+                {
+                    TRestanteEntrada--;
                 }
             }
         }
@@ -615,32 +547,11 @@ namespace WindowsFormsApplication3
             //MessageBox.Show("Se inicia la ejecucion en salida de " + proceso + " en instante " + instante);
             Salida.Dequeue();
             USalida = proceso;
-            if (politicaES == RR)
-            {
-                if (tiempoquantumES < trafaga)
-                {
-                    TRestanteSalida = tiempoquantumES - 1;
-                    rafagas[3][proceso] = trafaga - tiempoquantumES;
-                }
-                else
-                {
-                    TRestanteSalida = trafaga - 1;
-                    rafagas[3][proceso] = 0;
-                }
-            }
-            else
-            {
-                TRestanteSalida = trafaga - 1;
-                rafagas[3][proceso] = 0;
-            }
+            TRestanteSalida = trafaga - 1;
+            rafagas[3][proceso] = 0;
         }
         private void ejecutarSalida()
         {
-            //Para el algoritmo SRTF existira una variable politica de tipo int que si es= a la constante SRTF en cada ciclo de ejecucion si arriba
-            //en la cola de planificacion un proceso con tiempo de irrupcion menor que el actualmente ejecutando
-            //En ese caso sacara de la ejecucion al proceso actual y lo ubicara en el lugar correspondiente en la cola
-            int rafaga;
-            int proceso;
             //Si no hay ningun proceso en ejecucion de salida
             if (USalida == -1)
             {
@@ -651,22 +562,14 @@ namespace WindowsFormsApplication3
                     ejecutandoSalida();
                 }
             }
-            else {//Si ya hay algun proceso en ejecucion
-                //Determina si ya ha terminado su ejecucion 
+            else { 
                 if (TRestanteSalida == 0)
                 {
-                    if (rafagas[3][USalida] != 0 && politicaES == RR)
-                    {
-                        agregarprocesoS(USalida);
-                    }
-                    else
-                    {
-                        tiemposfinalizacionS[USalida] = instante;
-                        //Desbloquea el proceso
-                        BSalida.Dequeue();
-                        //Lo agrega a la cola de CPU
-                        agregarproceso(USalida);
-                    }
+                    tiemposfinalizacionS[USalida] = instante;
+                    //Desbloquea el proceso
+                    BSalida.Dequeue();
+                    //Lo agrega a la cola de CPU
+                    agregarproceso(USalida);
                     //Si hay algun proceso en la cola de Salida lo pone en ejecucion
                     //Orden FIFO
                     if (Salida.Count != 0)
@@ -679,49 +582,8 @@ namespace WindowsFormsApplication3
                     }
                 }
                 else
-                {//En caso de que se este usando politica SRTF
-                 //Si no termino la ejecucion verifica si el primer proceso en la cola de listos arribo un proceso con tiempo de irrupcion menor
-                 //que el actualmente en ejecucion
-                    if (politicaES == SRTF && hayarriboS)
-                    {
-                        hayarriboS = false;
-                        // MessageBox.Show("Hola");
-                        if (Salida.Count != 0)
-                        {
-                            proceso = Salida.Peek();
-                            rafaga = rafagas[3][proceso];
-                            if (rafaga < TRestanteSalida)
-                            {
-                                //Debera indicar que no termino la rafaga actual del proceso actualizando la cantidad de irrupciones pendientes
-                                rafagas[3][USalida] = TRestanteSalida;
-                                //Saca el nuevo proceso a ejecutar
-                                tiemposprimerrespuestaS[proceso] = instante;
-                                //Ordena la cola de listos 
-                                agregarprocesoS(USalida);
-                                Salida.Dequeue();
-                                //Inicia la ejecucion del nuevo proceso
-                                USalida = proceso;
-                                //Descuenta el ciclo de reloj en curso
-                                TRestanteSalida = rafagas[3][proceso] - 1;
-                                rafagas[3][proceso] = 0;
-
-                            }
-                            else
-                            {
-                                TRestanteSalida--;
-                            }
-                        }
-                        else
-                        {
-                            TRestanteSalida--;
-                        }
-
-                    }
-                    else
-                    {
-                        //Sino simplemente continua con la ejecucion
-                        TRestanteSalida--;
-                    }
+                {
+                    TRestanteSalida--;
                 }
             }
         }

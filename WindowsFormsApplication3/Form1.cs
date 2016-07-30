@@ -699,14 +699,6 @@ namespace WindowsFormsApplication3
             {
                 politicaES = SJF;
             }
-            if (politicaESSRTF.Checked)
-            {
-                politicaES = SRTF;
-            }
-            if (politicaESRR.Checked)
-            {
-                politicaES = RR;              
-            }
             FlujoEjec.Rows.Clear();
             usosmem.Clear();
             particiones.Clear();
@@ -831,14 +823,6 @@ namespace WindowsFormsApplication3
             {
                 politicaESSJF.Checked = false;
             }
-            if (politicaESSRTF != ts)
-            {
-                politicaESSRTF.Checked = false;
-            }
-            if (politicaESRR != ts)
-            {
-                politicaESRR.Checked = false;
-            }
         }
         public void definirquantumCPU()
         {
@@ -896,37 +880,6 @@ namespace WindowsFormsApplication3
             {
                 Politica4.Checked = false;
             }
-        }
-        public void definirquantumES()
-        {
-            int temporal = dialogoS.bufer;
-            if (temporal > 0)
-            {
-                tiempoquantumES = temporal;
-                politicaESRR.Text = "Round Robin (q=" + tiempoquantumES + ")";
-            }
-            else
-            {
-                dialogoS.error = true;
-                MessageBox.Show("Debe ingresar un tiempo de quantum mayor que 0");
-            }
-            dialogoS.Texto.Text = tiempoquantumES.ToString();
-        }
-        private void tiempoQuantumToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            dialogoS = new DialogoSimple();
-            politicaESFCFS.Checked = false;
-            politicaESSJF.Checked = false;
-            politicaESSRTF.Checked = false;
-            politicaESRR.Checked = true;
-            dialogoS.Text = "Quantum E/S";
-            dialogoS.Texto.Text = tiempoquantumES.ToString();
-            dialogoS.Etiqueta.Text = "Quantum E/S";
-            dialogoS.BotonEst.Text = "Establecer este quantum";
-            dialogoS.mensaje = "Debe ingresar un numero para el tiempo de quantum";
-            dialogoS.manejador = definirquantumES;
-            dialogoS.bufer = tiempoquantumES;
-            dialogoS.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)

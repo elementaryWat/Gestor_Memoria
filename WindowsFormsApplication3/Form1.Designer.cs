@@ -179,9 +179,6 @@
             this.politicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaESFCFS = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaESSJF = new System.Windows.Forms.ToolStripMenuItem();
-            this.politicaESSRTF = new System.Windows.Forms.ToolStripMenuItem();
-            this.politicaESRR = new System.Windows.Forms.ToolStripMenuItem();
-            this.tiempoQuantumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuConMem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ejercicio8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1246,7 +1243,7 @@
             this.Politica4});
             this.politicaToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem1.Name = "politicaToolStripMenuItem1";
-            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.politicaToolStripMenuItem1.Text = "Politica";
             this.politicaToolStripMenuItem1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaToolStripMenuItem1.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1330,12 +1327,10 @@
             this.politicaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.politicaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.politicaESFCFS,
-            this.politicaESSJF,
-            this.politicaESSRTF,
-            this.politicaESRR});
+            this.politicaESSJF});
             this.politicaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem.Name = "politicaToolStripMenuItem";
-            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.politicaToolStripMenuItem.Text = "Politica";
             this.politicaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1348,7 +1343,7 @@
             this.politicaESFCFS.CheckState = System.Windows.Forms.CheckState.Checked;
             this.politicaESFCFS.ForeColor = System.Drawing.Color.Cyan;
             this.politicaESFCFS.Name = "politicaESFCFS";
-            this.politicaESFCFS.Size = new System.Drawing.Size(175, 22);
+            this.politicaESFCFS.Size = new System.Drawing.Size(152, 22);
             this.politicaESFCFS.Text = "FCFS";
             this.politicaESFCFS.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
             this.politicaESFCFS.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -1360,48 +1355,11 @@
             this.politicaESSJF.CheckOnClick = true;
             this.politicaESSJF.ForeColor = System.Drawing.Color.Cyan;
             this.politicaESSJF.Name = "politicaESSJF";
-            this.politicaESSJF.Size = new System.Drawing.Size(175, 22);
+            this.politicaESSJF.Size = new System.Drawing.Size(152, 22);
             this.politicaESSJF.Text = "SJF";
             this.politicaESSJF.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
             this.politicaESSJF.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaESSJF.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
-            // politicaESSRTF
-            // 
-            this.politicaESSRTF.BackColor = System.Drawing.Color.RoyalBlue;
-            this.politicaESSRTF.CheckOnClick = true;
-            this.politicaESSRTF.ForeColor = System.Drawing.Color.Cyan;
-            this.politicaESSRTF.Name = "politicaESSRTF";
-            this.politicaESSRTF.Size = new System.Drawing.Size(175, 22);
-            this.politicaESSRTF.Text = "SRTF";
-            this.politicaESSRTF.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
-            this.politicaESSRTF.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.politicaESSRTF.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
-            // politicaESRR
-            // 
-            this.politicaESRR.BackColor = System.Drawing.Color.RoyalBlue;
-            this.politicaESRR.CheckOnClick = true;
-            this.politicaESRR.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tiempoQuantumToolStripMenuItem});
-            this.politicaESRR.ForeColor = System.Drawing.Color.Cyan;
-            this.politicaESRR.Name = "politicaESRR";
-            this.politicaESRR.Size = new System.Drawing.Size(175, 22);
-            this.politicaESRR.Text = "Round Robin (q=1)";
-            this.politicaESRR.Click += new System.EventHandler(this.OnSelPolESCPU_Click);
-            this.politicaESRR.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.politicaESRR.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
-            // tiempoQuantumToolStripMenuItem
-            // 
-            this.tiempoQuantumToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
-            this.tiempoQuantumToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
-            this.tiempoQuantumToolStripMenuItem.Name = "tiempoQuantumToolStripMenuItem";
-            this.tiempoQuantumToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.tiempoQuantumToolStripMenuItem.Text = "Cambiar tiempo de quantum";
-            this.tiempoQuantumToolStripMenuItem.Click += new System.EventHandler(this.tiempoQuantumToolStripMenuItem_Click);
-            this.tiempoQuantumToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.tiempoQuantumToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // MenuConMem
             // 
@@ -1538,13 +1496,10 @@
         private System.Windows.Forms.ToolStripMenuItem politicaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem politicaESFCFS;
         private System.Windows.Forms.ToolStripMenuItem politicaESSJF;
-        private System.Windows.Forms.ToolStripMenuItem politicaESSRTF;
-        private System.Windows.Forms.ToolStripMenuItem politicaESRR;
         private System.Windows.Forms.ToolStripMenuItem politicaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem Politica1;
         private System.Windows.Forms.ToolStripMenuItem Politica2;
         private System.Windows.Forms.ToolStripMenuItem Politica3;
-        private System.Windows.Forms.ToolStripMenuItem tiempoQuantumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Politica4;
         private System.Windows.Forms.ToolStripMenuItem cambiarTiempoDeQuantumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem datosEjecucionToolStripMenuItem;
