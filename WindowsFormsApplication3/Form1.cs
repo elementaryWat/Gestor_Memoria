@@ -777,6 +777,7 @@ namespace WindowsFormsApplication3
                             filasgantt.Clear();
                             filasganttE.Clear();
                             filasganttS.Clear();
+                            //MessageBox.Show("La organizacion de mem es " + Gestormemoria.particionesmem);
                             while (notermi())
                             {
                                 int[] respuesta = verificaraarribar(reloj);
@@ -785,15 +786,11 @@ namespace WindowsFormsApplication3
                                 {
                                     for (int x = 0; x < respuesta.Length; x++)
                                     {
+                                        //MessageBox.Show("Se agrega");
                                         Gestormemoria.agregaracolanuevos(respuesta[x]);
                                     }
-                                    if (primerarribo)
-                                    {
-                                        primerarribo = false;
-                                        Gestormemoria.asignarmemoria();
-                                    }
                                 }
-                                //MessageBox.Show("Instante de tiempo "+reloj+" Cantidad de particiones"+Gestormemoria.cantpart);
+                                Gestormemoria.asignarmemoria();
                                 ordenador.ejecutar(reloj);
                                 Gestormemoria.asignarmemoria();
                                 imprimir();
@@ -1067,29 +1064,32 @@ namespace WindowsFormsApplication3
         private void TipoPart_CheckedChanged(object sender, EventArgs e)
         {
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
-            if (ts == PartFijas)
+            if (ts.Checked)
             {
-                Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTFIJO;
-                Gestormemoria.particionesmem = Gestormemoria.particionesmemfij;
-                Gestormemoria.cantpart = Gestormemoria.cantpartfij;
-                Gestormemoria.mapamemoria = new int[Gestormemoria.cantpart];
-                Gestormemoria.vaciarmemoria();
-            }
-            if (ts == PartDin)
-            {
-                Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTDIN;
-                Gestormemoria.cantpart = 1;
-                Gestormemoria.particionesmem = new int[1];
-                Gestormemoria.particionesmem[0] = Gestormemoria.tamañomemoria;
-                Gestormemoria.mapamemoria = new int[1];
-                Gestormemoria.vaciarmemoria();
-            }
-            if (ts == Paginado)
-            {
-                Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PAGINADO;
-                Gestormemoria.cantpart = Gestormemoria.cantpag;
-                Gestormemoria.mapamemoria = new int[Gestormemoria.cantpag];
-                Gestormemoria.vaciarmemoria();
+                if (ts == PartFijas)
+                {
+                    Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTFIJO;
+                    Gestormemoria.particionesmem = Gestormemoria.particionesmemfij;
+                    Gestormemoria.cantpart = Gestormemoria.cantpartfij;
+                    Gestormemoria.mapamemoria = new int[Gestormemoria.cantpart];
+                    Gestormemoria.vaciarmemoria();
+                }
+                if (ts == PartDin)
+                {
+                    Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTDIN;
+                    Gestormemoria.cantpart = 1;
+                    Gestormemoria.particionesmem = new int[1];
+                    Gestormemoria.particionesmem[0] = Gestormemoria.tamañomemoria;
+                    Gestormemoria.mapamemoria = new int[1];
+                    Gestormemoria.vaciarmemoria();
+                }
+                if (ts == Paginado)
+                {
+                    Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PAGINADO;
+                    Gestormemoria.cantpart = Gestormemoria.cantpag;
+                    Gestormemoria.mapamemoria = new int[Gestormemoria.cantpag];
+                    Gestormemoria.vaciarmemoria();
+                }
             }
         }
         private void TamPart_Click(object sender, EventArgs e)
@@ -1127,16 +1127,20 @@ namespace WindowsFormsApplication3
             PartDin.Checked = false;
             Paginado.Checked = false;
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
-            if (ts == IgTamPart)
+            if (ts.Checked)
             {
-                Gestormemoria.Tampart = Memoria.Opcionestam.MISMTAM;
-                Gestormemoria.cantpart = Gestormemoria.cantpartig;
+                if (ts == IgTamPart)
+                {
+                    Gestormemoria.Tampart = Memoria.Opcionestam.MISMTAM;
+                    Gestormemoria.cantpart = Gestormemoria.cantpartig;
+                }
+                if (ts == DifTamPart)
+                {
+                    Gestormemoria.Tampart = Memoria.Opcionestam.DIFTAM;
+                    Gestormemoria.cantpart = Gestormemoria.cantpartdif;
+                }
             }
-            if (ts == DifTamPart)
-            {
-                Gestormemoria.Tampart = Memoria.Opcionestam.DIFTAM;
-                Gestormemoria.cantpart = Gestormemoria.cantpartdif;
-            }
+            
         }
         private void Cantidadcolas_Click(object sender, EventArgs e)
         {
@@ -1170,17 +1174,20 @@ namespace WindowsFormsApplication3
         private void Unacola_CheckedChanged(object sender, EventArgs e)
         {
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
-            if (ts == UnaCola)
+            if (ts.Checked)
             {
-                Gestormemoria.CantCol = Memoria.OpcionesCol.UNA;
-            }
-            if (ts == UnaColaPP)
-            {
-                Gestormemoria.CantCol = Memoria.OpcionesCol.UNAxPART;
-            }
-            IgTamPart.Checked = false;
-            DifTamPart.Checked = true;
-            Gestormemoria.cambiarcolas();
+                if (ts == UnaCola)
+                {
+                    Gestormemoria.CantCol = Memoria.OpcionesCol.UNA;
+                }
+                if (ts == UnaColaPP)
+                {
+                    Gestormemoria.CantCol = Memoria.OpcionesCol.UNAxPART;
+                }
+                IgTamPart.Checked = false;
+                DifTamPart.Checked = true;
+                Gestormemoria.cambiarcolas();
+            } 
         }
 
         private void configurarMismT(object sender, EventArgs e)
