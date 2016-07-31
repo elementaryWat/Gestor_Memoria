@@ -117,6 +117,19 @@ namespace WindowsFormsApplication3
             }
             vaciarmemoria();
         }
+        private void quitarprocesoCola(int id_proceso,int idcola)
+        {
+            int[] colamem = ListaColas[0].ToArray();
+            int longcolm = colamem.Length;
+            ListaColas[idcola].Clear();
+            for (int i = 0; i < longcolm; i++)
+            {
+                if (colamem[i] != id_proceso)
+                {
+                    ListaColas[idcola].Enqueue(colamem[i]);
+                }
+            }
+        }
         /*--------------------------------------------------------------------*/
         /*--------------------------Asignacion de memoria---------------------*/
         public bool tamanioadecuado(int tamanio)
@@ -372,7 +385,7 @@ namespace WindowsFormsApplication3
                     {
                         asigmarco(colamem[i], tampag);
                     }
-                    ListaColas[0].Dequeue();
+                    quitarprocesoCola(colamem[i],0);
                     compactual.agregarproceso(colamem[i]);
                 }
             }
@@ -477,8 +490,7 @@ namespace WindowsFormsApplication3
                     }
 
                 }
-
-                ListaColas[0].Dequeue();
+                quitarprocesoCola(id_proceso, 0);
                 compactual.agregarproceso(id_proceso);
             }
         }
@@ -526,7 +538,7 @@ namespace WindowsFormsApplication3
                 if (mapamemoria[h] == -1 && tamaniosproc[id_proceso] <= tampar)
                 {
                     mapamemoria[h] = id_proceso;
-                    ListaColas[0].Dequeue();
+                    quitarprocesoCola(id_proceso, 0);
                     compactual.agregarproceso(id_proceso);
                     asignado = true;
                 }
@@ -546,7 +558,7 @@ namespace WindowsFormsApplication3
                     if (ListaColas[i].Count != 0)
                     {
                         int procesonuevo = ListaColas[i].Peek();
-                        ListaColas[i].Dequeue();
+                        quitarprocesoCola(procesonuevo, i);
                         mapamemoria[i] = procesonuevo;
                         compactual.agregarproceso(procesonuevo);
                     }

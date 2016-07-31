@@ -796,11 +796,12 @@ namespace WindowsFormsApplication3
                                 //MessageBox.Show("Instante de tiempo "+reloj+" Cantidad de particiones"+Gestormemoria.cantpart);
                                 ordenador.ejecutar(reloj);
                                 Gestormemoria.asignarmemoria();
-                                if (reloj>10)
+                                imprimir();
+                                /*if (reloj>10)
                                 {
                                     imprimir();
                                     MessageBox.Show("Hola");
-                                }
+                                }*/
                                 reloj++;
                             }
                             imprimirestadisticas();
