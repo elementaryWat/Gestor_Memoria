@@ -17,6 +17,7 @@ namespace WindowsFormsApplication3
         DialogoSimple dialogoS;
         DialogoPartIgtam DialogoP;
         ConfPartFijas2 dialogoConfPF;
+        ConfPaginado Micongpaginas;
         Memoria Gestormemoria;
         List<int[]> usosmem;
         List<int[]> particiones;
@@ -138,6 +139,27 @@ namespace WindowsFormsApplication3
             string[] row5 = { "5", "7", "14", "1", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row5);
         }
+        private void ejer5Guia4ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatosFlow.Rows.Clear();
+            //{Id_Proceso,Tiempo_de_arribo,1er_R_CPU,Entrada,2da_R_CPU,Salida,3er_R_CPU}
+            string[] row1 = { "1", "0", "15", "5", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row1);
+            string[] row2 = { "2", "0", "20", "4", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row2);
+            string[] row3 = { "3", "0", "12", "10", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row3);
+            string[] row4 = { "4", "1", "5", "3", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row4);
+            string[] row5 = { "5", "2", "3", "2", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row5);
+            string[] row6 = { "6", "3", "70", "10", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row6);
+            string[] row7 = { "7", "4", "25", "5", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row7);
+            string[] row8 = { "8", "5", "10", "5", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row8);
+        }
         //Determina si hay un proceso
         int cantidad;
         public int[] verificaraarribar(int instante)
@@ -237,12 +259,37 @@ namespace WindowsFormsApplication3
                 {
                     tamparticion = Gestormemoria.tam1part;
                 }
+                else if (Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PAGINADO)
+                {
+                    tamparticion = Gestormemoria.tampag;
+                }
                 if (usomemactual[i] != -1)
                 {
                     int idproceso = Int32.Parse(DatosFlow.Rows[usomemactual[i]].Cells[0].Value.ToString());
                     int tamanioproc = Int32.Parse(DatosFlow.Rows[usomemactual[i]].Cells[2].Value.ToString());
-                    string[] filaac = { idproceso.ToString(), "(" + tamanioproc + "/" + tamparticion + ")", (tamparticion - tamanioproc) + "/" + tamparticion };
-                    miusoprueba.Bloquesmem.Rows.Add(filaac);
+                    int tamanioac = tamanioproc;
+                    int tamaniocupado = 0;
+                    if (Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PAGINADO)
+                    {
+                        if (tamanioac < Gestormemoria.tampag)
+                        {
+                            string[] filaac = { idproceso.ToString(), "(" + tamanioproc + "/" + tamparticion + ")", (tamparticion - tamanioproc) + "/" + tamparticion };
+                            miusoprueba.Bloquesmem.Rows.Add(filaac);
+                        }
+                        else
+                        {
+                            tamanioac -= Gestormemoria.tampag;
+                            string[] filaac = { idproceso.ToString(), "(" + tamparticion + "/" + tamparticion + ")", 0 + "/" + tamparticion };
+                            miusoprueba.Bloquesmem.Rows.Add(filaac);
+                        }
+                        
+                    } else
+                    {
+                        string[] filaac = { idproceso.ToString(), "(" + tamanioproc + "/" + tamparticion + ")", (tamparticion - tamanioproc) + "/" + tamparticion };
+                        miusoprueba.Bloquesmem.Rows.Add(filaac);
+                    }
+                    
+                    
                     
                 }
                 else
@@ -732,7 +779,6 @@ namespace WindowsFormsApplication3
                             filasganttS.Clear();
                             while (notermi())
                             {
-                                //MessageBox.Show("Hola");
                                 int[] respuesta = verificaraarribar(reloj);
                                 //Si hay algun proceso para arribar
                                 if (respuesta[0] != -1)
@@ -750,7 +796,11 @@ namespace WindowsFormsApplication3
                                 //MessageBox.Show("Instante de tiempo "+reloj+" Cantidad de particiones"+Gestormemoria.cantpart);
                                 ordenador.ejecutar(reloj);
                                 Gestormemoria.asignarmemoria();
-                                imprimir();
+                                if (reloj>10)
+                                {
+                                    imprimir();
+                                    MessageBox.Show("Hola");
+                                }
                                 reloj++;
                             }
                             imprimirestadisticas();
@@ -898,6 +948,9 @@ namespace WindowsFormsApplication3
                     Gestormemoria.cantpartdif = 2;
                     Gestormemoria.cantpartig = 2;
                     Gestormemoria.cantpartfij = 2;
+                    Gestormemoria.tam1part = Gestormemoria.tamañomemoria / 2;
+                    Gestormemoria.tampag = Gestormemoria.tamañomemoria / 2;
+                    Gestormemoria.cantpag = 2;
                     Gestormemoria.particionesmemfij = new int[2];
                     Gestormemoria.particionesmemfij[0] = (Gestormemoria.tamañomemoria / 2) + 1;
                     Gestormemoria.particionesmemfij[1] = (Gestormemoria.tamañomemoria / 2) - 1;
@@ -916,9 +969,14 @@ namespace WindowsFormsApplication3
                             Gestormemoria.particionesmem = (int[])Gestormemoria.particionesmemfij.Clone();
                             Gestormemoria.vaciarmemoria();
                             break;
+                        case Memoria.Tiposorgmem.PAGINADO:
+                            Gestormemoria.cantpart = Gestormemoria.cantpag;
+                            Gestormemoria.mapamemoria = new int[Gestormemoria.cantpart];
+                            Gestormemoria.vaciarmemoria();
+                            break;
                     }
 
-                    BotTamMem.Text = "Tamaño de memoria (" + Gestormemoria.tamañomemoria + " KB)";
+                    BotTamMem.Text = "Tamaño de memoria (" + Gestormemoria.tamañomemoria + " palabras)";
                 }
                 else
                 {
@@ -937,7 +995,7 @@ namespace WindowsFormsApplication3
             dialogoS = new DialogoSimple();
             dialogoS.Text = "Tamaño de memoria";
             dialogoS.Texto.Text = Gestormemoria.tamañomemoria.ToString();
-            dialogoS.Etiqueta.Text = "Tamaño de memoria (KB)";
+            dialogoS.Etiqueta.Text = "Tamaño de memoria (palabras)";
             dialogoS.BotonEst.Text = "Establecer este tamaño";
             dialogoS.mensaje = "Debe ingresar un numero para el tamaño de memoria";
             dialogoS.manejador = definirtamaño;
@@ -951,6 +1009,15 @@ namespace WindowsFormsApplication3
             dialogoConfPF = new ConfPartFijas2(Gestormemoria);
             dialogoConfPF.manejadormem = Gestormemoria.ConfigurarConPartFijo;
             dialogoConfPF.Show();
+        }
+        private void organizarPaginasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PartFijas.Checked = false;
+            PartDin.Checked = false;
+            Paginado.Checked = true;
+            Gestormemoria.organizacionmem =  Memoria.Tiposorgmem.PAGINADO;
+            ConfPaginado dialogocon = new ConfPaginado(Gestormemoria);
+            dialogocon.Show();
         }
         private void TipoPart_Click(object sender, EventArgs e)
         {
@@ -967,6 +1034,10 @@ namespace WindowsFormsApplication3
             {
                 PartDin.Checked = false;
             }
+            if (Paginado != ts)
+            {
+                Paginado.Checked = false;
+            }
             if (ts == PartFijas)
             {
                 Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PARTFIJO;
@@ -982,6 +1053,13 @@ namespace WindowsFormsApplication3
                 Gestormemoria.particionesmem = new int[1];
                 Gestormemoria.particionesmem[0] = Gestormemoria.tamañomemoria;
                 Gestormemoria.mapamemoria = new int[1];
+                Gestormemoria.vaciarmemoria();
+            }
+            if (ts == Paginado)
+            {
+                Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PAGINADO;
+                Gestormemoria.cantpart = Gestormemoria.cantpag;
+                Gestormemoria.mapamemoria = new int[Gestormemoria.cantpag];
                 Gestormemoria.vaciarmemoria();
             }
         }
@@ -1005,11 +1083,19 @@ namespace WindowsFormsApplication3
                 Gestormemoria.mapamemoria = new int[1];
                 Gestormemoria.vaciarmemoria();
             }
+            if (ts == Paginado)
+            {
+                Gestormemoria.organizacionmem = Memoria.Tiposorgmem.PAGINADO;
+                Gestormemoria.cantpart = Gestormemoria.cantpag;
+                Gestormemoria.mapamemoria = new int[Gestormemoria.cantpag];
+                Gestormemoria.vaciarmemoria();
+            }
         }
         private void TamPart_Click(object sender, EventArgs e)
         {
             PartFijas.Checked = true;
             PartDin.Checked = false;
+            Paginado.Checked = false;
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
             if (!ts.Checked)
             {
@@ -1038,14 +1124,17 @@ namespace WindowsFormsApplication3
         {
             PartFijas.Checked = true;
             PartDin.Checked = false;
+            Paginado.Checked = false;
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
             if (ts == IgTamPart)
             {
                 Gestormemoria.Tampart = Memoria.Opcionestam.MISMTAM;
+                Gestormemoria.cantpart = Gestormemoria.cantpartig;
             }
             if (ts == DifTamPart)
             {
                 Gestormemoria.Tampart = Memoria.Opcionestam.DIFTAM;
+                Gestormemoria.cantpart = Gestormemoria.cantpartdif;
             }
         }
         private void Cantidadcolas_Click(object sender, EventArgs e)
@@ -1132,6 +1221,7 @@ namespace WindowsFormsApplication3
         {
             PartDin.Checked = true;
             PartFijas.Checked = false;
+            Paginado.Checked = false;
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
             //Solo permite la seleccion de una opcion
             if (!ts.Checked)
@@ -1160,6 +1250,7 @@ namespace WindowsFormsApplication3
         {
             PartDin.Checked = true;
             PartFijas.Checked = false;
+            Paginado.Checked = false;
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
             //Solo permite la seleccion de una opcion
             if (!ts.Checked)
@@ -1203,6 +1294,11 @@ namespace WindowsFormsApplication3
             ToolStripMenuItem ts = (ToolStripMenuItem)sender;
             ts.BackColor = Color.RoyalBlue;
             ts.ForeColor = Color.Cyan;
+        }
+
+        private void organizacionMemoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
     /*-----------------------------------------------------------------------------------------*/

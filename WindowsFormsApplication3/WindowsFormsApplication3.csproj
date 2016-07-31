@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfPaginado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfPaginado.Designer.cs">
+      <DependentUpon>ConfPaginado.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfPartFijas2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     <Compile Include="Usomemoria.Designer.cs">
       <DependentUpon>Usomemoria.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ConfPaginado.resx">
+      <DependentUpon>ConfPaginado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConfPartFijas2.resx">
       <DependentUpon>ConfPartFijas2.cs</DependentUpon>
     </EmbeddedResource>

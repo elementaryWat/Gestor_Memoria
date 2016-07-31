@@ -31,7 +31,7 @@ namespace WindowsFormsApplication3
             particionesor = memoriaactual.particionesmemfij;
             cantpart = memoriaactual.cantpartdif;
             Cantpart.Text = cantpart.ToString();
-            Tamactual.Text = "Tamaño actual de memoria = " + memoriaactual.tamañomemoria + " KB";
+            Tamactual.Text = "Tamaño actual de memoria = " + memoriaactual.tamañomemoria + " palabras";
             Tampartic.Rows.Clear();
             for (int x = 0; x < cantpart; x++)
             {
@@ -39,7 +39,7 @@ namespace WindowsFormsApplication3
                 Tampartic.Rows.Add(particion);
                 sumatamor += particionesor[x];
             }
-            SumaAct.Text = "Suma de particiones = " + sumatamor + " KB";
+            SumaAct.Text = "Suma de particiones = " + sumatamor + " palabras";
             if (sumatamor == memoriaactual.tamañomemoria)
             {
                 SumaAct.BackColor = Color.Lime;
@@ -99,7 +99,7 @@ namespace WindowsFormsApplication3
                     string[] particion = { (x + 1).ToString(), particionesor[x].ToString() };
                     Tampartic.Rows.Add(particion);
                 }
-                SumaAct.Text = "Suma de particiones = "+sumatamor + " KB";
+                SumaAct.Text = "Suma de particiones = "+sumatamor + " palabras";
                 if (sumatamor==memoriaactual.tamañomemoria)
                 {
                     SumaAct.BackColor = Color.Lime;
@@ -114,7 +114,7 @@ namespace WindowsFormsApplication3
             }
             else
             {
-                SumaAct.Text = "Suma de particiones = " + sumatamnu + " KB";
+                SumaAct.Text = "Suma de particiones = " + sumatamnu + " palabras";
                 if (sumatamnu == memoriaactual.tamañomemoria)
                 {
                     SumaAct.BackColor = Color.Lime;
@@ -186,7 +186,7 @@ namespace WindowsFormsApplication3
                     error = true;
                 }
             }
-            SumaAct.Text = "Suma de particiones = " + sumatamnu + " KB";
+            SumaAct.Text = "Suma de particiones = " + sumatamnu + " palabras";
             if (sumatamnu == memoriaactual.tamañomemoria)
             {
                 SumaAct.BackColor = Color.Lime;

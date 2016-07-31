@@ -23,8 +23,8 @@ namespace WindowsFormsApplication3
             memoriactual = memac;
             InitializeComponent();
             TextoCP.Text = memoriactual.cantpartig.ToString();
-            Tampart.Text = "Tamaño de particion "+memoriactual.tam1part+" KB";
-            EtTamMemoria.Text = "Tamaño de memoria = "+memoriactual.tamañomemoria+" KB";
+            Tampart.Text = "Tamaño de particion "+memoriactual.tam1part+" palabras";
+            EtTamMemoria.Text = "Tamaño de memoria = "+memoriactual.tamañomemoria+" palabras";
             EtSumaPart.BackColor = Color.Lime;
             EtSumaPart.ForeColor = Color.Black;
             EtSumaPart.Text = "Suma de tamaños de particiones=" + memoriactual.cantpartig * memoriactual.tam1part ;
@@ -67,7 +67,7 @@ namespace WindowsFormsApplication3
                 }else
                 {
                     tamp = memoriactual.tamañomemoria / bufer;
-                    Tampart.Text = "Tamaño de particion " + tamp + " KB";
+                    Tampart.Text = "Tamaño de particion " + tamp + " palabras";
                     if ((tamp * bufer) == memoriactual.tamañomemoria)
                     {
 

@@ -10,6 +10,7 @@ namespace WindowsFormsApplication3
     {
         public int tamañomemoria;
         public int cantpart;
+        public int cantpag;
         public int cantpartig;
         public int cantpartdif;
         public int cantpartfij;
@@ -19,6 +20,7 @@ namespace WindowsFormsApplication3
         public int[] particionesmemdin;
         public int[] mapamemoria;
         public int tam1part;
+        public int tampag;
         public enum Tiposorgmem { PARTFIJO = 1, PARTDIN, PAGINADO }
         public enum Opcionestam { MISMTAM = 1, DIFTAM };
         public enum AlgsCol {BESTFIT = 1, WORSTFIT,FIRSTFIT };
@@ -32,7 +34,7 @@ namespace WindowsFormsApplication3
         public TiposrecCol RecorColPD;
         List<Queue<int>> ListaColas;
         Computador compactual;
-        int[] tamaniosproc;
+        public int[] tamaniosproc;
         public Memoria(int tammem)
         {
             ListaColas = new List<Queue<int>>();
@@ -42,10 +44,12 @@ namespace WindowsFormsApplication3
             AlgorCol = AlgsCol.BESTFIT;
             RecorColPD = TiposrecCol.Conrecor;
             RecorColPF = TiposrecCol.Conrecor;
+            cantpag = 2;
             cantpart = 2;
             cantpartdif = 2;
             cantpartig = 2;
             tamañomemoria = tammem;
+            tampag= tamañomemoria / cantpart;
             tam1part = tamañomemoria / cantpart;
             int tamp = tamañomemoria / cantpart;
             particionesmem = new int[cantpart];
@@ -120,6 +124,7 @@ namespace WindowsFormsApplication3
             switch (organizacionmem)
             {
                 case Tiposorgmem.PARTDIN:
+                case Tiposorgmem.PAGINADO:
                     if (tamanio <= tamañomemoria)
                     {
                         return true;
@@ -211,6 +216,9 @@ namespace WindowsFormsApplication3
                 case Tiposorgmem.PARTDIN:
                     ListaColas[0].Enqueue(id_proceso);
                     break;
+                case Tiposorgmem.PAGINADO:
+                    ListaColas[0].Enqueue(id_proceso);
+                    break;
             }
         }
         public void liberarmemoria(int id_proceso)
@@ -282,6 +290,9 @@ namespace WindowsFormsApplication3
                         }
                         break;
                     case Tiposorgmem.PARTFIJO:
+                        mapamemoria[indice] = -1;
+                        break;
+                    case Tiposorgmem.PAGINADO:
                         while (indice != -1)
                         {
                             mapamemoria[indice] = -1;
@@ -300,6 +311,9 @@ namespace WindowsFormsApplication3
                     break;
                 case Tiposorgmem.PARTDIN:
                     asignarbloque();
+                    break;
+                case Tiposorgmem.PAGINADO:
+                    asignarpaginas();
                     break;
             }
         }
@@ -327,6 +341,51 @@ namespace WindowsFormsApplication3
                         }
                     }
                     break;
+            }
+        }
+        private void asignarpaginas()
+        {
+            int[] colamem = ListaColas[0].ToArray();
+            int longcolm = colamem.Length;
+            for (int i = 0; i < longcolm; i++)
+            {
+                int tamanioproc = tamaniosproc[colamem[i]];
+                int cantpagreq = (int)Math.Ceiling((double)(tamanioproc / tampag));
+                int resto = tamanioproc % tampag;
+                int r = 0;
+                int cantlibres = 0;
+                for (int h = 0; h < cantpart; h++)
+                {
+                    if (mapamemoria[h] == -1)
+                    {
+                        cantlibres++;
+                    }
+                }
+                if (cantlibres>=cantpagreq)
+                {
+                    if (resto != 0)
+                    {
+                        r = 1;
+                        asigmarco(colamem[i], resto);
+                    }
+                    for (int h = 0; h < (cantpagreq - r); h++)
+                    {
+                        asigmarco(colamem[i], tampag);
+                    }
+                    ListaColas[0].Dequeue();
+                    compactual.agregarproceso(colamem[i]);
+                }
+            }
+        }
+        private void asigmarco(int id_proceso, int tamanio)
+        {
+            for (int h = 0; h < cantpart; h++)
+            {
+                if (mapamemoria[h] == -1)
+                {
+                    mapamemoria[h] = id_proceso;
+                    break;
+                }
             }
         }
         private void asignarbloque()
