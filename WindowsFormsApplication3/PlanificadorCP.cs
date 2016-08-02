@@ -75,6 +75,15 @@ namespace WindowsFormsApplication3
         bool[] esprimerarespuesta;
         bool[] esprimerarespuestaE;
         bool[] esprimerarespuestaS;
+        public int cantcolas;
+        List<Queue<int>> Colasmultinivel;
+        public bool CRealimentada;
+        public bool CApropiativa;
+        public int[] politicasColas;
+        //Usado para las colas con algoritmo de planificacion RR
+        public int[] quantumcolas;
+        public string[] nombrescolas;
+        public int colaenejec;
         const int FCFS = 1;
         const int SJF = 2;
         const int SRTF = 3;

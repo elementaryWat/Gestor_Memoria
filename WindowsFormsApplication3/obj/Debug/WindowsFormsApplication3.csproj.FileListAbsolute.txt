@@ -40,3 +40,4 @@ C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplica
 C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.DialogoPartIgtam.resources
 C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Usomemoria.resources
 C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.ConfPaginado.resources
+C:\Users\GerardoAugusto\Desktop\Gestormemoria\Gestor_Memoria\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Colas_multinivel.resources

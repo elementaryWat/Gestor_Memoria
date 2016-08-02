@@ -46,6 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Colas multinivel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Colas multinivel.designer.cs">
+      <DependentUpon>Colas multinivel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfColas.cs" />
     <Compile Include="ConfPaginado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +94,9 @@
     <Compile Include="Usomemoria.Designer.cs">
       <DependentUpon>Usomemoria.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Colas multinivel.resx">
+      <DependentUpon>Colas multinivel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConfPaginado.resx">
       <DependentUpon>ConfPaginado.cs</DependentUpon>
     </EmbeddedResource>

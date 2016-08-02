@@ -17,7 +17,8 @@ namespace WindowsFormsApplication3
         DialogoSimple dialogoS;
         DialogoPartIgtam DialogoP;
         ConfPartFijas2 dialogoConfPF;
-        ConfPaginado Micongpaginas;
+        Colas_multinivel DialogoColas;
+        ConfColas MiconfColas;
         Memoria Gestormemoria;
         List<int[]> usosmem;
         List<int[]> particiones;
@@ -26,6 +27,7 @@ namespace WindowsFormsApplication3
         {
             InitializeComponent();
             dialogoS = new DialogoSimple();
+            MiconfColas = new ConfColas();
             Gestormemoria = new Memoria(128);
             usosmem = new List<int[]>();
             particiones = new List<int[]>();
@@ -1304,10 +1306,12 @@ namespace WindowsFormsApplication3
             ts.ForeColor = Color.Cyan;
         }
 
-        private void organizacionMemoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void colasMultinivelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            DialogoColas = new Colas_multinivel(MiconfColas);
+            DialogoColas.Show();
         }
+
     }
     /*-----------------------------------------------------------------------------------------*/
 }
