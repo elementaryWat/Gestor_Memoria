@@ -33,13 +33,13 @@
             this.TipoC = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Datoscolas = new System.Windows.Forms.DataGridView();
+            this.AColas = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Est_Conf = new System.Windows.Forms.Button();
             this.Id_Cola = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre_Cola = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Alg_Plan = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.QuantumSoportado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AColas = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.Est_Conf = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Datoscolas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,6 +103,8 @@
             // 
             this.Datoscolas.AllowUserToAddRows = false;
             this.Datoscolas.AllowUserToDeleteRows = false;
+            this.Datoscolas.AllowUserToResizeColumns = false;
+            this.Datoscolas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.Datoscolas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Datoscolas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_Cola,
@@ -115,33 +117,6 @@
             this.Datoscolas.TabIndex = 4;
             this.Datoscolas.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.Datoscolas_CellEnter);
             this.Datoscolas.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Datoscolas_EditingControlShowing);
-            // 
-            // Id_Cola
-            // 
-            this.Id_Cola.HeaderText = "Id_Cola";
-            this.Id_Cola.Name = "Id_Cola";
-            this.Id_Cola.ReadOnly = true;
-            // 
-            // Nombre_Cola
-            // 
-            this.Nombre_Cola.HeaderText = "Nombre_Cola";
-            this.Nombre_Cola.Name = "Nombre_Cola";
-            // 
-            // Alg_Plan
-            // 
-            this.Alg_Plan.HeaderText = "Alg. Planif";
-            this.Alg_Plan.Items.AddRange(new object[] {
-            "FCFS",
-            "SJF",
-            "SRTF",
-            "Round Robin"});
-            this.Alg_Plan.Name = "Alg_Plan";
-            // 
-            // QuantumSoportado
-            // 
-            this.QuantumSoportado.HeaderText = "Quantum Soportado";
-            this.QuantumSoportado.Name = "QuantumSoportado";
-            this.QuantumSoportado.Visible = false;
             // 
             // AColas
             // 
@@ -177,6 +152,38 @@
             this.Est_Conf.Text = "Establecer configuracion";
             this.Est_Conf.UseVisualStyleBackColor = false;
             this.Est_Conf.Click += new System.EventHandler(this.Est_Conf_Click);
+            // 
+            // Id_Cola
+            // 
+            this.Id_Cola.HeaderText = "Id_Cola";
+            this.Id_Cola.Name = "Id_Cola";
+            this.Id_Cola.ReadOnly = true;
+            this.Id_Cola.Width = 68;
+            // 
+            // Nombre_Cola
+            // 
+            this.Nombre_Cola.HeaderText = "Nombre_Cola";
+            this.Nombre_Cola.Name = "Nombre_Cola";
+            this.Nombre_Cola.Width = 96;
+            // 
+            // Alg_Plan
+            // 
+            this.Alg_Plan.HeaderText = "Alg. Planif";
+            this.Alg_Plan.Items.AddRange(new object[] {
+            "FCFS",
+            "SJF",
+            "SRTF",
+            "Round Robin"});
+            this.Alg_Plan.Name = "Alg_Plan";
+            this.Alg_Plan.Width = 60;
+            // 
+            // QuantumSoportado
+            // 
+            this.QuantumSoportado.HeaderText = "Quantum Soportado";
+            this.QuantumSoportado.Name = "QuantumSoportado";
+            this.QuantumSoportado.ReadOnly = true;
+            this.QuantumSoportado.Visible = false;
+            this.QuantumSoportado.Width = 127;
             // 
             // Colas_multinivel
             // 

@@ -185,6 +185,11 @@ namespace WindowsFormsApplication3
                     MessageBox.Show("Debe ingresar valores numericos en los tamaños!");
                     error = true;
                 }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("Debe ingresar valores en los tamaños!");
+                    error = true;
+                }
             }
             SumaAct.Text = "Suma de particiones = " + sumatamnu + " palabras";
             if (sumatamnu == memoriaactual.tamañomemoria)

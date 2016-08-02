@@ -1308,7 +1308,7 @@ namespace WindowsFormsApplication3
 
         private void colasMultinivelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogoColas = new Colas_multinivel(MiconfColas);
+            DialogoColas = new Colas_multinivel(MiconfColas,ordenador);
             DialogoColas.Show();
         }
 

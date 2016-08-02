@@ -76,7 +76,7 @@ namespace WindowsFormsApplication3
         bool[] esprimerarespuestaE;
         bool[] esprimerarespuestaS;
         public int cantcolas;
-        List<Queue<int>> Colasmultinivel;
+        public List<Queue<int>> Colasmultinivel;
         public bool CRealimentada;
         public bool CApropiativa;
         public int[] politicasColas;
