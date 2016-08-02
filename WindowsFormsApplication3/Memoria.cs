@@ -216,6 +216,14 @@ namespace WindowsFormsApplication3
                             break; 
                     }
                     break;
+                case Tiposorgmem.PARTDIN:
+                case Tiposorgmem.PAGINADO:
+                    colanac = ListaColas[0].ToArray();
+                    for (int h = 0; h < colanac.Length; h++)
+                    {
+                        colanuevoscom.Add(colanac[h]);
+                    }
+                    break;
             }
             return colanuevoscom.ToArray();
         }
@@ -405,7 +413,10 @@ namespace WindowsFormsApplication3
         {
             if (RecorColPD == TiposrecCol.Sinrecor)
             {
-                asigbloqaproc(ListaColas[0].Peek());
+                if (ListaColas[0].Count!=0)
+                {
+                    asigbloqaproc(ListaColas[0].Peek());
+                } 
             }
             else if (RecorColPD == TiposrecCol.Conrecor)
             {
@@ -510,7 +521,10 @@ namespace WindowsFormsApplication3
         {
             if (RecorColPF == TiposrecCol.Sinrecor)
             {
-                asigpartaproc(ListaColas[0].Peek());
+                if (ListaColas[0].Count != 0)
+                {
+                    asigpartaproc(ListaColas[0].Peek());
+                }
             }
             else if (RecorColPF == TiposrecCol.Conrecor)
             {
@@ -532,7 +546,7 @@ namespace WindowsFormsApplication3
             {
                 if (Tampart == Opcionestam.DIFTAM)
                 {
-                    tampar = particionesmem[h];
+                    tampar = particionesmem[h]; 
                 }
                 //Si encuentra un hueco libre en memoria lo asigna al proceso y lo agrega a la cola de listos
                 if (mapamemoria[h] == -1 && tamaniosproc[id_proceso] <= tampar)
