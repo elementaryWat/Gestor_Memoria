@@ -73,14 +73,6 @@
             this.UEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.USalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatosFlow = new System.Windows.Forms.DataGridView();
-            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Arribo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Entrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CPU2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CPU3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estadisticass = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -179,13 +171,23 @@
             this.Politica3 = new System.Windows.Forms.ToolStripMenuItem();
             this.Politica4 = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarTiempoDeQuantumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colasMultinivelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.politicaCM = new System.Windows.Forms.ToolStripMenuItem();
             this.planificadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaESFCFS = new System.Windows.Forms.ToolStripMenuItem();
             this.politicaESSJF = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuConMem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Naturaleza = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Arribo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Entrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CPU2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CPU3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ejer9Guia1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -342,6 +344,7 @@
             this.DatosFlow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DatosFlow.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Proceso,
+            this.Naturaleza,
             this.Arribo,
             this.Tam,
             this.CPU,
@@ -354,46 +357,6 @@
             this.DatosFlow.Size = new System.Drawing.Size(854, 153);
             this.DatosFlow.TabIndex = 1;
             this.DatosFlow.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DatosFlow_KeyUp);
-            // 
-            // Proceso
-            // 
-            this.Proceso.HeaderText = "Proceso";
-            this.Proceso.Name = "Proceso";
-            // 
-            // Arribo
-            // 
-            this.Arribo.HeaderText = "Arribo a memoria";
-            this.Arribo.Name = "Arribo";
-            // 
-            // Tam
-            // 
-            this.Tam.HeaderText = "Tamaño(KB)";
-            this.Tam.Name = "Tam";
-            // 
-            // CPU
-            // 
-            this.CPU.HeaderText = "CPU";
-            this.CPU.Name = "CPU";
-            // 
-            // Entrada
-            // 
-            this.Entrada.HeaderText = "Entrada";
-            this.Entrada.Name = "Entrada";
-            // 
-            // CPU2
-            // 
-            this.CPU2.HeaderText = "CPU2";
-            this.CPU2.Name = "CPU2";
-            // 
-            // Salida
-            // 
-            this.Salida.HeaderText = "Salida";
-            this.Salida.Name = "Salida";
-            // 
-            // CPU3
-            // 
-            this.CPU3.HeaderText = "CPU3";
-            this.CPU3.Name = "CPU3";
             // 
             // estadisticass
             // 
@@ -897,7 +860,8 @@
             this.datosDeInicioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ejercicio7ToolStripMenuItem,
             this.ejercicio8ToolStripMenuItem,
-            this.ejer5Guia4ToolStripMenuItem});
+            this.ejer5Guia4ToolStripMenuItem,
+            this.ejer9Guia1ToolStripMenuItem});
             this.datosDeInicioToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.datosDeInicioToolStripMenuItem.Name = "datosDeInicioToolStripMenuItem";
             this.datosDeInicioToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
@@ -910,7 +874,7 @@
             this.ejercicio7ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio7ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio7ToolStripMenuItem.Name = "ejercicio7ToolStripMenuItem";
-            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejercicio7ToolStripMenuItem.Text = "Ejercicio 7";
             this.ejercicio7ToolStripMenuItem.Click += new System.EventHandler(this.DatosEjer7_Inicio);
             this.ejercicio7ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -921,7 +885,7 @@
             this.ejercicio8ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio8ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio8ToolStripMenuItem.Name = "ejercicio8ToolStripMenuItem";
-            this.ejercicio8ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.ejercicio8ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejercicio8ToolStripMenuItem.Text = "Modelo Libro";
             this.ejercicio8ToolStripMenuItem.Click += new System.EventHandler(this.ejercicio8ToolStripMenuItem_Click);
             this.ejercicio8ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -932,7 +896,7 @@
             this.ejer5Guia4ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejer5Guia4ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejer5Guia4ToolStripMenuItem.Name = "ejer5Guia4ToolStripMenuItem";
-            this.ejer5Guia4ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.ejer5Guia4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejer5Guia4ToolStripMenuItem.Text = "Ejer5/Guia 4";
             this.ejer5Guia4ToolStripMenuItem.Click += new System.EventHandler(this.ejer5Guia4ToolStripMenuItem_Click);
             this.ejer5Guia4ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -1293,7 +1257,7 @@
             this.Politica2,
             this.Politica3,
             this.Politica4,
-            this.colasMultinivelToolStripMenuItem});
+            this.politicaCM});
             this.politicaToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem1.Name = "politicaToolStripMenuItem1";
             this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
@@ -1364,16 +1328,16 @@
             this.cambiarTiempoDeQuantumToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.cambiarTiempoDeQuantumToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
-            // colasMultinivelToolStripMenuItem
+            // politicaCM
             // 
-            this.colasMultinivelToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
-            this.colasMultinivelToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
-            this.colasMultinivelToolStripMenuItem.Name = "colasMultinivelToolStripMenuItem";
-            this.colasMultinivelToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.colasMultinivelToolStripMenuItem.Text = "Colas multinivel";
-            this.colasMultinivelToolStripMenuItem.Click += new System.EventHandler(this.colasMultinivelToolStripMenuItem_Click);
-            this.colasMultinivelToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.colasMultinivelToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            this.politicaCM.BackColor = System.Drawing.Color.RoyalBlue;
+            this.politicaCM.ForeColor = System.Drawing.Color.Cyan;
+            this.politicaCM.Name = "politicaCM";
+            this.politicaCM.Size = new System.Drawing.Size(172, 22);
+            this.politicaCM.Text = "Colas multinivel";
+            this.politicaCM.Click += new System.EventHandler(this.colasMultinivelToolStripMenuItem_Click);
+            this.politicaCM.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.politicaCM.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // planificadorToolStripMenuItem
             // 
@@ -1394,7 +1358,7 @@
             this.politicaESSJF});
             this.politicaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem.Name = "politicaToolStripMenuItem";
-            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.politicaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.politicaToolStripMenuItem.Text = "Politica";
             this.politicaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1439,6 +1403,62 @@
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Text = "Ver mapa de memoria en este instante";
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Click += new System.EventHandler(this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click);
             // 
+            // Proceso
+            // 
+            this.Proceso.HeaderText = "Proceso";
+            this.Proceso.Name = "Proceso";
+            // 
+            // Naturaleza
+            // 
+            this.Naturaleza.HeaderText = "Tipo  Proceso";
+            this.Naturaleza.Name = "Naturaleza";
+            // 
+            // Arribo
+            // 
+            this.Arribo.HeaderText = "Arribo a memoria";
+            this.Arribo.Name = "Arribo";
+            // 
+            // Tam
+            // 
+            this.Tam.HeaderText = "Tamaño(KB)";
+            this.Tam.Name = "Tam";
+            // 
+            // CPU
+            // 
+            this.CPU.HeaderText = "CPU";
+            this.CPU.Name = "CPU";
+            // 
+            // Entrada
+            // 
+            this.Entrada.HeaderText = "Entrada";
+            this.Entrada.Name = "Entrada";
+            // 
+            // CPU2
+            // 
+            this.CPU2.HeaderText = "CPU2";
+            this.CPU2.Name = "CPU2";
+            // 
+            // Salida
+            // 
+            this.Salida.HeaderText = "Salida";
+            this.Salida.Name = "Salida";
+            // 
+            // CPU3
+            // 
+            this.CPU3.HeaderText = "CPU3";
+            this.CPU3.Name = "CPU3";
+            // 
+            // ejer9Guia1ToolStripMenuItem
+            // 
+            this.ejer9Guia1ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.ejer9Guia1ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.ejer9Guia1ToolStripMenuItem.Name = "ejer9Guia1ToolStripMenuItem";
+            this.ejer9Guia1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ejer9Guia1ToolStripMenuItem.Text = "Ejer9/Guia1";
+            this.ejer9Guia1ToolStripMenuItem.Click += new System.EventHandler(this.ejer9Guia1ToolStripMenuItem_Click);
+            this.ejer9Guia1ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.ejer9Guia1ToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1458,7 +1478,6 @@
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Planificador de procesos";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).EndInit();
             this.estadisticass.ResumeLayout(false);
@@ -1486,7 +1505,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView FlujoEjec;
-        private System.Windows.Forms.DataGridView DatosFlow;
         private System.Windows.Forms.TabControl estadisticass;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -1552,10 +1570,6 @@
         private System.Windows.Forms.ToolStripMenuItem politicaESFCFS;
         private System.Windows.Forms.ToolStripMenuItem politicaESSJF;
         private System.Windows.Forms.ToolStripMenuItem politicaToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem Politica1;
-        private System.Windows.Forms.ToolStripMenuItem Politica2;
-        private System.Windows.Forms.ToolStripMenuItem Politica3;
-        private System.Windows.Forms.ToolStripMenuItem Politica4;
         private System.Windows.Forms.ToolStripMenuItem cambiarTiempoDeQuantumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem datosEjecucionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem datosDeInicioToolStripMenuItem;
@@ -1577,14 +1591,6 @@
         private System.Windows.Forms.ToolStripMenuItem UnaColaPP;
         private System.Windows.Forms.ToolStripMenuItem configurarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem organizarParticionesToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Arribo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tam;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CPU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Entrada;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CPU2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Salida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CPU3;
         private System.Windows.Forms.ToolStripMenuItem ConrecorPF;
         private System.Windows.Forms.ToolStripMenuItem SinrecorPF;
         private System.Windows.Forms.ToolStripMenuItem conRecorPD;
@@ -1611,7 +1617,22 @@
         private System.Windows.Forms.ToolStripMenuItem Paginado;
         private System.Windows.Forms.ToolStripMenuItem organizarPaginasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ejer5Guia4ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem colasMultinivelToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Politica1;
+        public System.Windows.Forms.ToolStripMenuItem Politica2;
+        public System.Windows.Forms.ToolStripMenuItem Politica3;
+        public System.Windows.Forms.ToolStripMenuItem Politica4;
+        public System.Windows.Forms.ToolStripMenuItem politicaCM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Naturaleza;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Arribo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CPU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Entrada;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CPU2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Salida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CPU3;
+        public System.Windows.Forms.DataGridView DatosFlow;
+        private System.Windows.Forms.ToolStripMenuItem ejer9Guia1ToolStripMenuItem;
     }
 }
 

@@ -32,9 +32,9 @@ namespace WindowsFormsApplication3
             usosmem = new List<int[]>();
             particiones = new List<int[]>();
             cantpartins = new List<int>();
-            tiempoquantum =1;
-            tiempoquantumES=1;
-    }
+            tiempoquantum = 1;
+            tiempoquantumES = 1;
+        }
         bool[] exProceso;
         int[] pend1CPU;
         int[] pendentrada;
@@ -46,18 +46,23 @@ namespace WindowsFormsApplication3
 
         const int FCFS = 1;
         const int SJF = 2;
-        const int SRTF =3;
+        const int SRTF = 3;
         const int RR = 4;
+        const int CM = 5;
         public int tiempoquantum;
         public int tiempoquantumES;
         public int[] tamaniosproc;
+        public int[] naturalezasproc;
         public bool haydemasiadogrande;
+        public bool naturnodef;
         private void inicializar(int cantidad)
         {
+            naturnodef = false;
             haydemasiadogrande = false;
             //Lista de arreglos con las rafagas de los procesos
             List<int[]> configuraciones = new List<int[]>();
             tamaniosproc = new int[cantidad];
+            naturalezasproc = new int[cantidad];
             exProceso = new bool[cantidad];
             pend1CPU = new int[cantidad];
             pendentrada = new int[cantidad];
@@ -68,16 +73,16 @@ namespace WindowsFormsApplication3
             for (int x = 0; x < cantidad; x++)
             {
                 exProceso[x] = false;
-                tamaniosproc[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[2].Value.ToString()));
+                tamaniosproc[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[3].Value.ToString()));
                 if (!Gestormemoria.tamanioadecuado(tamaniosproc[x]))
                 {
                     haydemasiadogrande = true;
                 }
-                pend1CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[3].Value.ToString()));
-                pendentrada[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[4].Value.ToString()));
-                pend2CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[5].Value.ToString()));
-                pendsalida[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[6].Value.ToString()));
-                pend3CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[7].Value.ToString()));
+                pend1CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[4].Value.ToString()));
+                pendentrada[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[5].Value.ToString()));
+                pend2CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[6].Value.ToString()));
+                pendsalida[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[7].Value.ToString()));
+                pend3CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[8].Value.ToString()));
                 if (pend1CPU[x]==0 || pendentrada[x] == 0 || pend2CPU[x] == 0 || pendsalida[x] == 0 || pend3CPU[x] == 0)
                 {
                     cerosdet = true;
@@ -93,9 +98,28 @@ namespace WindowsFormsApplication3
             configuraciones.Add(pend2CPU);
             configuraciones.Add(pendsalida);
             configuraciones.Add(pend3CPU);
-            ordenador = new Computador(cantidad,configuraciones.ToArray());
+            ordenador = new Computador(cantidad,configuraciones.ToArray(),MiconfColas);
             Gestormemoria.definirordenador(ordenador);
             ordenador.definirmemoria(Gestormemoria);
+            if (politica == CM && !MiconfColas.CRealimentada)
+            {
+                for (int i = 0; i < cantidad; i++)
+                {
+                    string texto = DatosFlow.Rows[i].Cells[1].Value.ToString();
+                    if (texto != "")
+                    {
+                        int indice = Array.IndexOf(MiconfColas.nombrescolas, DatosFlow.Rows[i].Cells[1].Value.ToString());
+                        ordenador.naturalezasprocesos[i] = indice;
+                    }
+                    else
+                    {
+                        naturnodef = true;
+                        break;
+                    }
+                }
+            }
+            
+            
         }
         private bool haynoarribados()
         {
@@ -113,53 +137,72 @@ namespace WindowsFormsApplication3
         {
             DatosFlow.Rows.Clear();
             //{Id_Proceso,Tiempo_de_arribo,1er_R_CPU,Entrada,2da_R_CPU,Salida,3er_R_CPU}
-            string[] row1 = { "1", "0", "6", "1", "3", "4", "3", "1" };
+            string[] row1 = { "1","", "0", "6", "1", "3", "4", "3", "1" };
             DatosFlow.Rows.Add(row1);
-            string[] row2 = { "2", "3", "5", "1", "2", "3", "2", "1" };
+            string[] row2 = { "2", "", "3", "5", "1", "2", "3", "2", "1" };
             DatosFlow.Rows.Add(row2);
-            string[] row3 = { "3", "5", "4", "1", "3", "2", "1", "1" };
+            string[] row3 = { "3", "", "5", "4", "1", "3", "2", "1", "1" };
             DatosFlow.Rows.Add(row3);
-            string[] row4 = { "4", "8", "6", "1", "2", "4", "3", "1" };
+            string[] row4 = { "4", "", "8", "6", "1", "2", "4", "3", "1" };
             DatosFlow.Rows.Add(row4);
-            string[] row5 = { "5", "10", "7", "1", "4", "5", "3", "1" };
+            string[] row5 = { "5", "", "10", "7", "1", "4", "5", "3", "1" };
             DatosFlow.Rows.Add(row5);
-            string[] row6 = { "6", "11", "4", "1", "2", "2", "2", "1" };
+            string[] row6 = { "6", "", "11", "4", "1", "2", "2", "2", "1" };
             DatosFlow.Rows.Add(row6);
         }
         private void ejercicio8ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DatosFlow.Rows.Clear();
             //{Id_Proceso,Tiempo_de_arribo,1er_R_CPU,Entrada,2da_R_CPU,Salida,3er_R_CPU}
-            string[] row1 = { "1", "1", "20", "2", "1", "1", "0", "0" };
+            string[] row1 = { "1", "", "1", "20", "2", "1", "1", "0", "0" };
             DatosFlow.Rows.Add(row1);
-            string[] row2 = { "2", "2", "14", "1", "0", "0", "0", "0" };
+            string[] row2 = { "2", "", "2", "14", "1", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row2);
-            string[] row3 = { "3", "3", "18", "1", "2", "1", "0", "0" };
+            string[] row3 = { "3", "", "3", "18", "1", "2", "1", "0", "0" };
             DatosFlow.Rows.Add(row3);
-            string[] row4 = { "4", "5", "8", "2", "0", "0", "0", "0" };
+            string[] row4 = { "4", "", "5", "8", "2", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row4);
-            string[] row5 = { "5", "7", "14", "1", "0", "0", "0", "0" };
+            string[] row5 = { "5", "", "7", "14", "1", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row5);
+        }
+        private void ejer9Guia1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatosFlow.Rows.Clear();
+            //{Id_Proceso,Tiempo_de_arribo,1er_R_CPU,Entrada,2da_R_CPU,Salida,3er_R_CPU}
+            string[] row1 = { "1", "", "0", "10", "10", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row1);
+            string[] row2 = { "2", "", "0", "10", "4", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row2);
+            string[] row3 = { "3", "", "0", "10", "2", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row3);
+            string[] row4 = { "4", "", "0", "10", "1", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row4);
+            string[] row5 = { "5", "", "1", "10", "6", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row5);
+            string[] row6 = { "6", "", "3", "10", "2", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row6);
+            string[] row7 = { "7", "", "4", "10", "2", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row7);
         }
         private void ejer5Guia4ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DatosFlow.Rows.Clear();
             //{Id_Proceso,Tiempo_de_arribo,1er_R_CPU,Entrada,2da_R_CPU,Salida,3er_R_CPU}
-            string[] row1 = { "1", "0", "15", "5", "0", "0", "0", "0" };
+            string[] row1 = { "1", "", "0", "15", "5", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row1);
-            string[] row2 = { "2", "0", "20", "4", "0", "0", "0", "0" };
+            string[] row2 = { "2", "", "0", "20", "4", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row2);
-            string[] row3 = { "3", "0", "12", "10", "0", "0", "0", "0" };
+            string[] row3 = { "3", "", "0", "12", "10", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row3);
-            string[] row4 = { "4", "1", "5", "3", "0", "0", "0", "0" };
+            string[] row4 = { "4", "", "1", "5", "3", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row4);
-            string[] row5 = { "5", "2", "3", "2", "0", "0", "0", "0" };
+            string[] row5 = { "5", "", "2", "3", "2", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row5);
-            string[] row6 = { "6", "3", "70", "10", "0", "0", "0", "0" };
+            string[] row6 = { "6", "", "3", "70", "10", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row6);
-            string[] row7 = { "7", "4", "25", "5", "0", "0", "0", "0" };
+            string[] row7 = { "7", "", "4", "25", "5", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row7);
-            string[] row8 = { "8", "5", "10", "5", "0", "0", "0", "0" };
+            string[] row8 = { "8", "", "5", "10", "5", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row8);
         }
         //Determina si hay un proceso
@@ -173,7 +216,7 @@ namespace WindowsFormsApplication3
             cantidad = (DatosFlow.RowCount) - 1;
             for (int x = 0; x < cantidad; x++)
             {
-                int arribo = (Int32.Parse(DatosFlow.Rows[x].Cells[1].Value.ToString()));
+                int arribo = (Int32.Parse(DatosFlow.Rows[x].Cells[2].Value.ToString()));
                 if (!exProceso[x])
                 {
                     if (arribo == instante)
@@ -268,7 +311,7 @@ namespace WindowsFormsApplication3
                 if (usomemactual[i] != -1)
                 {
                     int idproceso = Int32.Parse(DatosFlow.Rows[usomemactual[i]].Cells[0].Value.ToString());
-                    int tamanioproc = Int32.Parse(DatosFlow.Rows[usomemactual[i]].Cells[2].Value.ToString());
+                    int tamanioproc = Int32.Parse(DatosFlow.Rows[usomemactual[i]].Cells[3].Value.ToString());
                     int tamanioac = tamanioproc;
                     int tamaniocupado = 0;
                     if (Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PAGINADO)
@@ -390,19 +433,19 @@ namespace WindowsFormsApplication3
             for (int x = 0; x < cantidad; x++)
             {
                 //-----------------------Obtiene datos orginales-----------------------------
-                pend1CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[3].Value.ToString()));
+                pend1CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[4].Value.ToString()));
                 sumapend1CPU += pend1CPU[x];
-                pendentrada[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[4].Value.ToString()));
+                pendentrada[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[5].Value.ToString()));
                 sumapendEntrada += pendentrada[x];
-                pend2CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[5].Value.ToString()));
+                pend2CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[6].Value.ToString()));
                 sumapend2CPU += pend2CPU[x];
-                pendsalida[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[6].Value.ToString()));
+                pendsalida[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[7].Value.ToString()));
                 sumapendSalida += pendsalida[x];
-                pend3CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[7].Value.ToString()));
+                pend3CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[8].Value.ToString()));
                 sumapend3CPU += pend3CPU[x];
                 //--------------------------------------------------------------------------
                 //Estadisticas para CPU
-                tiemposarribo[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[1].Value.ToString()));
+                tiemposarribo[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[2].Value.ToString()));
                 if (x>0)
                 {
                     sumadiferearribo += tiemposarribo[x]- tiemposarribo[x-1];
@@ -457,7 +500,14 @@ namespace WindowsFormsApplication3
             promretornoS = sumaretornoS / cantidad;
             string[] estadistpromS = { promesperaS.ToString(), promretornoS.ToString(), promrespuestaS.ToString() };
             EstadisticaspromedioS.Rows.Add(estadistpromS);
-            promdiferearribo = sumadiferearribo / (cantidad-1);
+            if (cantidad > 1)
+            {
+                promdiferearribo = sumadiferearribo / (cantidad - 1);
+            }
+            else
+            {
+                promdiferearribo = 0;
+            }
             prompend1CPU = sumapend1CPU / cantidad;
             prompendEntrada = sumapendEntrada / cantidad;
             prompend2CPU = sumapend2CPU / cantidad;
@@ -545,23 +595,58 @@ namespace WindowsFormsApplication3
             /*-------------------------------------------------------------------------------------*/
             /*---------------------------Cola de CPU-----------------------------------------------------*/
             string colacpu = "";
-            int[] colalistos = ordenador.CPU.ToArray();
-            int cantidadcpu = colalistos.Length;
-            if (cantidadcpu == 0)
+            int[] colalistos;
+            int cantidadcpu;
+            if (ordenador.politica == CM)
             {
-                colacpu = "-";
-            }
-            else {
-                for (int x = 0; x < cantidadcpu; x++)
+                for (int i=0;i<ordenador.cantcolas;i++)
                 {
-                    colacpu += DatosFlow.Rows[colalistos[x]].Cells[0].Value.ToString();
-                    //+"("+(ordenador.rafagas[(ordenador.rafagas_actuales[x] - 1)][x])+")"
-                    if (x != (cantidadcpu - 1))
+                    colalistos = ordenador.Colasmultinivel[i].ToArray();
+                    cantidadcpu = colalistos.Length;
+                    if (cantidadcpu == 0)
                     {
-                        colacpu += ", ";
+                        colacpu = "-";
+                    }
+                    else
+                    {
+                        for (int x = 0; x < cantidadcpu; x++)
+                        {
+                            colacpu += DatosFlow.Rows[colalistos[x]].Cells[0].Value.ToString()+" (" +i+ ")";
+                            //+"("+(ordenador.rafagas[(ordenador.rafagas_actuales[x] - 1)][x])+")"
+                            if (x != (cantidadcpu - 1))
+                            {
+                                colacpu += ", ";
+                            }
+                        }
+                    }
+                    if (i!=(ordenador.cantcolas-1))
+                    {
+                        colacpu += "/";
                     }
                 }
             }
+            else
+            {
+                colalistos = ordenador.CPU.ToArray();
+                cantidadcpu = colalistos.Length;
+                if (cantidadcpu == 0)
+                {
+                    colacpu = "-";
+                }
+                else
+                {
+                    for (int x = 0; x < cantidadcpu; x++)
+                    {
+                        colacpu += DatosFlow.Rows[colalistos[x]].Cells[0].Value.ToString();
+                        //+"("+(ordenador.rafagas[(ordenador.rafagas_actuales[x] - 1)][x])+")"
+                        if (x != (cantidadcpu - 1))
+                        {
+                            colacpu += ", ";
+                        }
+                    }
+                }
+            }
+            
             /*-------------------------------------------------------------------------------------*/
             /*---------------------------Cola de Entrada-------------------------------------------*/
             string colaE = "";
@@ -736,9 +821,9 @@ namespace WindowsFormsApplication3
             {
                 politica = RR;
             }
-            if (Politica4.Checked)
+            if (politicaCM.Checked)
             {
-                politica = RR;
+                politica = CM;
             }
             if (politicaESFCFS.Checked)
             {
@@ -763,12 +848,14 @@ namespace WindowsFormsApplication3
                 {
                     if (noerror)
                     {
-                        bool primerarribo = true;
                         inicializar(cantidad);
                         if (haydemasiadogrande)
                         {
                             MessageBox.Show("Existe uno o mas procesos que no caben en la memoria");
-                            noerror = false;
+                        }
+                        else if (naturnodef)
+                        {
+                            MessageBox.Show("No se han definido los tipos de algunos procesos");
                         }
                         else
                         {
@@ -835,10 +922,12 @@ namespace WindowsFormsApplication3
                 {
                     MessageBox.Show("Se encontro caracteres no numericos en los datos de los procesos");
                 }
+                /*
                 catch (NullReferenceException)
                 {
                     MessageBox.Show("Se encontro valores nulos en los datos de los procesos");
                 }
+                */
             }
             
         }
@@ -930,12 +1019,12 @@ namespace WindowsFormsApplication3
             {
                 Politica4.Checked = false;
             }
+            if (politicaCM!=ts)
+            {
+                politicaCM.Checked = false;
+            }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
         /*---------------------Configuraciones de gestion de memoria-------------------------------*/
         public void definirtamaño()
         {
@@ -1308,10 +1397,9 @@ namespace WindowsFormsApplication3
 
         private void colasMultinivelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogoColas = new Colas_multinivel(MiconfColas,ordenador);
+            DialogoColas = new Colas_multinivel(MiconfColas,ordenador,this);
             DialogoColas.Show();
         }
-
     }
     /*-----------------------------------------------------------------------------------------*/
 }

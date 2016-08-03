@@ -394,7 +394,7 @@ namespace WindowsFormsApplication3
                         asigmarco(colamem[i], tampag);
                     }
                     quitarprocesoCola(colamem[i],0);
-                    compactual.agregarproceso(colamem[i]);
+                    compactual.agregarproceso(colamem[i],false,0);
                 }
             }
         }
@@ -502,7 +502,7 @@ namespace WindowsFormsApplication3
 
                 }
                 quitarprocesoCola(id_proceso, 0);
-                compactual.agregarproceso(id_proceso);
+                compactual.agregarproceso(id_proceso, false, 0);
             }
         }
         private void asignarparticion_fija()
@@ -553,7 +553,7 @@ namespace WindowsFormsApplication3
                 {
                     mapamemoria[h] = id_proceso;
                     quitarprocesoCola(id_proceso, 0);
-                    compactual.agregarproceso(id_proceso);
+                    compactual.agregarproceso(id_proceso, false, 0);
                     asignado = true;
                 }
                 if (asignado)
@@ -574,7 +574,7 @@ namespace WindowsFormsApplication3
                         int procesonuevo = ListaColas[i].Peek();
                         quitarprocesoCola(procesonuevo, i);
                         mapamemoria[i] = procesonuevo;
-                        compactual.agregarproceso(procesonuevo);
+                        compactual.agregarproceso(procesonuevo, false, 0);
                     }
                 }
             }

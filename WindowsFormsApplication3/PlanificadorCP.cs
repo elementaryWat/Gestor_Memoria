@@ -8,8 +8,23 @@ namespace WindowsFormsApplication3
 {
     public class Computador
     {
-        public Computador(int cantproces, int[][] configuraciones)
+        public Computador(int cantproces, int[][] configuraciones, ConfColas conac)
         {
+            esmultinivel = false;
+            Confactcolas = conac;
+            naturalezasprocesos = new int[cantproces];
+            cantcolas = Confactcolas.cantcolas;
+            politicasColas = Confactcolas.politicasColas;
+            quantumcolas = Confactcolas.quantumcolas;
+            nombrescolas = Confactcolas.nombrescolas;
+            CApropiativa = Confactcolas.CApropiativa;
+            CRealimentada = Confactcolas.CRealimentada;
+            Colasmultinivel = new List<Queue<int>>();
+            for (int i=0;i<cantcolas;i++)
+            {
+                Queue<int> colaac = new Queue<int>();
+                Colasmultinivel.Add(colaac);
+            }
             // configuraciones[rafaga][num_proceso]
             rafagas = configuraciones;
             esprimerarespuesta = new bool[cantproces];
@@ -63,6 +78,7 @@ namespace WindowsFormsApplication3
         bool hayarriboE;
         bool hayarriboS;
         public int politica, politicaES, instante;
+        int politicaA;
         //Datos para estadisticas de procesos
         public int[] tiemposfinalizacion;
         public int[] tiemposprimerrespuesta;
@@ -75,11 +91,15 @@ namespace WindowsFormsApplication3
         bool[] esprimerarespuesta;
         bool[] esprimerarespuestaE;
         bool[] esprimerarespuestaS;
+        public int[] naturalezasprocesos;
+        ConfColas Confactcolas;
         public int cantcolas;
         public List<Queue<int>> Colasmultinivel;
+        Queue<int> actual = null;
         public bool CRealimentada;
         public bool CApropiativa;
         public int[] politicasColas;
+        bool esmultinivel;
         //Usado para las colas con algoritmo de planificacion RR
         public int[] quantumcolas;
         public string[] nombrescolas;
@@ -88,6 +108,7 @@ namespace WindowsFormsApplication3
         const int SJF = 2;
         const int SRTF = 3;
         const int RR = 4;
+        const int CM = 5;
         public int tiempoquantum;
         public int tiempoquantumES;
         //Estados
@@ -103,20 +124,57 @@ namespace WindowsFormsApplication3
         public int uCPU;
         public int UEntrada;
         public int USalida;
-        public void agregarproceso(int num_proceso)
+        public void agregarproceso(int num_proceso, bool buscaradecuada, int colaains)
         {
+            //Se define la cola en la que sera agregada el proceso
+            Queue<int> actual=null;
+            if (politica == CM)
+            {
+                //Si la politica actua
+                if (CRealimentada)
+                {
+                    //Inserta el proceso en la primera cola cuando es la primera vez ejecutado y en la correspondiente cuando ya habia sido ejecutado previamente
+                    if (buscaradecuada)
+                    {
+                        for (int i=0;i<cantcolas;i++)
+                        {
+                            if (rafagas[(rafagas_actuales[num_proceso] - 1)][num_proceso]<quantumcolas[i])
+                            {
+                                actual = Colasmultinivel[i];
+                                politicaA = politicasColas[i];
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        actual = Colasmultinivel[colaains];
+                        politicaA = politicasColas[colaains];
+                    }
+                    
+                }
+                else
+                {
+                    actual = Colasmultinivel[naturalezasprocesos[num_proceso]];
+                    politicaA = politicasColas[naturalezasprocesos[num_proceso]];
+                }  
+            }
+            else
+            {
+                actual = CPU;
+                politicaA = politica;
+            }
             //Agrega a la cola solo a procesos con irrupciones distintas de 0 en sus rafagas actuales
             if (rafagas[(rafagas_actuales[num_proceso] - 1)][num_proceso] != 0)
             {
                 //Tendra en cuenta el valor del arreglo politica para definir el criterio de ordenacion de la cola de listos
-                CPU.Enqueue(num_proceso);
+                actual.Enqueue(num_proceso);
                 hayarribo = true;
                 bool modificada = false;
                 int temporal = -1;
                 //Si se implementa politica SJF o SRTF se ordena la cola de listos
-                if (politica == SJF || politica == SRTF)
+                if (politicaA == SJF || politicaA == SRTF)
                 {
-                    int[] colaaccpu = CPU.ToArray();
+                    int[] colaaccpu = actual.ToArray();
                     int cantidadcola = colaaccpu.Length;
                     //Ordena la cola de listos teniendo en cuenta la rafaga actual de cada proceso
                     for (int x = 0; x < (cantidadcola - 1); x++)
@@ -134,10 +192,10 @@ namespace WindowsFormsApplication3
                     }
                     if (modificada)
                     {
-                        CPU.Clear();
+                        actual.Clear();
                         for (int x = 0; x < cantidadcola; x++)
                         {
-                            CPU.Enqueue(colaaccpu[x]);
+                            actual.Enqueue(colaaccpu[x]);
                         }
                     }
                 }
@@ -283,8 +341,27 @@ namespace WindowsFormsApplication3
         int trafaga;
         private void ejecutandoCPU()
         {
-            proceso = CPU.Peek();
-            CPU.Dequeue();
+            if (politica == CM)
+            {
+                //Busca alguna cola con procesos desde la mayor a la menor prioridad
+                for (int i=0;i<cantcolas;i++)
+                {
+                    actual = Colasmultinivel[i];
+                    politicaA = politicasColas[i];
+                    tiempoquantum = quantumcolas[i];
+                    if (actual.Count!=0)
+                    {
+                        colaenejec = i;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                actual = CPU;
+            }
+            proceso = actual.Peek();
+            actual.Dequeue();
             trafaga = rafagas[(rafagas_actuales[proceso] - 1)][proceso];
             // MessageBox.Show("Se inicia la ejecucion de " +proceso+" en instante "+instante);
             uCPU = proceso;
@@ -298,7 +375,7 @@ namespace WindowsFormsApplication3
             rafagas_anteriores[proceso] = rafagas_actuales[proceso];
             rafaga = rafagas_actuales[proceso];
 
-            if (politica == RR)
+            if (politicaA == RR)
             {
                 if (tiempoquantum < trafaga)
                 {
@@ -325,14 +402,27 @@ namespace WindowsFormsApplication3
 
         private void ejecutarcpu()
         {
-            //Para el algoritmo SRTF existira una variable politica de tipo int que si es= a la constante SRTF en cada ciclo de ejecucion si arriba
-            //en la cola de planificacion un proceso con tiempo de irrupcion menor que el actualmente ejecutando
-            //En ese caso sacara de la ejecucion al proceso actual y lo ubicara en el lugar correspondiente en la cola
-            //Si no hay ningun proceso en ejecucion
             if (uCPU == -1)
             {
+                Queue<int> actuallocal = null;
+                if (politica == CM)
+                {
+                    esmultinivel = true;
+                    for (int i = 0; i < cantcolas; i++)
+                    {
+                        actuallocal = Colasmultinivel[i];
+                        if (actuallocal.Count != 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    actuallocal = CPU;
+                }
                 //Si hay algun proceso en la cola de Listos lo pone en ejecucion
-                if (CPU.Count != 0)
+                if (actuallocal.Count != 0)
                 {
                     ejecutandoCPU();
                 }
@@ -343,9 +433,16 @@ namespace WindowsFormsApplication3
                 {
                     rafaga = rafagas_actuales[uCPU];
                     //Si no termino de ejecutar la rafaga actual y se usa politica Round Robin
-                    if (rafaga == rafagas_anteriores[uCPU] && politica == RR)
+                    if (rafaga == rafagas_anteriores[uCPU] && politicaA == RR)
                     {
-                        agregarproceso(uCPU);
+                        if (esmultinivel && Confactcolas.CRealimentada && colaenejec == 0)
+                        {
+                            agregarproceso(uCPU, true, colaenejec);
+                        }
+                        else
+                        {
+                            agregarproceso(uCPU, false, colaenejec);
+                        }     
                     }
                     else
                     {
@@ -385,13 +482,13 @@ namespace WindowsFormsApplication3
                                         if (rafagas[4][uCPU] != 0)
                                         {
                                             rafagas_actuales[uCPU] += 2;
-                                            agregarproceso(uCPU);
+                                            agregarproceso(uCPU,false,0);
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    agregarproceso(uCPU);
+                                    agregarproceso(uCPU,false,0);
                                 }
                             }
 
@@ -415,7 +512,7 @@ namespace WindowsFormsApplication3
                                 BSalida.Dequeue();
                                 if (rafagas[4][uCPU] != 0)
                                 {
-                                    agregarproceso(uCPU);
+                                    agregarproceso(uCPU,false,0);
                                 }
                             }
                             //Informa de un nuevo arribo a la cola de salida
@@ -423,7 +520,7 @@ namespace WindowsFormsApplication3
                     }
                     //Si hay algun proceso en la cola de Listos lo pone en ejecucion
                     //Orden FIFO
-                    if (CPU.Count != 0)
+                    if (actual.Count != 0)
                     {
                         ejecutandoCPU();
                     }
@@ -433,27 +530,55 @@ namespace WindowsFormsApplication3
                     }
                 }
                 else
-                {//En caso de que se este usando politica SRTF
+                {//En caso de que se este usando politica SRTF o colas multinivel con prioridad entre colas apropiativa
                  //Si no termino la ejecucion verifica si el primer proceso en la cola de listos arribo un proceso con tiempo de irrupcion menor
-                 //que el actualmente en ejecucion
-                    if (politica == SRTF && hayarribo)
+                 //que el actualmente en ejecucion o que haya arribado algun proceso en alguna cola de mayor prioridad
+                    if ((politica == SRTF || (politica==CM && CApropiativa)) && hayarribo)
                     {
+                        bool verificarc = false;
+                        bool verificars = false;
                         hayarribo = false;
-                        // MessageBox.Show("Hola");
-                        if (CPU.Count != 0)
+                        int colanueva = 0;
+                        if (politica == CM)
                         {
-                            proceso = CPU.Peek();
+                            for (int i = 0; i < colaenejec; i++)
+                            {
+                                actual = Colasmultinivel[i];
+                                if (actual.Count != 0)
+                                {
+                                    colanueva = i;
+                                    verificarc = true;
+                                    verificars = true;
+                                    break;
+                                }
+                            }
+                            if (!verificarc && politicasColas[colaenejec]==SRTF)
+                            {
+                                verificarc = true;
+                                actual = Colasmultinivel[colaenejec];
+                            }
+                        }
+                        else if (politica == SRTF)
+                        {
+                            actual = CPU;
+                            verificarc = true;
+                        }
+                        // MessageBox.Show("Hola");
+                        if (actual.Count != 0 && verificarc)
+                        {
+                            proceso = actual.Peek();
                             rafaga = rafagas[(rafagas_actuales[proceso] - 1)][proceso];
-                            if (rafaga < TRestanteCPU)
+                            if ((rafaga < TRestanteCPU) || verificars)
                             {
                                 //Debera indicar que no termino la rafaga actual del proceso actualizando la cantidad de irrupciones pendientes
                                 rafagas_actuales[uCPU] -= 2;
                                 //MessageBox.Show("El proceso " + uCPU + " sale de ejecucion en el instante " + instante + " con la rafaga " + rafagas_actuales[uCPU]+"pendiente de terminar con "+ TRestanteCPU+" irrupciones");
                                 rafagas[(rafagas_actuales[uCPU] - 1)][uCPU] = TRestanteCPU;
                                 //Saca el nuevo proceso a ejecutar
-                                CPU.Dequeue();
+                                actual.Dequeue();
                                 //Ordena la cola de listos 
-                                agregarproceso(uCPU);
+                                agregarproceso(uCPU,false,colaenejec);
+                                colaenejec = colanueva;
                                 //Inicia la ejecucion del nuevo proceso
                                 uCPU = proceso;
                                 //Descuenta el ciclo de reloj en curso
@@ -526,7 +651,7 @@ namespace WindowsFormsApplication3
                     //Desbloquea el proceso
                     BEntrada.Dequeue();
                     //Lo agrega a la cola de CPU
-                    agregarproceso(UEntrada);
+                    agregarproceso(UEntrada,false,0);
                     //Si hay algun proceso en la cola de Entrada lo pone en ejecucion
                     //Orden FIFO
                     if (Entrada.Count != 0)
@@ -578,7 +703,7 @@ namespace WindowsFormsApplication3
                     //Desbloquea el proceso
                     BSalida.Dequeue();
                     //Lo agrega a la cola de CPU
-                    agregarproceso(USalida);
+                    agregarproceso(USalida,false,0);
                     //Si hay algun proceso en la cola de Salida lo pone en ejecucion
                     //Orden FIFO
                     if (Salida.Count != 0)
@@ -611,7 +736,28 @@ namespace WindowsFormsApplication3
         }
         public bool noterminado()
         {
-            if (CPU.Count == 0 && Entrada.Count == 0 && Salida.Count == 0 && uCPU == -1 && UEntrada == -1 && USalida == -1)
+            Queue<int> actual = null;
+            bool terminado = true;
+            if (politica == CM)
+            {
+                for (int i = 0; i < cantcolas; i++)
+                {
+                    actual = Colasmultinivel[i];
+                    if (actual.Count != 0)
+                    {
+                        terminado = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                if (CPU.Count!=0)
+                {
+                    terminado = false;
+                }
+            }
+            if (terminado && Entrada.Count == 0 && Salida.Count == 0 && uCPU == -1 && UEntrada == -1 && USalida == -1)
             {
                 return false;
             }

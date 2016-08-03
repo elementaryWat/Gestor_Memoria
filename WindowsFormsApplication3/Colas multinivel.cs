@@ -26,10 +26,12 @@ namespace WindowsFormsApplication3
         const int SJF = 2;
         const int SRTF = 3;
         const int RR = 4;
+        Form1 formactual;
         ConfColas configC;
         Computador ordenador;
-        public Colas_multinivel(ConfColas miconf, Computador miord)
+        public Colas_multinivel(ConfColas miconf, Computador miord,Form1 miform)
         {
+            formactual = miform;
             ordenador = miord;
             nombpol = new string[4];
             nombpol[0] = "FCFS";
@@ -142,13 +144,21 @@ namespace WindowsFormsApplication3
                 configC.politicasColas = (int[])algplan.Clone();
                 configC.quantumcolas = (int[])quancolas.Clone();
                 configC.nombrescolas = (string[])nombrescolas.Clone();
-                if (TipoC.SelectedIndex==0)
+                if (TipoC.SelectedIndex == 0)
                 {
                     configC.CRealimentada = true;
+                    formactual.DatosFlow.Columns[1].Visible = false;
                 }
                 else
                 {
                     configC.CRealimentada = false;
+                    formactual.DatosFlow.Columns[1].Visible = true;
+                    DataGridViewComboBoxColumn comtippros = formactual.DatosFlow.Columns[1] as DataGridViewComboBoxColumn;
+                    comtippros.Items.Clear();
+                    for (int i=0;i<cantcolas;i++)
+                    {
+                        comtippros.Items.Add(nombrescolas[i]);
+                    }
                 }
                 if (AColas.SelectedIndex == 0)
                 {
@@ -158,6 +168,15 @@ namespace WindowsFormsApplication3
                 {
                     configC.CApropiativa = false;
                 }
+                formactual.Politica1.Checked = false;
+                formactual.Politica2.Checked = false;
+                formactual.Politica3.Checked = false;
+                formactual.Politica4.Checked = false;
+                formactual.politicaCM.Checked = true;
+                this.Dispose();
+            }
+            else {
+                MessageBox.Show("Debe corregir los errores para continuar");
             }
         }
         private void Datoscolas_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
