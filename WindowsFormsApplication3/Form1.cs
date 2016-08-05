@@ -611,7 +611,7 @@ namespace WindowsFormsApplication3
                     {
                         for (int x = 0; x < cantidadcpu; x++)
                         {
-                            colacpu += DatosFlow.Rows[colalistos[x]].Cells[0].Value.ToString()+" (" +i+ ")";
+                            colacpu += DatosFlow.Rows[colalistos[x]].Cells[0].Value.ToString();
                             //+"("+(ordenador.rafagas[(ordenador.rafagas_actuales[x] - 1)][x])+")"
                             if (x != (cantidadcpu - 1))
                             {
@@ -922,12 +922,10 @@ namespace WindowsFormsApplication3
                 {
                     MessageBox.Show("Se encontro caracteres no numericos en los datos de los procesos");
                 }
-                /*
                 catch (NullReferenceException)
                 {
                     MessageBox.Show("Se encontro valores nulos en los datos de los procesos");
                 }
-                */
             }
             
         }

@@ -341,6 +341,7 @@
             // 
             // DatosFlow
             // 
+            this.DatosFlow.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DatosFlow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DatosFlow.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Proceso,
@@ -1407,46 +1408,55 @@
             // 
             this.Proceso.HeaderText = "Proceso";
             this.Proceso.Name = "Proceso";
+            this.Proceso.Width = 71;
             // 
             // Naturaleza
             // 
             this.Naturaleza.HeaderText = "Tipo  Proceso";
             this.Naturaleza.Name = "Naturaleza";
+            this.Naturaleza.Width = 71;
             // 
             // Arribo
             // 
             this.Arribo.HeaderText = "Arribo a memoria";
             this.Arribo.Name = "Arribo";
+            this.Arribo.Width = 101;
             // 
             // Tam
             // 
             this.Tam.HeaderText = "Tamaño(KB)";
             this.Tam.Name = "Tam";
+            this.Tam.Width = 91;
             // 
             // CPU
             // 
             this.CPU.HeaderText = "CPU";
             this.CPU.Name = "CPU";
+            this.CPU.Width = 54;
             // 
             // Entrada
             // 
             this.Entrada.HeaderText = "Entrada";
             this.Entrada.Name = "Entrada";
+            this.Entrada.Width = 69;
             // 
             // CPU2
             // 
             this.CPU2.HeaderText = "CPU2";
             this.CPU2.Name = "CPU2";
+            this.CPU2.Width = 60;
             // 
             // Salida
             // 
             this.Salida.HeaderText = "Salida";
             this.Salida.Name = "Salida";
+            this.Salida.Width = 61;
             // 
             // CPU3
             // 
             this.CPU3.HeaderText = "CPU3";
             this.CPU3.Name = "CPU3";
+            this.CPU3.Width = 60;
             // 
             // ejer9Guia1ToolStripMenuItem
             // 

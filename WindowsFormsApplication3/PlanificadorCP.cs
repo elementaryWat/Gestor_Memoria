@@ -126,8 +126,9 @@ namespace WindowsFormsApplication3
         public int USalida;
         public void agregarproceso(int num_proceso, bool buscaradecuada, int colaains)
         {
+            int politicaAl=0;
             //Se define la cola en la que sera agregada el proceso
-            Queue<int> actual=null;
+            Queue<int> actuall=null;
             if (politica == CM)
             {
                 //Si la politica actua
@@ -140,41 +141,41 @@ namespace WindowsFormsApplication3
                         {
                             if (rafagas[(rafagas_actuales[num_proceso] - 1)][num_proceso]<quantumcolas[i])
                             {
-                                actual = Colasmultinivel[i];
-                                politicaA = politicasColas[i];
+                                actuall = Colasmultinivel[i];
+                                politicaAl = politicasColas[i];
                                 break;
                             }
                         }
                     }
                     else {
-                        actual = Colasmultinivel[colaains];
-                        politicaA = politicasColas[colaains];
+                        actuall = Colasmultinivel[colaains];
+                        politicaAl = politicasColas[colaains];
                     }
                     
                 }
                 else
                 {
-                    actual = Colasmultinivel[naturalezasprocesos[num_proceso]];
-                    politicaA = politicasColas[naturalezasprocesos[num_proceso]];
+                    actuall = Colasmultinivel[naturalezasprocesos[num_proceso]];
+                    politicaAl = politicasColas[naturalezasprocesos[num_proceso]];
                 }  
             }
             else
             {
-                actual = CPU;
-                politicaA = politica;
+                actuall = CPU;
+                politicaAl = politica;
             }
             //Agrega a la cola solo a procesos con irrupciones distintas de 0 en sus rafagas actuales
             if (rafagas[(rafagas_actuales[num_proceso] - 1)][num_proceso] != 0)
             {
                 //Tendra en cuenta el valor del arreglo politica para definir el criterio de ordenacion de la cola de listos
-                actual.Enqueue(num_proceso);
+                actuall.Enqueue(num_proceso);
                 hayarribo = true;
                 bool modificada = false;
                 int temporal = -1;
                 //Si se implementa politica SJF o SRTF se ordena la cola de listos
-                if (politicaA == SJF || politicaA == SRTF)
+                if (politicaAl == SJF || politicaAl == SRTF)
                 {
-                    int[] colaaccpu = actual.ToArray();
+                    int[] colaaccpu = actuall.ToArray();
                     int cantidadcola = colaaccpu.Length;
                     //Ordena la cola de listos teniendo en cuenta la rafaga actual de cada proceso
                     for (int x = 0; x < (cantidadcola - 1); x++)
@@ -192,10 +193,10 @@ namespace WindowsFormsApplication3
                     }
                     if (modificada)
                     {
-                        actual.Clear();
+                        actuall.Clear();
                         for (int x = 0; x < cantidadcola; x++)
                         {
-                            actual.Enqueue(colaaccpu[x]);
+                            actuall.Enqueue(colaaccpu[x]);
                         }
                     }
                 }
@@ -384,7 +385,7 @@ namespace WindowsFormsApplication3
                     //Recuerda que rafaga de CPU debera ejecutar en la proxima
                 }
                 else
-                {
+                {   
                     TRestanteCPU = trafaga - 1;
                     rafagas[(rafagas_actuales[proceso] - 1)][proceso] = 0;
                     //Recuerda que rafaga de CPU debera ejecutar en la proxima
@@ -399,30 +400,37 @@ namespace WindowsFormsApplication3
                 rafagas_actuales[proceso] += 2;
             }
         }
-
+        private bool hayprocesos()
+        {
+            Queue<int> actuallocal = null;
+            if (politica == CM)
+            {
+                esmultinivel = true;
+                for (int i = 0; i < cantcolas; i++)
+                {
+                    actuallocal = Colasmultinivel[i];
+                    if (actuallocal.Count != 0)
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                actuallocal = CPU;
+            }
+            //Si hay algun proceso en la cola de Listos lo pone en ejecucion
+            if (actuallocal.Count != 0)
+            {
+                return true;
+            }
+            return false;
+        }
         private void ejecutarcpu()
         {
             if (uCPU == -1)
             {
-                Queue<int> actuallocal = null;
-                if (politica == CM)
-                {
-                    esmultinivel = true;
-                    for (int i = 0; i < cantcolas; i++)
-                    {
-                        actuallocal = Colasmultinivel[i];
-                        if (actuallocal.Count != 0)
-                        {
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    actuallocal = CPU;
-                }
-                //Si hay algun proceso en la cola de Listos lo pone en ejecucion
-                if (actuallocal.Count != 0)
+                if (hayprocesos())
                 {
                     ejecutandoCPU();
                 }
@@ -519,8 +527,7 @@ namespace WindowsFormsApplication3
                         }
                     }
                     //Si hay algun proceso en la cola de Listos lo pone en ejecucion
-                    //Orden FIFO
-                    if (actual.Count != 0)
+                    if (hayprocesos())
                     {
                         ejecutandoCPU();
                     }
@@ -530,9 +537,7 @@ namespace WindowsFormsApplication3
                     }
                 }
                 else
-                {//En caso de que se este usando politica SRTF o colas multinivel con prioridad entre colas apropiativa
-                 //Si no termino la ejecucion verifica si el primer proceso en la cola de listos arribo un proceso con tiempo de irrupcion menor
-                 //que el actualmente en ejecucion o que haya arribado algun proceso en alguna cola de mayor prioridad
+                {
                     if ((politica == SRTF || (politica==CM && CApropiativa)) && hayarribo)
                     {
                         bool verificarc = false;
@@ -568,39 +573,31 @@ namespace WindowsFormsApplication3
                         {
                             proceso = actual.Peek();
                             rafaga = rafagas[(rafagas_actuales[proceso] - 1)][proceso];
+                            int pa = uCPU ;
+                            int ca = colaenejec;
+                           
                             if ((rafaga < TRestanteCPU) || verificars)
                             {
-                                //Debera indicar que no termino la rafaga actual del proceso actualizando la cantidad de irrupciones pendientes
                                 rafagas_actuales[uCPU] -= 2;
-                                //MessageBox.Show("El proceso " + uCPU + " sale de ejecucion en el instante " + instante + " con la rafaga " + rafagas_actuales[uCPU]+"pendiente de terminar con "+ TRestanteCPU+" irrupciones");
-                                rafagas[(rafagas_actuales[uCPU] - 1)][uCPU] = TRestanteCPU;
-                                //Saca el nuevo proceso a ejecutar
-                                actual.Dequeue();
-                                //Ordena la cola de listos 
-                                agregarproceso(uCPU,false,colaenejec);
-                                colaenejec = colanueva;
-                                //Inicia la ejecucion del nuevo proceso
-                                uCPU = proceso;
-                                //Descuenta el ciclo de reloj en curso
-                                rafaga = rafagas_actuales[proceso];
-                                //Si la rafaga es la primera almacena recuerda el instante de primer respuesta
-                                if (rafaga == 1)
+                                if (verificars)
                                 {
-                                    tiemposprimerrespuesta[proceso] = instante;
+                                    if (politicaA == RR)
+                                    {
+                                        rafagas[(rafagas_actuales[uCPU] - 1)][uCPU] += TRestanteCPU;
+                                    }
                                 }
-                                TRestanteCPU = rafagas[(rafagas_actuales[proceso] - 1)][proceso] - 1;
-                                rafagas[(rafagas_actuales[proceso] - 1)][proceso] = 0;
-                                //Recuerda que rafaga de CPU debera ejecutar en la proxima
-                                rafagas_actuales[proceso] += 2;
-
+                                else
+                                {
+                                    rafagas[(rafagas_actuales[uCPU] - 1)][uCPU] = TRestanteCPU;
+                                }
+                                ejecutandoCPU();
+                                agregarproceso(pa,false,ca);
                             }
                             else
                             {
                                 TRestanteCPU--;
                             }
                         }
-                        //MessageBox.Show("Chau.El proceso actualmente en ejecucion es "+(uCPU+1)+".La rafaga actual es "+ rafagas_actuales[uCPU]+" con " + rafagas[(rafagas_actuales[uCPU] - 1)][uCPU]+"irrupciones pendientes");
-                        //MessageBox.Show("Existen "+CPU.Count+" en la cola de listos");
                         else
                         {
                             TRestanteCPU--;
