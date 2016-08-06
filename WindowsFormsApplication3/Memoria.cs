@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication3
 {
@@ -46,6 +47,7 @@ namespace WindowsFormsApplication3
             RecorColPF = TiposrecCol.Conrecor;
             cantpag = 2;
             cantpart = 2;
+            cantpartfij = 2;
             cantpartdif = 2;
             cantpartig = 2;
             tamañomemoria = tammem;
@@ -53,6 +55,7 @@ namespace WindowsFormsApplication3
             tam1part = tamañomemoria / cantpart;
             int tamp = tamañomemoria / cantpart;
             particionesmem = new int[cantpart];
+            particionesmemfij = new int[cantpart];
             mapamemoria = new int[cantpart];
             vaciarmemoria();
             Queue<int> cola = new Queue<int>();
@@ -371,7 +374,7 @@ namespace WindowsFormsApplication3
             for (int i = 0; i < longcolm; i++)
             {
                 int tamanioproc = tamaniosproc[colamem[i]];
-                int cantpagreq = (int)Math.Ceiling((double)(tamanioproc / tampag));
+                int cantpagreq = (int)Math.Ceiling((double)tamanioproc / (double)tampag);
                 int resto = tamanioproc % tampag;
                 int r = 0;
                 int cantlibres = 0;
