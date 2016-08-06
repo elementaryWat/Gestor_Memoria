@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication3
 {
@@ -389,6 +390,7 @@ namespace WindowsFormsApplication3
                     TRestanteCPU = trafaga - 1;
                     rafagas[(rafagas_actuales[proceso] - 1)][proceso] = 0;
                     //Recuerda que rafaga de CPU debera ejecutar en la proxima
+
                     rafagas_actuales[proceso] += 2;
                 }
             }
@@ -578,12 +580,16 @@ namespace WindowsFormsApplication3
                            
                             if ((rafaga < TRestanteCPU) || verificars)
                             {
-                                rafagas_actuales[uCPU] -= 2;
+                                rafagas_actuales[uCPU] = rafagas_anteriores[uCPU];
                                 if (verificars)
                                 {
                                     if (politicaA == RR)
                                     {
-                                        rafagas[(rafagas_actuales[uCPU] - 1)][uCPU] += TRestanteCPU;
+                                        rafagas[(rafagas_actuales[uCPU]-1)][uCPU] += TRestanteCPU;
+                                    }
+                                    else
+                                    {
+                                        rafagas[(rafagas_actuales[uCPU] - 1)][uCPU] = TRestanteCPU;
                                     }
                                 }
                                 else

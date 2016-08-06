@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Textoprueba = new System.Windows.Forms.Label();
             this.Bloquesmem = new System.Windows.Forms.DataGridView();
             this.IdProc = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,22 +68,25 @@
             // 
             this.IdProc.HeaderText = "Id_Proceso";
             this.IdProc.Name = "IdProc";
+            this.IdProc.ReadOnly = true;
             this.IdProc.Width = 50;
             // 
             // Libre
             // 
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.Libre.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.Libre.DefaultCellStyle = dataGridViewCellStyle1;
             this.Libre.HeaderText = "Usado";
             this.Libre.Name = "Libre";
+            this.Libre.ReadOnly = true;
             // 
             // Usado
             // 
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Red;
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
-            this.Usado.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            this.Usado.DefaultCellStyle = dataGridViewCellStyle2;
             this.Usado.HeaderText = "Libre";
             this.Usado.Name = "Usado";
+            this.Usado.ReadOnly = true;
             // 
             // Usomemoria
             // 

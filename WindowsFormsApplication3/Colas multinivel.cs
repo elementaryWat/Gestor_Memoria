@@ -66,7 +66,7 @@ namespace WindowsFormsApplication3
                     Datoscolas.Rows[x].Cells[2].Value = nombpol[3];
                     esrr[x] = true;
                     Datoscolas.Rows[x].Cells[3].ReadOnly = false;
-                    Datoscolas.Rows[x].Cells[3].Value = 1;
+                    Datoscolas.Rows[x].Cells[3].Value = quancolas[x]; ;
                 }
                 Datoscolas.Rows[cantcolas - 1].Cells[2].Value = nombpol[0];
             }
@@ -87,7 +87,7 @@ namespace WindowsFormsApplication3
                     {
                         esrr[x] = true;
                         Datoscolas.Rows[x].Cells[3].ReadOnly = false;
-                        Datoscolas.Rows[x].Cells[3].Value = 1;
+                        Datoscolas.Rows[x].Cells[3].Value = quancolas[x];
                         if (!Datoscolas.Columns[3].Visible)
                         {
                             Datoscolas.Columns[3].Visible = true;
@@ -112,8 +112,8 @@ namespace WindowsFormsApplication3
                 {
                     if (esrr[i])
                     {
-                        bufern=Int32.Parse(Datoscolas.Rows[i].Cells[3].Value.ToString());
-                        if (bufern <= 0)
+                        quancolas[i]=Int32.Parse(Datoscolas.Rows[i].Cells[3].Value.ToString());
+                        if (quancolas[i] <= 0)
                         {
                             MessageBox.Show("Debe ingresar valores mayores que 0 en los tiempos de quantum");
                             error = true;
@@ -154,6 +154,7 @@ namespace WindowsFormsApplication3
                     configC.CRealimentada = false;
                     formactual.DatosFlow.Columns[1].Visible = true;
                     DataGridViewComboBoxColumn comtippros = formactual.DatosFlow.Columns[1] as DataGridViewComboBoxColumn;
+                    formactual.limpiarseleccombo();
                     comtippros.Items.Clear();
                     for (int i=0;i<cantcolas;i++)
                     {
