@@ -36,6 +36,7 @@ namespace WindowsFormsApplication3
             tiempoquantumES = 1;
         }
         bool[] exProceso;
+        bool cerosdet;
         int[] pend1CPU;
         int[] pendentrada;
         int[] pend2CPU;
@@ -69,7 +70,7 @@ namespace WindowsFormsApplication3
             pend2CPU = new int[cantidad];
             pendsalida = new int[cantidad];
             pend3CPU = new int[cantidad];
-            bool cerosdet = false;
+            cerosdet = false;
             for (int x = 0; x < cantidad; x++)
             {
                 exProceso[x] = false;
@@ -83,14 +84,14 @@ namespace WindowsFormsApplication3
                 pend2CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[6].Value.ToString()));
                 pendsalida[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[7].Value.ToString()));
                 pend3CPU[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[8].Value.ToString()));
-                if (pend1CPU[x]==0 || pendentrada[x] == 0 || pend2CPU[x] == 0 || pendsalida[x] == 0 || pend3CPU[x] == 0)
+                if (pend1CPU[x]==0)
                 {
                     cerosdet = true;
                 }
             }
             if (cerosdet)
             {
-                MessageBox.Show("Se detectaron valores iguales a 0 en las rafagas. Es probable que el programa no funcione correctamente");
+                MessageBox.Show("La primer rafaga de CPU debe ser distinta de 0");
             }
             Gestormemoria.definirtamproc(tamaniosproc);
             configuraciones.Add(pend1CPU);
@@ -204,6 +205,19 @@ namespace WindowsFormsApplication3
             DatosFlow.Rows.Add(row7);
             string[] row8 = { "8", "", "5", "10", "5", "0", "0", "0", "0" };
             DatosFlow.Rows.Add(row8);
+        }
+        private void ejerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatosFlow.Rows.Clear();
+            //{Id_Proceso,Tiempo_de_arribo,1er_R_CPU,Entrada,2da_R_CPU,Salida,3er_R_CPU}
+            string[] row1 = { "T1", "", "0", "15", "8", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row1);
+            string[] row2 = { "T2", "", "1", "20", "2", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row2);
+            string[] row3 = { "T3", "", "4", "10", "3", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row3);
+            string[] row4 = { "T4", "", "3", "30", "10", "0", "0", "0", "0" };
+            DatosFlow.Rows.Add(row4);
         }
         //Determina si hay un proceso
         int cantidad;
@@ -862,7 +876,7 @@ namespace WindowsFormsApplication3
                         {
                             MessageBox.Show("No se han definido los tipos de algunos procesos");
                         }
-                        else
+                        else if(!cerosdet)
                         {
                             ordenador.politica = politica;
                             ordenador.politicaES = politicaES;
@@ -927,10 +941,12 @@ namespace WindowsFormsApplication3
                 {
                     MessageBox.Show("Se encontro caracteres no numericos en los datos de los procesos");
                 }
+                /*
                 catch (NullReferenceException)
                 {
                     MessageBox.Show("Se encontro valores nulos en los datos de los procesos");
                 }
+                */
             }
             
         }

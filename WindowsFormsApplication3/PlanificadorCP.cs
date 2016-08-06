@@ -17,6 +17,7 @@ namespace WindowsFormsApplication3
             cantcolas = Confactcolas.cantcolas;
             politicasColas = Confactcolas.politicasColas;
             quantumcolas = Confactcolas.quantumcolas;
+            maxquantum = Confactcolas.maxquantum;
             nombrescolas = Confactcolas.nombrescolas;
             CApropiativa = Confactcolas.CApropiativa;
             CRealimentada = Confactcolas.CRealimentada;
@@ -103,6 +104,7 @@ namespace WindowsFormsApplication3
         bool esmultinivel;
         //Usado para las colas con algoritmo de planificacion RR
         public int[] quantumcolas;
+        public int[] maxquantum;
         public string[] nombrescolas;
         public int colaenejec;
         const int FCFS = 1;
@@ -138,14 +140,19 @@ namespace WindowsFormsApplication3
                     //Inserta el proceso en la primera cola cuando es la primera vez ejecutado y en la correspondiente cuando ya habia sido ejecutado previamente
                     if (buscaradecuada)
                     {
-                        for (int i=0;i<cantcolas;i++)
+                        for (int i=0;i<(cantcolas-1);i++)
                         {
-                            if (rafagas[(rafagas_actuales[num_proceso] - 1)][num_proceso]<quantumcolas[i])
+                            if (rafagas[(rafagas_actuales[num_proceso] - 1)][num_proceso]<=maxquantum[i])
                             {
                                 actuall = Colasmultinivel[i];
                                 politicaAl = politicasColas[i];
                                 break;
                             }
+                        }
+                        if (actuall==null)
+                        {
+                            actuall = Colasmultinivel[cantcolas - 1];
+                            politicaAl = politicasColas[cantcolas - 1];
                         }
                     }
                     else {
@@ -360,6 +367,7 @@ namespace WindowsFormsApplication3
             }
             else
             {
+                politicaA = politica;
                 actual = CPU;
             }
             proceso = actual.Peek();
@@ -441,6 +449,7 @@ namespace WindowsFormsApplication3
                 //Determina si ya ha terminado su ejecucion 
                 if (TRestanteCPU == 0)
                 {
+                    //MessageBox.Show("El tiempo restante se acabo");
                     rafaga = rafagas_actuales[uCPU];
                     //Si no termino de ejecutar la rafaga actual y se usa politica Round Robin
                     if (rafaga == rafagas_anteriores[uCPU] && politicaA == RR)

@@ -40,6 +40,7 @@
             this.Nombre_Cola = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Alg_Plan = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.QuantumSoportado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxQuant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.Datoscolas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,12 +106,14 @@
             this.Datoscolas.AllowUserToDeleteRows = false;
             this.Datoscolas.AllowUserToResizeColumns = false;
             this.Datoscolas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.Datoscolas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
             this.Datoscolas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Datoscolas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_Cola,
             this.Nombre_Cola,
             this.Alg_Plan,
-            this.QuantumSoportado});
+            this.QuantumSoportado,
+            this.MaxQuant});
             this.Datoscolas.Location = new System.Drawing.Point(12, 139);
             this.Datoscolas.Name = "Datoscolas";
             this.Datoscolas.Size = new System.Drawing.Size(350, 150);
@@ -179,11 +182,19 @@
             // 
             // QuantumSoportado
             // 
-            this.QuantumSoportado.HeaderText = "Quantum Soportado";
+            this.QuantumSoportado.HeaderText = "Quantum";
             this.QuantumSoportado.Name = "QuantumSoportado";
             this.QuantumSoportado.ReadOnly = true;
             this.QuantumSoportado.Visible = false;
-            this.QuantumSoportado.Width = 127;
+            this.QuantumSoportado.Width = 75;
+            // 
+            // MaxQuant
+            // 
+            this.MaxQuant.HeaderText = "Max Quantum";
+            this.MaxQuant.Name = "MaxQuant";
+            this.MaxQuant.ReadOnly = true;
+            this.MaxQuant.Visible = false;
+            this.MaxQuant.Width = 98;
             // 
             // Colas_multinivel
             // 
@@ -224,5 +235,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_Cola;
         private System.Windows.Forms.DataGridViewComboBoxColumn Alg_Plan;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuantumSoportado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaxQuant;
     }
 }
