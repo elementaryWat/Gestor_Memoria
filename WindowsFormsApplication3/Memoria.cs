@@ -33,6 +33,9 @@ namespace WindowsFormsApplication3
         public OpcionesCol CantCol;
         public TiposrecCol RecorColPF;
         public TiposrecCol RecorColPD;
+        public bool hayfragin;
+        public bool hayfragex;
+        public int fragmentacion;
         List<Queue<int>> ListaColas;
         Computador compactual;
         public int[] tamaniosproc;
@@ -135,6 +138,60 @@ namespace WindowsFormsApplication3
         }
         /*--------------------------------------------------------------------*/
         /*--------------------------Asignacion de memoria---------------------*/
+        public int obtenerfragmem()
+        {
+            switch (organizacionmem)
+            {
+                case Tiposorgmem.PAGINADO:
+                    return obtenerfraginternapag();
+                case Tiposorgmem.PARTFIJO:
+                    return obtenerfraginternafij();
+                case Tiposorgmem.PARTDIN:
+                    if (hayfragex)
+                    {
+                        return fragmentacion;
+                    }
+                    break;
+            }
+            return 0;
+        }
+        public int obtenerfraginternafij()
+        {
+            int sumafrag=0;
+            int tamparticion = tam1part;
+            for (int i=0;i<cantpart;i++)
+            {
+                if (Tampart== Opcionestam.DIFTAM)
+                {
+                    tamparticion = particionesmem[i];
+                }
+                if (mapamemoria[i]!=-1)
+                {
+                    sumafrag += tamparticion-tamaniosproc[mapamemoria[i]];
+                }
+            }
+            return sumafrag;
+        }
+        public int obtenerfraginternapag()
+        {
+            int sumafrag = 0;
+            int[] tamprocesos = (int[] )tamaniosproc.Clone();
+            for (int i = 0; i < cantpart; i++)
+            {
+                if (mapamemoria[i] != -1)
+                {
+                    if (tamprocesos[mapamemoria[i]] <= tampag)
+                    {
+                        sumafrag += tampag - tamprocesos[mapamemoria[i]];
+                    }
+                    else
+                    {
+                        tamprocesos[mapamemoria[i]] -= tampag;
+                    }
+                }
+            }
+            return sumafrag;
+        }
         public bool tamanioadecuado(int tamanio)
         {
             switch (organizacionmem)
@@ -334,6 +391,7 @@ namespace WindowsFormsApplication3
                     asignarparticion_fija();
                     break;
                 case Tiposorgmem.PARTDIN:
+                    hayfragex = false;
                     asignarbloque();
                     break;
                 case Tiposorgmem.PAGINADO:
@@ -442,8 +500,13 @@ namespace WindowsFormsApplication3
             int indmaxt = 0;
             int primerlibre=-1;
             bool enclibre=false;
+            int sumalibres=0;//Para fragmentacion externa
             for (int h=0;h<cantpart;h++)
             {
+                if (mapamemoria[h] == -1)
+                {
+                    sumalibres += particionesmem[h];
+                }
                 if (mapamemoria[h] == -1 && tamaniosproc[id_proceso] <=particionesmem[h])
                 {
                     enclibre = true;
@@ -506,6 +569,14 @@ namespace WindowsFormsApplication3
                 }
                 quitarprocesoCola(id_proceso, 0);
                 compactual.agregarproceso(id_proceso, false, 0);
+            }
+            else
+            {
+                if (sumalibres>= tamaniosproc[id_proceso])
+                {
+                    hayfragex = true;
+                    fragmentacion = sumalibres;
+                }
             }
         }
         private void asignarparticion_fija()

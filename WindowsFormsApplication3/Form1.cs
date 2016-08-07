@@ -23,6 +23,7 @@ namespace WindowsFormsApplication3
         List<int[]> usosmem;
         List<int[]> particiones;
         List<int> cantpartins;
+        List<int> fragmentaciones;
         public Form1()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace WindowsFormsApplication3
             usosmem = new List<int[]>();
             particiones = new List<int[]>();
             cantpartins = new List<int>();
+            fragmentaciones = new List<int>();
             tiempoquantum = 1;
             tiempoquantumES = 1;
         }
@@ -285,24 +287,35 @@ namespace WindowsFormsApplication3
                 DatosFlow.Rows[i].Cells[1].Value = "";
             }
         }
-        Usomemoria miusoprueba;
+        Usomemoria miusomemoria;
         private void verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (miusoprueba != null)
+            if (miusomemoria != null)
             {
-                miusoprueba.Dispose();
+                miusomemoria.Dispose();
             }
-            miusoprueba = new Usomemoria();
-            miusoprueba.Show();
+            miusomemoria = new Usomemoria();
+            miusomemoria.Show();
             int[] usomemactual = usosmem[instanteseleccionado];
             int[] particionesactual = particiones[instanteseleccionado];
             int cantpartactual = cantpartins[instanteseleccionado];
+            int fragmentactual = fragmentaciones[instanteseleccionado];
             int tamanio = cantpartactual;
             int alturatotal = 40 * tamanio;
             int mentamanio;
             mentamanio = 0;
             int cantidadc = (DatosFlow.RowCount) - 1;
             int[] tamaniosproc = new int[cantidadc];
+            string textoa = "";
+            if (Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PAGINADO || Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTFIJO)
+            {
+                textoa = "Fragmentacion interna = " + fragmentactual;
+            }
+            else
+            {
+                textoa = "Fragmentacion externa = " + fragmentactual;
+            }
+            miusomemoria.FragT.Text = textoa;
             for (int i=0;i<cantidad;i++)
             {
                 tamaniosproc[i] = Int32.Parse(DatosFlow.Rows[i].Cells[3].Value.ToString());
@@ -342,28 +355,28 @@ namespace WindowsFormsApplication3
                     if (tamanioac < tamparticion)
                     {
                         string[] filaac = { idproceso.ToString(), "(" + tamanioac + "/" + tamparticion + ")", (tamparticion - tamanioac) + "/" + tamparticion };
-                        miusoprueba.Bloquesmem.Rows.Add(filaac);
+                        miusomemoria.Bloquesmem.Rows.Add(filaac);
                         DataGridViewCellStyle style = new DataGridViewCellStyle();
                         style.BackColor = Color.BlueViolet;
-                        miusoprueba.Bloquesmem.Rows[miusoprueba.Bloquesmem.Rows.Count - 1].Cells[2].Style = style;
+                        miusomemoria.Bloquesmem.Rows[miusomemoria.Bloquesmem.Rows.Count - 1].Cells[2].Style = style;
                     }
                     else
                     {
                         tamaniosproc[usomemactual[i]] -= tamparticion;
                         string[] filaac = { idproceso.ToString(), "(" + tamparticion + "/" + tamparticion + ")", 0 + "/" + tamparticion };
-                        miusoprueba.Bloquesmem.Rows.Add(filaac);
+                        miusomemoria.Bloquesmem.Rows.Add(filaac);
                     }
 
                 }
                 else
                 {
                     string[] filaac = { "-","0", tamparticion.ToString() };
-                    miusoprueba.Bloquesmem.Rows.Add(filaac);
+                    miusomemoria.Bloquesmem.Rows.Add(filaac);
                     DataGridViewCellStyle style = new DataGridViewCellStyle();
                     style.BackColor = Color.BlueViolet;
                     for (int h = 0; h < 3; h++)
                     {
-                        miusoprueba.Bloquesmem.Rows[miusoprueba.Bloquesmem.Rows.Count - 1].Cells[h].Style = style;
+                        miusomemoria.Bloquesmem.Rows[miusomemoria.Bloquesmem.Rows.Count - 1].Cells[h].Style = style;
                     }
                 }
                 if ((Gestormemoria.Tampart == Memoria.Opcionestam.DIFTAM && Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTFIJO) || Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTDIN)
@@ -728,7 +741,8 @@ namespace WindowsFormsApplication3
             }
             usosmem.Add((int[])usomemactual.Clone());
             particiones.Add((int[])Gestormemoria.particionesmem.Clone());
-            cantpartins.Add((int)Gestormemoria.cantpart);
+            cantpartins.Add(Gestormemoria.cantpart);
+            fragmentaciones.Add(Gestormemoria.obtenerfragmem());
             /*-------------------------------------------------------------------------------------*/
             /*-------------------------------Uso de CPU-------------------------------------------*/
             string enejc = "";
@@ -856,6 +870,7 @@ namespace WindowsFormsApplication3
             usosmem.Clear();
             particiones.Clear();
             cantpartins.Clear();
+            fragmentaciones.Clear();
             reloj =0;
             int cantidad = (DatosFlow.RowCount) - 1;
             if (cantidad==0)
