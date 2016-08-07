@@ -19,6 +19,7 @@ namespace WindowsFormsApplication3
         int cantcolas;
         int[] algplan;
         int[] quancolas;
+        int[] maxquan;
         string[] nombrescolas;
         bool[] esrr;
         string[] nombpol;
@@ -47,6 +48,7 @@ namespace WindowsFormsApplication3
             Datoscolas.Rows.Clear();
             if (Tipocola == Conretro)
             {
+                Datoscolas.Columns[3].Visible = true;
                 DataGridViewComboBoxColumn cel = Datoscolas.Columns[2] as DataGridViewComboBoxColumn;
                 cel.Items.Clear();
                 cel.Items.Add("Round Robin");
@@ -61,12 +63,16 @@ namespace WindowsFormsApplication3
                 ultcel.Items.Add("SJF");
                 ultcel.Items.Add("SRTF");
                 ultcel.Items.Add("Round Robin");
+                Datoscolas.Columns[4].Visible = true;
                 for (int x = 0; x < (cantcolas - 1); x++)
                 {
                     Datoscolas.Rows[x].Cells[2].Value = nombpol[3];
                     esrr[x] = true;
+                    algplan[x] = RR;
                     Datoscolas.Rows[x].Cells[3].ReadOnly = false;
-                    Datoscolas.Rows[x].Cells[3].Value = quancolas[x]; ;
+                    Datoscolas.Rows[x].Cells[4].ReadOnly = false;
+                    Datoscolas.Rows[x].Cells[3].Value = quancolas[x];
+                    Datoscolas.Rows[x].Cells[4].Value = maxquan[x];
                 }
                 Datoscolas.Rows[cantcolas - 1].Cells[2].Value = nombpol[0];
             }
@@ -78,6 +84,7 @@ namespace WindowsFormsApplication3
                 cel.Items.Add("SJF");
                 cel.Items.Add("SRTF");
                 cel.Items.Add("Round Robin");
+                Datoscolas.Columns[4].Visible = false;
                 for (int x = 0; x < cantcolas; x++)
                 {
                     Datoscolas.Rows.Add(x.ToString(), nombrescolas[x]);
@@ -88,6 +95,7 @@ namespace WindowsFormsApplication3
                         esrr[x] = true;
                         Datoscolas.Rows[x].Cells[3].ReadOnly = false;
                         Datoscolas.Rows[x].Cells[3].Value = quancolas[x];
+                        Datoscolas.Rows[x].Cells[4].Value = maxquan[x];
                         if (!Datoscolas.Columns[3].Visible)
                         {
                             Datoscolas.Columns[3].Visible = true;
@@ -112,12 +120,33 @@ namespace WindowsFormsApplication3
                 {
                     if (esrr[i])
                     {
-                        quancolas[i]=Int32.Parse(Datoscolas.Rows[i].Cells[3].Value.ToString());
+                        quancolas[i] = Int32.Parse(Datoscolas.Rows[i].Cells[3].Value.ToString());
                         if (quancolas[i] <= 0)
                         {
                             MessageBox.Show("Debe ingresar valores mayores que 0 en los tiempos de quantum");
                             error = true;
                         }
+                    }
+                    if (Tipocola == Conretro && i < (cantcolas - 1))
+                    {
+                        maxquan[i] = Int32.Parse(Datoscolas.Rows[i].Cells[4].Value.ToString());
+                        if (i > 0)
+                        {
+                            if (maxquan[i] <= maxquan[i - 1])
+                            {
+                                MessageBox.Show("Debe ingresar valores ascendentes en los quantum maximos de colas");
+                                error = true;
+                            }
+                        }
+                        else
+                        {
+                            if (maxquan[i] <= 0)
+                            {
+                                MessageBox.Show("Debe ingresar valores mayores que 0 en los quantum maximos");
+                                error = true;
+                            }
+                        }
+
                     }
                     bufert = Datoscolas.Rows[i].Cells[1].Value.ToString();
                     if (bufert == "")
@@ -125,7 +154,18 @@ namespace WindowsFormsApplication3
                         MessageBox.Show("Debe completar los nombres de las colas para poder identificarlas");
                         error = true;
                     }
-                    
+                    else
+                    {
+                        for (int h = (i+1); h < cantcolas; h++)
+                        {
+                            if (Datoscolas.Rows[h].Cells[1].Value.ToString()==bufert)
+                            {
+                                MessageBox.Show("Las colas deben tener nombres unicos");
+                                error = true;
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             catch (FormatException)
@@ -143,6 +183,7 @@ namespace WindowsFormsApplication3
                 configC.cantcolas = cantcolas;
                 configC.politicasColas = (int[])algplan.Clone();
                 configC.quantumcolas = (int[])quancolas.Clone();
+                configC.maxquantum = (int[])maxquan.Clone();
                 configC.nombrescolas = (string[])nombrescolas.Clone();
                 if (TipoC.SelectedIndex == 0)
                 {
@@ -195,6 +236,7 @@ namespace WindowsFormsApplication3
             if (algplan[filasel] == RR || (Tipocola == Conretro && filasel<(cantcolas-1)))
             {
                 esrr[filasel] = true;
+                algplan[filasel] = RR;
                 Datoscolas.Rows[filasel].Cells[3].ReadOnly = false;
                 Datoscolas.Rows[filasel].Cells[3].Value = 1;
                 if (!Datoscolas.Columns[3].Visible)
@@ -221,7 +263,6 @@ namespace WindowsFormsApplication3
                     if (Datoscolas.Columns[3].Visible)
                     {
                         Datoscolas.Columns[3].Visible = false;
-
                     }
                 }
                 quancolas[filasel] = -1;
@@ -239,12 +280,21 @@ namespace WindowsFormsApplication3
             cantcolas = combocanc.SelectedIndex + 1;
             algplan=new int[cantcolas];
             quancolas= new int[cantcolas];
-            esrr= new bool[cantcolas];
+            maxquan = new int[cantcolas];
+            esrr = new bool[cantcolas];
             nombrescolas = new string[cantcolas];
             for (int i=0;i<cantcolas;i++)
             {
                 algplan[i] = 1;
-                quancolas[i] = 0;
+                quancolas[i] = 1;
+                if (i > 0)
+                {
+                    maxquan[i] = maxquan[i - 1] + 1;
+                }
+                else
+                {
+                    maxquan[i] = 1;
+                }
                 esrr[i] = false;
                 nombrescolas[i] = "Cola "+i;
             }
@@ -256,6 +306,7 @@ namespace WindowsFormsApplication3
             CantidadC.SelectedIndex = cantcolas - 1;
             algplan = configC.politicasColas;
             quancolas = configC.quantumcolas;
+            maxquan= configC.maxquantum;
             nombrescolas = (string[])configC.nombrescolas.Clone();
             if (configC.CRealimentada)
             {
