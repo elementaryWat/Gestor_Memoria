@@ -9,65 +9,8 @@ namespace WindowsFormsApplication3
 {
     public class Computador
     {
-        public Computador(int cantproces, int[][] configuraciones, ConfColas conac)
-        {
-            esmultinivel = false;
-            Confactcolas = conac;
-            naturalezasprocesos = new int[cantproces];
-            cantcolas = Confactcolas.cantcolas;
-            politicasColas = Confactcolas.politicasColas;
-            quantumcolas = Confactcolas.quantumcolas;
-            maxquantum = Confactcolas.maxquantum;
-            nombrescolas = Confactcolas.nombrescolas;
-            CApropiativa = Confactcolas.CApropiativa;
-            CRealimentada = Confactcolas.CRealimentada;
-            Colasmultinivel = new List<Queue<int>>();
-            for (int i=0;i<cantcolas;i++)
-            {
-                Queue<int> colaac = new Queue<int>();
-                Colasmultinivel.Add(colaac);
-            }
-            // configuraciones[rafaga][num_proceso]
-            rafagas = configuraciones;
-            esprimerarespuesta = new bool[cantproces];
-            esprimerarespuestaE = new bool[cantproces];
-            esprimerarespuestaS = new bool[cantproces];
-            rafagas_actuales = new int[cantproces];
-            rafagas_anteriores = new int[cantproces];
-            tiemposfinalizacion = new int[cantproces];
-            tiemposprimerrespuesta = new int[cantproces];
-            tiemposarriboE = new int[cantproces];
-            tiemposfinalizacionE = new int[cantproces];
-            tiemposprimerrespuestaE = new int[cantproces];
-            tiemposarriboS = new int[cantproces];
-            tiemposfinalizacionS = new int[cantproces];
-            tiemposprimerrespuestaS = new int[cantproces];
-            hayarribo = false;
-            hayarriboE = false;
-            hayarriboS = false;
-            for (int x = 0; x < cantproces; x++)
-            {
-                //Recuerda la rafaga de CPU que tiene que ejecutar
-                rafagas_actuales[x] = 1;
-                rafagas_anteriores[x] = 0;
-                esprimerarespuesta[x] = true;
-                esprimerarespuestaE[x] = true;
-                esprimerarespuestaS[x] = true;
-            }
-            cantidad_procesos = cantproces;
-            uCPU = UEntrada = USalida = -1;
-            TRestanteCPU = TRestanteEntrada = TRestanteSalida = 0;
-            CPU = new Queue<int>();
-            BEntrada = new Queue<int>();
-            BSalida = new Queue<int>();
-            Entrada = new Queue<int>();
-            Salida = new Queue<int>();
-        }
-        public void definirmemoria(Memoria memac)
-        {
-            memoriaactual = memac;
-        }
         Memoria memoriaactual;
+        public bool GestMemon;
         //Contadores auxiliares
         public int[] rafagas_actuales;
         public int[] rafagas_anteriores;
@@ -127,6 +70,65 @@ namespace WindowsFormsApplication3
         public int uCPU;
         public int UEntrada;
         public int USalida;
+        public Computador(int cantproces, int[][] configuraciones, ConfColas conac)
+        {
+            esmultinivel = false;
+            Confactcolas = conac;
+            naturalezasprocesos = new int[cantproces];
+            cantcolas = Confactcolas.cantcolas;
+            politicasColas = Confactcolas.politicasColas;
+            quantumcolas = Confactcolas.quantumcolas;
+            maxquantum = Confactcolas.maxquantum;
+            nombrescolas = Confactcolas.nombrescolas;
+            CApropiativa = Confactcolas.CApropiativa;
+            CRealimentada = Confactcolas.CRealimentada;
+            Colasmultinivel = new List<Queue<int>>();
+            for (int i=0;i<cantcolas;i++)
+            {
+                Queue<int> colaac = new Queue<int>();
+                Colasmultinivel.Add(colaac);
+            }
+            // configuraciones[rafaga][num_proceso]
+            rafagas = configuraciones;
+            esprimerarespuesta = new bool[cantproces];
+            esprimerarespuestaE = new bool[cantproces];
+            esprimerarespuestaS = new bool[cantproces];
+            rafagas_actuales = new int[cantproces];
+            rafagas_anteriores = new int[cantproces];
+            tiemposfinalizacion = new int[cantproces];
+            tiemposprimerrespuesta = new int[cantproces];
+            tiemposarriboE = new int[cantproces];
+            tiemposfinalizacionE = new int[cantproces];
+            tiemposprimerrespuestaE = new int[cantproces];
+            tiemposarriboS = new int[cantproces];
+            tiemposfinalizacionS = new int[cantproces];
+            tiemposprimerrespuestaS = new int[cantproces];
+            hayarribo = false;
+            hayarriboE = false;
+            hayarriboS = false;
+            for (int x = 0; x < cantproces; x++)
+            {
+                //Recuerda la rafaga de CPU que tiene que ejecutar
+                rafagas_actuales[x] = 1;
+                rafagas_anteriores[x] = 0;
+                esprimerarespuesta[x] = true;
+                esprimerarespuestaE[x] = true;
+                esprimerarespuestaS[x] = true;
+            }
+            cantidad_procesos = cantproces;
+            uCPU = UEntrada = USalida = -1;
+            TRestanteCPU = TRestanteEntrada = TRestanteSalida = 0;
+            CPU = new Queue<int>();
+            BEntrada = new Queue<int>();
+            BSalida = new Queue<int>();
+            Entrada = new Queue<int>();
+            Salida = new Queue<int>();
+        }
+        public void definirmemoria(Memoria memac)
+        {
+            memoriaactual = memac;
+        }
+
         public void agregarproceso(int num_proceso, bool buscaradecuada, int colaains)
         {
             int politicaAl=0;
@@ -469,7 +471,10 @@ namespace WindowsFormsApplication3
                         if (rafaga == 7)
                         {
                             tiemposfinalizacion[uCPU] = instante;
-                            memoriaactual.liberarmemoria(uCPU);
+                            if (GestMemon)
+                            {
+                                memoriaactual.liberarmemoria(uCPU);
+                            }
                         }
                         //Lo agrega a la cola de entrada o salida dependiendo de la rafaga de cpu que deba ejecutar luego
                         else if (rafaga == 3)
@@ -478,7 +483,10 @@ namespace WindowsFormsApplication3
                             if (rafagas[2][uCPU] == 0 && rafagas[4][uCPU] == 0)
                             {
                                 tiemposfinalizacion[uCPU] = instante;
-                                memoriaactual.liberarmemoria(uCPU);
+                                if (GestMemon)
+                                {
+                                    memoriaactual.liberarmemoria(uCPU);
+                                }
                             }
                             BEntrada.Enqueue(uCPU);
                             if (agregarprocesoE(uCPU))
@@ -519,7 +527,10 @@ namespace WindowsFormsApplication3
                             if (rafagas[4][uCPU] == 0)
                             {
                                 tiemposfinalizacion[uCPU] = instante;
-                                memoriaactual.liberarmemoria(uCPU);
+                                if (GestMemon)
+                                {
+                                    memoriaactual.liberarmemoria(uCPU);
+                                }
                             }
                             BSalida.Enqueue(uCPU);
                             if (agregarprocesoS(uCPU))

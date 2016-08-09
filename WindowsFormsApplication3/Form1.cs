@@ -24,6 +24,7 @@ namespace WindowsFormsApplication3
         List<int[]> particiones;
         List<int> cantpartins;
         List<int> fragmentaciones;
+        bool GestMemon;
         public Form1()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace WindowsFormsApplication3
             fragmentaciones = new List<int>();
             tiempoquantum = 1;
             tiempoquantumES = 1;
+            GestMemon = true;
         }
         bool[] exProceso;
         bool cerosdet;
@@ -77,11 +79,19 @@ namespace WindowsFormsApplication3
             pendsalida = new int[cantidad];
             pend3CPU = new int[cantidad];
             cerosdet = false;
+            string basecero = "Se han detectado valores iguales a 0";
+            string[] men = { " en los tamaños de procesos"," en la primer rafaga de CPU", " en los tamaños de procesos y en la primer rafaga de CPU" };
+            int tipoc=0;
             for (int x = 0; x < cantidad; x++)
             {
                 exProceso[x] = false;
                 tamaniosproc[x] = (Int32.Parse(DatosFlow.Rows[x].Cells[3].Value.ToString()));
-                if (!Gestormemoria.tamanioadecuado(tamaniosproc[x]))
+                if (tamaniosproc[x] == 0 && GestMemon)
+                {
+                    cerosdet = true;
+                    tipoc++;
+                }
+                if (!Gestormemoria.tamanioadecuado(tamaniosproc[x]) && GestMemon)
                 {
                     haydemasiadogrande = true;
                 }
@@ -93,11 +103,16 @@ namespace WindowsFormsApplication3
                 if (pend1CPU[x]==0)
                 {
                     cerosdet = true;
+                    tipoc+=2;
+                }
+                if (tipoc>0)
+                {
+                    break;
                 }
             }
             if (cerosdet)
             {
-                MessageBox.Show("La primer rafaga de CPU debe ser distinta de 0");
+                MessageBox.Show(basecero+men[tipoc-1]);
             }
             Gestormemoria.definirtamproc(tamaniosproc);
             configuraciones.Add(pend1CPU);
@@ -108,6 +123,7 @@ namespace WindowsFormsApplication3
             ordenador = new Computador(cantidad,configuraciones.ToArray(),MiconfColas);
             Gestormemoria.definirordenador(ordenador);
             ordenador.definirmemoria(Gestormemoria);
+            ordenador.GestMemon = GestMemon;
             if (politica == CM && !MiconfColas.CRealimentada)
             {
                 for (int i = 0; i < cantidad; i++)
@@ -306,8 +322,6 @@ namespace WindowsFormsApplication3
             int fragmentactual = fragmentaciones[instanteseleccionado];
             int tamanio = cantpartactual;
             int alturatotal = 40 * tamanio;
-            int mentamanio;
-            mentamanio = 0;
             int cantidadc = (DatosFlow.RowCount) - 1;
             int[] tamaniosproc = new int[cantidadc];
             string textoa = "";
@@ -324,18 +338,7 @@ namespace WindowsFormsApplication3
             {
                 tamaniosproc[i] = Int32.Parse(DatosFlow.Rows[i].Cells[3].Value.ToString());
             }
-            if ((Gestormemoria.Tampart == Memoria.Opcionestam.DIFTAM && Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTFIJO) || Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTDIN)
-            {
-                mentamanio = particionesactual[0];
-                for (int i = 0; i < tamanio; i++)
-                {
-                    int tamaniopart = particionesactual[i];
-                    if (tamaniopart < mentamanio)
-                    {
-                        mentamanio = tamaniopart;
-                    }
-                }
-            }
+
             
             for (int i=0;i<tamanio;i++)
             {
@@ -608,26 +611,65 @@ namespace WindowsFormsApplication3
             }
             /*-------------------------------------------------------------------------------------*/
             //Colas de recursos
-            /*---------------------------Cola de memoria-----------------------------------------------------*/
             string colamemoria = "";
-            int[] colanuevos = Gestormemoria.obtenercolanuevos();
-            int cantidadmemoria = colanuevos.Length;
-            if (cantidadmemoria == 0)
+            string usomemoria = "";
+            if (GestMemon)
             {
-                colamemoria = "-";
-            }
-            else {
-                for (int x = 0; x < cantidadmemoria; x++)
+                /*---------------------------Cola de memoria-----------------------------------------------------*/
+                int[] colanuevos = Gestormemoria.obtenercolanuevos();
+                int cantidadmemoria = colanuevos.Length;
+                if (cantidadmemoria == 0)
                 {
-                    colamemoria += DatosFlow.Rows[colanuevos[x]].Cells[0].Value.ToString();
-                    //+"("+(ordenador.rafagas[(ordenador.rafagas_actuales[x] - 1)][x])+")"
-                    if (x != (cantidadmemoria - 1))
+                    colamemoria = "-";
+                }
+                else
+                {
+                    for (int x = 0; x < cantidadmemoria; x++)
                     {
-                        colamemoria += ", ";
+                        colamemoria += DatosFlow.Rows[colanuevos[x]].Cells[0].Value.ToString();
+                        //+"("+(ordenador.rafagas[(ordenador.rafagas_actuales[x] - 1)][x])+")"
+                        if (x != (cantidadmemoria - 1))
+                        {
+                            colamemoria += ", ";
+                        }
                     }
                 }
+                /*-------------------------------------------------------------------------------------*/
+                /*---------------------------Uso de memoria-----------------------------------------------------*/
+                int[] usomemactual = (int[])Gestormemoria.mapamemoria.Clone();
+                int[] usandomemoria = Gestormemoria.obtenerusomemoria();
+                int cantidadusandom = usandomemoria.Length;
+                if (cantidadusandom == 0)
+                {
+                    usomemoria = "-";
+                }
+                else
+                {
+                    for (int x = 0; x < cantidadusandom; x++)
+                    {
+                        usomemoria += DatosFlow.Rows[usandomemoria[x]].Cells[0].Value.ToString();
+                        //+"("+(ordenador.rafagas[(ordenador.rafagas_actuales[x] - 1)][x])+")"
+                        if (x != (cantidadusandom - 1))
+                        {
+                            usomemoria += ", ";
+                        }
+                    }
+                }
+                DataGridViewCellStyle Mstyle = new DataGridViewCellStyle();
+                Mstyle.BackColor = Color.Purple;
+                Mstyle.ForeColor = Color.White;
+                if (inscomp)
+                {
+                    inscomp = false;
+                    FlujoEjec.Rows[FlujoEjec.Rows.Count - 1].Cells[8].Style = Mstyle;
+                }
+                usosmem.Add((int[])usomemactual.Clone());
+                particiones.Add((int[])Gestormemoria.particionesmem.Clone());
+                cantpartins.Add(Gestormemoria.cantpart);
+                fragmentaciones.Add(Gestormemoria.obtenerfragmem());
+                /*-------------------------------------------------------------------------------------*/
             }
-            /*-------------------------------------------------------------------------------------*/
+
             /*---------------------------Cola de CPU-----------------------------------------------------*/
             string colacpu = "";
             int[] colalistos;
@@ -723,39 +765,6 @@ namespace WindowsFormsApplication3
             }
             /*-------------------------------------------------------------------------------------*/
             //Uso de recursos
-            /*---------------------------Uso de memoria-----------------------------------------------------*/
-            int[] usomemactual= (int[])Gestormemoria.mapamemoria.Clone();
-            string usomemoria = "";
-            int[] usandomemoria = Gestormemoria.obtenerusomemoria();
-            int cantidadusandom = usandomemoria.Length;
-            if (cantidadusandom == 0)
-            {
-                usomemoria = "-";
-            }
-            else {
-                for (int x = 0; x < cantidadusandom; x++)
-                {
-                    usomemoria += DatosFlow.Rows[usandomemoria[x]].Cells[0].Value.ToString();
-                    //+"("+(ordenador.rafagas[(ordenador.rafagas_actuales[x] - 1)][x])+")"
-                    if (x != (cantidadusandom - 1))
-                    {
-                        usomemoria += ", ";
-                    }
-                }
-            }
-            DataGridViewCellStyle style = new DataGridViewCellStyle();
-            style.BackColor = Color.Purple;
-            style.ForeColor = Color.White;
-            if (inscomp)
-            {
-                inscomp = false;
-                DatosFlow.Rows[DatosFlow.Rows.Count - 1].Cells[8].Style = style;
-            }
-            usosmem.Add((int[])usomemactual.Clone());
-            particiones.Add((int[])Gestormemoria.particionesmem.Clone());
-            cantpartins.Add(Gestormemoria.cantpart);
-            fragmentaciones.Add(Gestormemoria.obtenerfragmem());
-            /*-------------------------------------------------------------------------------------*/
             /*-------------------------------Uso de CPU-------------------------------------------*/
             string enejc = "";
             if (ordenador.uCPU == -1)
@@ -820,8 +829,11 @@ namespace WindowsFormsApplication3
 
                 string[] row = { reloj.ToString(),colamemoria, colacpu, enejc, colaBE + "/" + colaBS, colacpu, colaE, colaS,usomemoria, enejc, enejcent, enejcsal };
                 FlujoEjec.Rows.Add(row);
-                FlujoEjec.Rows[FlujoEjec.Rows.Count - 1].ContextMenuStrip = MenuConMem;
-                FlujoEjec.CellClick += new DataGridViewCellEventHandler(estinst);
+                if (GestMemon)
+                {
+                    FlujoEjec.Rows[FlujoEjec.Rows.Count - 1].ContextMenuStrip = MenuConMem;
+                    FlujoEjec.CellClick += new DataGridViewCellEventHandler(estinst);
+                }
                 //Resalta filas para GANTT CPU
                 if (cambiarcolor && InstGant.Checked)
                 {
@@ -924,12 +936,19 @@ namespace WindowsFormsApplication3
                                     for (int x = 0; x < respuesta.Length; x++)
                                     {
                                         //MessageBox.Show("Se agrega");
-                                        Gestormemoria.agregaracolanuevos(respuesta[x]);
+                                        if (GestMemon)
+                                        {
+                                            Gestormemoria.agregaracolanuevos(respuesta[x]);
+                                        }
+                                        else
+                                        {
+                                            ordenador.agregarproceso(respuesta[x], false, 0);
+                                        }
                                     }
                                 }
                                 if (intcomactual == 0)
                                 {
-                                    if (compacon)
+                                    if (compacon && GestMemon && Gestormemoria.organizacionmem== Memoria.Tiposorgmem.PARTDIN)
                                     {
                                         inscomp = true;
                                         Gestormemoria.compactarmemoria();
@@ -940,9 +959,15 @@ namespace WindowsFormsApplication3
                                 {
                                     intcomactual--;
                                 }
-                                Gestormemoria.asignarmemoria();
+                                if (GestMemon)
+                                {
+                                    Gestormemoria.asignarmemoria();
+                                }
                                 ordenador.ejecutar(reloj);
-                                Gestormemoria.asignarmemoria();
+                                if (GestMemon)
+                                {
+                                    Gestormemoria.asignarmemoria();
+                                }
                                 imprimir();
                                 /*if (reloj>10)
                                 {
@@ -1525,6 +1550,26 @@ namespace WindowsFormsApplication3
             }
             BotTamMem.Text = "Tamaño de memoria (" + Gestormemoria.tamañomemoria + Gestormemoria.textounidad+")";
 
+        }
+
+        private void activarGestionDeMemoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            if (ts.Checked)
+            {
+                Arribo.HeaderText = "Arribo a memoria";
+                Nuevos.Visible = true;
+                UsoMem.Visible = true;
+                Tam.Visible = true;
+                GestMemon = true;
+            }
+            else {
+                Arribo.HeaderText = "Arribo a CPU";
+                Nuevos.Visible = false;
+                UsoMem.Visible = false;
+                Tam.Visible = false;
+                GestMemon = false;
+            }
         }
     }
     /*-----------------------------------------------------------------------------------------*/

@@ -156,7 +156,7 @@ namespace WindowsFormsApplication3
             }
             if (cantlibres>1)
             {
-                MessageBox.Show("Se compactara la memoria");
+                //MessageBox.Show("Se compactara la memoria");
                 mapamemoria = new int[cantpart - (cantlibres-1)];
                 particionesmem = new int[cantpart - (cantlibres - 1)];
                 //Desplaza los contenidos del anterior mapa de memoria al tope de la misma

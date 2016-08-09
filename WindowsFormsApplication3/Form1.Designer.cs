@@ -197,6 +197,7 @@
             this.politicaESSJF = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuConMem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -794,7 +795,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.label2.Location = new System.Drawing.Point(6, 24);
+            this.label2.Location = new System.Drawing.Point(6, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 6;
@@ -804,7 +805,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.label3.Location = new System.Drawing.Point(4, 41);
+            this.label3.Location = new System.Drawing.Point(6, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 7;
@@ -823,12 +824,13 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 93);
+            this.groupBox1.Location = new System.Drawing.Point(12, 76);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 86);
+            this.groupBox1.Size = new System.Drawing.Size(200, 104);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Referencias";
@@ -1057,6 +1059,7 @@
             this.activarGestionDeMemoriaToolStripMenuItem.Name = "activarGestionDeMemoriaToolStripMenuItem";
             this.activarGestionDeMemoriaToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.activarGestionDeMemoriaToolStripMenuItem.Text = "Activar gestion de memoria";
+            this.activarGestionDeMemoriaToolStripMenuItem.Click += new System.EventHandler(this.activarGestionDeMemoriaToolStripMenuItem_Click);
             this.activarGestionDeMemoriaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.activarGestionDeMemoriaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
@@ -1581,6 +1584,17 @@
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Text = "Ver mapa de memoria en este instante";
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Click += new System.EventHandler(this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Purple;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 82);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Intervalo Compactacion";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1764,6 +1778,7 @@
         private System.Windows.Forms.ToolStripMenuItem unidadDeMemoriaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem isKB;
         private System.Windows.Forms.ToolStripMenuItem isWORD;
+        private System.Windows.Forms.Label label1;
     }
 }
 
