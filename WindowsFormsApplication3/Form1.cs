@@ -946,24 +946,24 @@ namespace WindowsFormsApplication3
                                         }
                                     }
                                 }
-                                if (intcomactual == 0)
-                                {
-                                    if (compacon && GestMemon && Gestormemoria.organizacionmem== Memoria.Tiposorgmem.PARTDIN)
-                                    {
-                                        inscomp = true;
-                                        Gestormemoria.compactarmemoria();
-                                        intcomactual = intercompac;
-                                    }              
-                                }
-                                else
-                                {
-                                    intcomactual--;
-                                }
                                 if (GestMemon)
                                 {
                                     Gestormemoria.asignarmemoria();
                                 }
                                 ordenador.ejecutar(reloj);
+                                if (intcomactual == 0)
+                                {
+                                    if (compacon && GestMemon && Gestormemoria.organizacionmem == Memoria.Tiposorgmem.PARTDIN)
+                                    {
+                                        inscomp = true;
+                                        Gestormemoria.compactarmemoria();
+                                        intcomactual = intercompac - 1;
+                                    }
+                                }
+                                else
+                                {
+                                    intcomactual--;
+                                }
                                 if (GestMemon)
                                 {
                                     Gestormemoria.asignarmemoria();
@@ -1500,7 +1500,7 @@ namespace WindowsFormsApplication3
             else
             {
                 dialogoS.error = true;
-                MessageBox.Show("Debe ingresar un tiempo de intervalos mayor que 0");
+                MessageBox.Show("Debe ingresar un tiempo de intervalo mayor que 0");
             }
             dialogoS.Texto.Text = intercompac.ToString();
         }

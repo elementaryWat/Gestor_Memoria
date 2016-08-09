@@ -15,7 +15,7 @@ namespace WindowsFormsApplication3
         public int[] rafagas_actuales;
         public int[] rafagas_anteriores;
         public int[][] rafagas;
-        private int cantidad_procesos;
+        public int cantidad_procesos;
         public int TRestanteCPU;
         public int TRestanteEntrada;
         public int TRestanteSalida;

@@ -270,15 +270,35 @@ namespace WindowsFormsApplication3
         }
         public int[] obtenerusomemoria()
         {
+            int cantidadp = compactual.cantidad_procesos;
+            bool[] usandolamem = new bool[cantidadp];
+            for (int i=0;i<cantidadp;i++)
+            {
+                usandolamem[i]= false;
+            }
             List<int> usandomemoria = new List<int>();
             switch (organizacionmem)
             {
                 case Tiposorgmem.PARTFIJO:
+                case Tiposorgmem.PARTDIN:
                     for (int i=0;i<cantpart;i++)
                     {
                         if (mapamemoria[i]!=-1)
                         {
                             usandomemoria.Add(mapamemoria[i]);
+                        }
+                    }
+                    break;
+                case Tiposorgmem.PAGINADO:
+                    for (int i = 0; i < cantpart; i++)
+                    {
+                        if (mapamemoria[i] != -1)
+                        {
+                            if (!usandolamem[mapamemoria[i]])
+                            {
+                                usandolamem[mapamemoria[i]] = true;
+                                usandomemoria.Add(mapamemoria[i]);
+                            }
                         }
                     }
                     break;
