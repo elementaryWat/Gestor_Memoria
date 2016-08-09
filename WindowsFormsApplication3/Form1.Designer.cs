@@ -189,6 +189,9 @@
             this.politicaESSJF = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuConMem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.Compactacion = new System.Windows.Forms.ToolStripMenuItem();
+            this.realizarCadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -932,7 +935,7 @@
             this.ejercicio7ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio7ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio7ToolStripMenuItem.Name = "ejercicio7ToolStripMenuItem";
-            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.ejercicio7ToolStripMenuItem.Text = "Ejercicio 7";
             this.ejercicio7ToolStripMenuItem.Click += new System.EventHandler(this.DatosEjer7_Inicio);
             this.ejercicio7ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -943,7 +946,7 @@
             this.ejer9Guia1ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejer9Guia1ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejer9Guia1ToolStripMenuItem.Name = "ejer9Guia1ToolStripMenuItem";
-            this.ejer9Guia1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ejer9Guia1ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.ejer9Guia1ToolStripMenuItem.Text = "Ejer9/Guia1";
             this.ejer9Guia1ToolStripMenuItem.Click += new System.EventHandler(this.ejer9Guia1ToolStripMenuItem_Click);
             this.ejer9Guia1ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -954,7 +957,7 @@
             this.ejerToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejerToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejerToolStripMenuItem.Name = "ejerToolStripMenuItem";
-            this.ejerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ejerToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.ejerToolStripMenuItem.Text = "Ejer12/Guia 1";
             this.ejerToolStripMenuItem.Click += new System.EventHandler(this.ejerToolStripMenuItem_Click);
             this.ejerToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -965,7 +968,7 @@
             this.ejercicio8ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio8ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio8ToolStripMenuItem.Name = "ejercicio8ToolStripMenuItem";
-            this.ejercicio8ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ejercicio8ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.ejercicio8ToolStripMenuItem.Text = "Modelo Libro";
             this.ejercicio8ToolStripMenuItem.Click += new System.EventHandler(this.ejercicio8ToolStripMenuItem_Click);
             this.ejercicio8ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -976,7 +979,7 @@
             this.ejer5Guia4ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejer5Guia4ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejer5Guia4ToolStripMenuItem.Name = "ejer5Guia4ToolStripMenuItem";
-            this.ejer5Guia4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ejer5Guia4ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.ejer5Guia4ToolStripMenuItem.Text = "Ejer5/Guia 4";
             this.ejer5Guia4ToolStripMenuItem.Click += new System.EventHandler(this.ejer5Guia4ToolStripMenuItem_Click);
             this.ejer5Guia4ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -1214,7 +1217,9 @@
             this.toolStripSeparator2,
             this.bESTFITcOL,
             this.wORSTFITcOL,
-            this.fIRSTFITcOL});
+            this.fIRSTFITcOL,
+            this.toolStripSeparator3,
+            this.Compactacion});
             this.PartDin.ForeColor = System.Drawing.Color.Cyan;
             this.PartDin.Name = "PartDin";
             this.PartDin.Size = new System.Drawing.Size(225, 22);
@@ -1342,7 +1347,7 @@
             this.politicaCM});
             this.politicaToolStripMenuItem1.ForeColor = System.Drawing.Color.Cyan;
             this.politicaToolStripMenuItem1.Name = "politicaToolStripMenuItem1";
-            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.politicaToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
             this.politicaToolStripMenuItem1.Text = "Politica";
             this.politicaToolStripMenuItem1.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.politicaToolStripMenuItem1.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
@@ -1484,6 +1489,36 @@
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Size = new System.Drawing.Size(275, 22);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Text = "Ver mapa de memoria en este instante";
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Click += new System.EventHandler(this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(185, 6);
+            // 
+            // Compactacion
+            // 
+            this.Compactacion.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Compactacion.CheckOnClick = true;
+            this.Compactacion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.realizarCadaToolStripMenuItem});
+            this.Compactacion.ForeColor = System.Drawing.Color.Cyan;
+            this.Compactacion.Name = "Compactacion";
+            this.Compactacion.Size = new System.Drawing.Size(188, 22);
+            this.Compactacion.Text = "Compactacion";
+            this.Compactacion.Click += new System.EventHandler(this.Compactacion_Click);
+            this.Compactacion.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.Compactacion.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // realizarCadaToolStripMenuItem
+            // 
+            this.realizarCadaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.realizarCadaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.realizarCadaToolStripMenuItem.Name = "realizarCadaToolStripMenuItem";
+            this.realizarCadaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.realizarCadaToolStripMenuItem.Text = "Realizar cada...";
+            this.realizarCadaToolStripMenuItem.Click += new System.EventHandler(this.realizarCadaToolStripMenuItem_Click);
+            this.realizarCadaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.realizarCadaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // Form1
             // 
@@ -1660,6 +1695,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Salida;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPU3;
         private System.Windows.Forms.ToolStripMenuItem ejerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem Compactacion;
+        private System.Windows.Forms.ToolStripMenuItem realizarCadaToolStripMenuItem;
     }
 }
 

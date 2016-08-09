@@ -138,6 +138,41 @@ namespace WindowsFormsApplication3
         }
         /*--------------------------------------------------------------------*/
         /*--------------------------Asignacion de memoria---------------------*/
+        public void compactarmemoria()
+        {
+            int sumalibres = 0;
+            int cantlibres = 0;
+            int[] backmapamemoria = (int[])mapamemoria.Clone();
+            int[] backparticiones = (int[])particionesmem.Clone();
+            for (int i = 0; i < cantpart; i++)
+            {
+                if (mapamemoria[i] == -1)
+                {
+                    sumalibres += particionesmem[i];
+                    cantlibres++;
+                }
+            }
+            if (cantlibres>1)
+            {
+                MessageBox.Show("Se compactara la memoria");
+                mapamemoria = new int[cantpart - (cantlibres-1)];
+                particionesmem = new int[cantpart - (cantlibres - 1)];
+                //Desplaza los contenidos del anterior mapa de memoria al tope de la misma
+                int h = 0;
+                for (int i=0;i<cantpart;i++)
+                {
+                    if (backmapamemoria[i] != -1)
+                    {
+                        mapamemoria[h] = backmapamemoria[i];
+                        particionesmem[h] = backparticiones[i];
+                        h++;
+                    }
+                }
+                mapamemoria[h] = -1;
+                particionesmem[h] = sumalibres;
+                cantpart -= (cantlibres - 1);
+            }
+        }
         public int obtenerfragmem()
         {
             switch (organizacionmem)

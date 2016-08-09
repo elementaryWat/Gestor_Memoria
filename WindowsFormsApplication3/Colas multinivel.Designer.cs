@@ -33,14 +33,14 @@
             this.TipoC = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Datoscolas = new System.Windows.Forms.DataGridView();
-            this.AColas = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.Est_Conf = new System.Windows.Forms.Button();
             this.Id_Cola = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre_Cola = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Alg_Plan = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.QuantumSoportado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaxQuant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AColas = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Est_Conf = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Datoscolas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +49,6 @@
             this.CantidadC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CantidadC.FormattingEnabled = true;
             this.CantidadC.Items.AddRange(new object[] {
-            "1",
             "2",
             "3",
             "4",
@@ -121,41 +120,6 @@
             this.Datoscolas.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.Datoscolas_CellEnter);
             this.Datoscolas.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Datoscolas_EditingControlShowing);
             // 
-            // AColas
-            // 
-            this.AColas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AColas.FormattingEnabled = true;
-            this.AColas.Items.AddRange(new object[] {
-            "Apropiativa",
-            "No apropiativa"});
-            this.AColas.Location = new System.Drawing.Point(243, 100);
-            this.AColas.Name = "AColas";
-            this.AColas.Size = new System.Drawing.Size(121, 21);
-            this.AColas.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Aquamarine;
-            this.label3.Location = new System.Drawing.Point(12, 100);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(132, 16);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Prioridad entre colas";
-            // 
-            // Est_Conf
-            // 
-            this.Est_Conf.BackColor = System.Drawing.Color.RoyalBlue;
-            this.Est_Conf.ForeColor = System.Drawing.Color.LightCyan;
-            this.Est_Conf.Location = new System.Drawing.Point(117, 296);
-            this.Est_Conf.Name = "Est_Conf";
-            this.Est_Conf.Size = new System.Drawing.Size(139, 23);
-            this.Est_Conf.TabIndex = 7;
-            this.Est_Conf.Text = "Establecer configuracion";
-            this.Est_Conf.UseVisualStyleBackColor = false;
-            this.Est_Conf.Click += new System.EventHandler(this.Est_Conf_Click);
-            // 
             // Id_Cola
             // 
             this.Id_Cola.HeaderText = "Id_Cola";
@@ -195,6 +159,41 @@
             this.MaxQuant.ReadOnly = true;
             this.MaxQuant.Visible = false;
             this.MaxQuant.Width = 98;
+            // 
+            // AColas
+            // 
+            this.AColas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AColas.FormattingEnabled = true;
+            this.AColas.Items.AddRange(new object[] {
+            "Apropiativa",
+            "No apropiativa"});
+            this.AColas.Location = new System.Drawing.Point(243, 100);
+            this.AColas.Name = "AColas";
+            this.AColas.Size = new System.Drawing.Size(121, 21);
+            this.AColas.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Aquamarine;
+            this.label3.Location = new System.Drawing.Point(12, 100);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(132, 16);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Prioridad entre colas";
+            // 
+            // Est_Conf
+            // 
+            this.Est_Conf.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Est_Conf.ForeColor = System.Drawing.Color.LightCyan;
+            this.Est_Conf.Location = new System.Drawing.Point(117, 296);
+            this.Est_Conf.Name = "Est_Conf";
+            this.Est_Conf.Size = new System.Drawing.Size(139, 23);
+            this.Est_Conf.TabIndex = 7;
+            this.Est_Conf.Text = "Establecer configuracion";
+            this.Est_Conf.UseVisualStyleBackColor = false;
+            this.Est_Conf.Click += new System.EventHandler(this.Est_Conf_Click);
             // 
             // Colas_multinivel
             // 

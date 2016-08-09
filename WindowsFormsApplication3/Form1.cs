@@ -52,6 +52,10 @@ namespace WindowsFormsApplication3
         const int SRTF = 3;
         const int RR = 4;
         const int CM = 5;
+        public bool compacon;
+        int intercompac=5;
+        int intcomactual;
+        bool inscomp;
         public int tiempoquantum;
         public int tiempoquantumES;
         public int[] tamaniosproc;
@@ -739,6 +743,14 @@ namespace WindowsFormsApplication3
                     }
                 }
             }
+            DataGridViewCellStyle style = new DataGridViewCellStyle();
+            style.BackColor = Color.Purple;
+            style.ForeColor = Color.White;
+            if (inscomp)
+            {
+                inscomp = false;
+                DatosFlow.Rows[DatosFlow.Rows.Count - 1].Cells[8].Style = style;
+            }
             usosmem.Add((int[])usomemactual.Clone());
             particiones.Add((int[])Gestormemoria.particionesmem.Clone());
             cantpartins.Add(Gestormemoria.cantpart);
@@ -805,6 +817,7 @@ namespace WindowsFormsApplication3
                 backusomem = usomemoria;
                 backenejcent = enejcent;
                 backenejcsal = enejcsal;
+
                 string[] row = { reloj.ToString(),colamemoria, colacpu, enejc, colaBE + "/" + colaBS, colacpu, colaE, colaS,usomemoria, enejc, enejcent, enejcsal };
                 FlujoEjec.Rows.Add(row);
                 FlujoEjec.Rows[FlujoEjec.Rows.Count - 1].ContextMenuStrip = MenuConMem;
@@ -837,6 +850,7 @@ namespace WindowsFormsApplication3
             backenejc = "";
             backenejcent = "";
             backenejcsal = "";
+            inscomp = false;
             bool noerror = true;
             if (Politica1.Checked)
             {
@@ -912,6 +926,19 @@ namespace WindowsFormsApplication3
                                         //MessageBox.Show("Se agrega");
                                         Gestormemoria.agregaracolanuevos(respuesta[x]);
                                     }
+                                }
+                                if (intcomactual == 0)
+                                {
+                                    if (compacon)
+                                    {
+                                        inscomp = true;
+                                        Gestormemoria.compactarmemoria();
+                                        intcomactual = intercompac;
+                                    }              
+                                }
+                                else
+                                {
+                                    intcomactual--;
                                 }
                                 Gestormemoria.asignarmemoria();
                                 ordenador.ejecutar(reloj);
@@ -1019,6 +1046,7 @@ namespace WindowsFormsApplication3
             Politica2.Checked = false;
             Politica3.Checked = false;
             Politica4.Checked = true;
+            politicaCM.Checked = false;
             dialogoS.Text = "Quantum CPU";
             dialogoS.Texto.Text = tiempoquantum.ToString();
             dialogoS.Etiqueta.Text = "Quantum CPU";
@@ -1434,6 +1462,46 @@ namespace WindowsFormsApplication3
         {
             DialogoColas = new Colas_multinivel(MiconfColas,ordenador,this);
             DialogoColas.Show();
+        }
+        private void definirintcomp()
+        {
+            int temporal = dialogoS.bufer;
+            if (temporal > 0)
+            {
+                intercompac = temporal;
+                intcomactual = temporal;
+                Compactacion.Text = "Compactacion (Int=" +intercompac + ")";
+            }
+            else
+            {
+                dialogoS.error = true;
+                MessageBox.Show("Debe ingresar un tiempo de intervalos mayor que 0");
+            }
+            dialogoS.Texto.Text = intercompac.ToString();
+        }
+        private void realizarCadaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dialogoS = new DialogoSimple();
+            dialogoS.Text = "Intervalo compactacion";
+            dialogoS.Texto.Text = intercompac.ToString();
+            dialogoS.Etiqueta.Text = "Intervalo de compactacion";
+            dialogoS.BotonEst.Text = "Establecer este intervalo";
+            dialogoS.mensaje = "Debe ingresar un numero en el intervalo";
+            //Establece la funcion de retorno
+            dialogoS.manejador = definirintcomp;
+            dialogoS.Show();
+        }
+
+        private void Compactacion_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            if (ts.Checked)
+            {
+                compacon = true;
+            }
+            else {
+                compacon = false;
+            }
         }
     }
     /*-----------------------------------------------------------------------------------------*/
