@@ -69,7 +69,7 @@ namespace WindowsFormsApplication3
                 cantpag = memoriactual.tamañomemoria / bufer;
                 double sumaact = cantpag * bufer;
                 Cantpag.Text = "Cantidad de paginas " + cantpag;
-                EtSumaPag.Text = "Suma de paginas " + sumaact + " palabras";
+                EtSumaPag.Text = "Suma de paginas " + sumaact +memoriactual.textounidad;
                 if (sumaact == memoriactual.tamañomemoria)
                 {
                     Cantpag.BackColor = Color.Lime;

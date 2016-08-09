@@ -354,7 +354,7 @@ namespace WindowsFormsApplication3
                 }
                 if (usomemactual[i] != -1)
                 {
-                    int idproceso = Int32.Parse(DatosFlow.Rows[usomemactual[i]].Cells[0].Value.ToString());
+                    string idproceso = DatosFlow.Rows[usomemactual[i]].Cells[0].Value.ToString();
                     int tamanioac = tamaniosproc[usomemactual[i]];
                     if (tamanioac < tamparticion)
                     {
@@ -1128,7 +1128,7 @@ namespace WindowsFormsApplication3
                             break;
                     }
 
-                    BotTamMem.Text = "Tamaño de memoria (" + Gestormemoria.tamañomemoria + " palabras)";
+                    BotTamMem.Text = "Tamaño de memoria (" + Gestormemoria.tamañomemoria + Gestormemoria.textounidad+")";
                 }
                 else
                 {
@@ -1147,7 +1147,7 @@ namespace WindowsFormsApplication3
             dialogoS = new DialogoSimple();
             dialogoS.Text = "Tamaño de memoria";
             dialogoS.Texto.Text = Gestormemoria.tamañomemoria.ToString();
-            dialogoS.Etiqueta.Text = "Tamaño de memoria (palabras)";
+            dialogoS.Etiqueta.Text = "Tamaño de memoria ("+Gestormemoria.textounidad+")";
             dialogoS.BotonEst.Text = "Establecer este tamaño";
             dialogoS.mensaje = "Debe ingresar un numero para el tamaño de memoria";
             dialogoS.manejador = definirtamaño;
@@ -1502,6 +1502,29 @@ namespace WindowsFormsApplication3
             else {
                 compacon = false;
             }
+        }
+
+        private void UnidadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem ts = (ToolStripMenuItem)sender;
+            if (!ts.Checked)
+            {
+                ts.Checked = true;
+            }
+            if (isWORD != ts)
+            {
+                isWORD.Checked = false;
+                Gestormemoria.textounidad = " KB";
+                Tam.HeaderText = "Tamaño(KB)";
+            }
+            if (isKB != ts)
+            {
+                isKB.Checked = false;
+                Gestormemoria.textounidad = " palabras";
+                Tam.HeaderText = "Tamaño(palabras)";
+            }
+            BotTamMem.Text = "Tamaño de memoria (" + Gestormemoria.tamañomemoria + Gestormemoria.textounidad+")";
+
         }
     }
     /*-----------------------------------------------------------------------------------------*/

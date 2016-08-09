@@ -39,6 +39,7 @@ namespace WindowsFormsApplication3
         List<Queue<int>> ListaColas;
         Computador compactual;
         public int[] tamaniosproc;
+        public string textounidad;
         public Memoria(int tammem)
         {
             ListaColas = new List<Queue<int>>();
@@ -54,6 +55,7 @@ namespace WindowsFormsApplication3
             cantpartdif = 2;
             cantpartig = 2;
             tamañomemoria = tammem;
+            textounidad = " KB";
             tampag= tamañomemoria / cantpart;
             tam1part = tamañomemoria / cantpart;
             int tamp = tamañomemoria / cantpart;

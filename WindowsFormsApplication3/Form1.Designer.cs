@@ -154,6 +154,11 @@
             this.InstGant = new System.Windows.Forms.ToolStripMenuItem();
             this.NoDatosrep = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDeMemoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activarGestionDeMemoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unidadDeMemoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.isKB = new System.Windows.Forms.ToolStripMenuItem();
+            this.isWORD = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.BotTamMem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarTamañoMemoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizacionMemoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -173,6 +178,9 @@
             this.bESTFITcOL = new System.Windows.Forms.ToolStripMenuItem();
             this.wORSTFITcOL = new System.Windows.Forms.ToolStripMenuItem();
             this.fIRSTFITcOL = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.Compactacion = new System.Windows.Forms.ToolStripMenuItem();
+            this.realizarCadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Paginado = new System.Windows.Forms.ToolStripMenuItem();
             this.organizarPaginasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planificadorLargoPlazoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -189,9 +197,6 @@
             this.politicaESSJF = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuConMem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.Compactacion = new System.Windows.Forms.ToolStripMenuItem();
-            this.realizarCadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -1030,6 +1035,9 @@
             // gestionDeMemoriaToolStripMenuItem
             // 
             this.gestionDeMemoriaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.activarGestionDeMemoriaToolStripMenuItem,
+            this.unidadDeMemoriaToolStripMenuItem,
+            this.toolStripSeparator4,
             this.BotTamMem,
             this.organizacionMemoriaToolStripMenuItem});
             this.gestionDeMemoriaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
@@ -1038,6 +1046,59 @@
             this.gestionDeMemoriaToolStripMenuItem.Text = "Gestion de memoria";
             this.gestionDeMemoriaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.gestionDeMemoriaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // activarGestionDeMemoriaToolStripMenuItem
+            // 
+            this.activarGestionDeMemoriaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.activarGestionDeMemoriaToolStripMenuItem.Checked = true;
+            this.activarGestionDeMemoriaToolStripMenuItem.CheckOnClick = true;
+            this.activarGestionDeMemoriaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.activarGestionDeMemoriaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.activarGestionDeMemoriaToolStripMenuItem.Name = "activarGestionDeMemoriaToolStripMenuItem";
+            this.activarGestionDeMemoriaToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.activarGestionDeMemoriaToolStripMenuItem.Text = "Activar gestion de memoria";
+            this.activarGestionDeMemoriaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.activarGestionDeMemoriaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // unidadDeMemoriaToolStripMenuItem
+            // 
+            this.unidadDeMemoriaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.unidadDeMemoriaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.isKB,
+            this.isWORD});
+            this.unidadDeMemoriaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.unidadDeMemoriaToolStripMenuItem.Name = "unidadDeMemoriaToolStripMenuItem";
+            this.unidadDeMemoriaToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.unidadDeMemoriaToolStripMenuItem.Text = "Unidad de memoria";
+            this.unidadDeMemoriaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.unidadDeMemoriaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // isKB
+            // 
+            this.isKB.BackColor = System.Drawing.Color.RoyalBlue;
+            this.isKB.Checked = true;
+            this.isKB.CheckOnClick = true;
+            this.isKB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.isKB.ForeColor = System.Drawing.Color.Cyan;
+            this.isKB.Name = "isKB";
+            this.isKB.Size = new System.Drawing.Size(152, 22);
+            this.isKB.Text = "KB";
+            this.isKB.Click += new System.EventHandler(this.UnidadToolStripMenuItem_Click);
+            // 
+            // isWORD
+            // 
+            this.isWORD.BackColor = System.Drawing.Color.RoyalBlue;
+            this.isWORD.CheckOnClick = true;
+            this.isWORD.ForeColor = System.Drawing.Color.Cyan;
+            this.isWORD.Name = "isWORD";
+            this.isWORD.Size = new System.Drawing.Size(152, 22);
+            this.isWORD.Text = "Palabras";
+            this.isWORD.Click += new System.EventHandler(this.UnidadToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(227, 6);
             // 
             // BotTamMem
             // 
@@ -1301,6 +1362,36 @@
             this.fIRSTFITcOL.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
             this.fIRSTFITcOL.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(185, 6);
+            // 
+            // Compactacion
+            // 
+            this.Compactacion.BackColor = System.Drawing.Color.RoyalBlue;
+            this.Compactacion.CheckOnClick = true;
+            this.Compactacion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.realizarCadaToolStripMenuItem});
+            this.Compactacion.ForeColor = System.Drawing.Color.Cyan;
+            this.Compactacion.Name = "Compactacion";
+            this.Compactacion.Size = new System.Drawing.Size(188, 22);
+            this.Compactacion.Text = "Compactacion";
+            this.Compactacion.Click += new System.EventHandler(this.Compactacion_Click);
+            this.Compactacion.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.Compactacion.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
+            // realizarCadaToolStripMenuItem
+            // 
+            this.realizarCadaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.realizarCadaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.realizarCadaToolStripMenuItem.Name = "realizarCadaToolStripMenuItem";
+            this.realizarCadaToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.realizarCadaToolStripMenuItem.Text = "Realizar cada...";
+            this.realizarCadaToolStripMenuItem.Click += new System.EventHandler(this.realizarCadaToolStripMenuItem_Click);
+            this.realizarCadaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.realizarCadaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
+            // 
             // Paginado
             // 
             this.Paginado.BackColor = System.Drawing.Color.RoyalBlue;
@@ -1490,36 +1581,6 @@
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Text = "Ver mapa de memoria en este instante";
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Click += new System.EventHandler(this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(185, 6);
-            // 
-            // Compactacion
-            // 
-            this.Compactacion.BackColor = System.Drawing.Color.RoyalBlue;
-            this.Compactacion.CheckOnClick = true;
-            this.Compactacion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.realizarCadaToolStripMenuItem});
-            this.Compactacion.ForeColor = System.Drawing.Color.Cyan;
-            this.Compactacion.Name = "Compactacion";
-            this.Compactacion.Size = new System.Drawing.Size(188, 22);
-            this.Compactacion.Text = "Compactacion";
-            this.Compactacion.Click += new System.EventHandler(this.Compactacion_Click);
-            this.Compactacion.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.Compactacion.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
-            // realizarCadaToolStripMenuItem
-            // 
-            this.realizarCadaToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
-            this.realizarCadaToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
-            this.realizarCadaToolStripMenuItem.Name = "realizarCadaToolStripMenuItem";
-            this.realizarCadaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.realizarCadaToolStripMenuItem.Text = "Realizar cada...";
-            this.realizarCadaToolStripMenuItem.Click += new System.EventHandler(this.realizarCadaToolStripMenuItem_Click);
-            this.realizarCadaToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
-            this.realizarCadaToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1698,6 +1759,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem Compactacion;
         private System.Windows.Forms.ToolStripMenuItem realizarCadaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem activarGestionDeMemoriaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem unidadDeMemoriaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem isKB;
+        private System.Windows.Forms.ToolStripMenuItem isWORD;
     }
 }
 
