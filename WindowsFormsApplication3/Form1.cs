@@ -38,6 +38,8 @@ namespace WindowsFormsApplication3
             tiempoquantum = 1;
             tiempoquantumES = 1;
             GestMemon = true;
+            intercompac = 5;
+            intcomactual = 4;
         }
         bool[] exProceso;
         bool cerosdet;
@@ -55,7 +57,7 @@ namespace WindowsFormsApplication3
         const int RR = 4;
         const int CM = 5;
         public bool compacon;
-        int intercompac=5;
+        int intercompac;
         int intcomactual;
         bool inscomp;
         public int tiempoquantum;
@@ -655,14 +657,6 @@ namespace WindowsFormsApplication3
                         }
                     }
                 }
-                DataGridViewCellStyle Mstyle = new DataGridViewCellStyle();
-                Mstyle.BackColor = Color.Purple;
-                Mstyle.ForeColor = Color.White;
-                if (inscomp)
-                {
-                    inscomp = false;
-                    FlujoEjec.Rows[FlujoEjec.Rows.Count - 1].Cells[8].Style = Mstyle;
-                }
                 usosmem.Add((int[])usomemactual.Clone());
                 particiones.Add((int[])Gestormemoria.particionesmem.Clone());
                 cantpartins.Add(Gestormemoria.cantpart);
@@ -829,6 +823,14 @@ namespace WindowsFormsApplication3
 
                 string[] row = { reloj.ToString(),colamemoria, colacpu, enejc, colaBE + "/" + colaBS, colacpu, colaE, colaS,usomemoria, enejc, enejcent, enejcsal };
                 FlujoEjec.Rows.Add(row);
+                DataGridViewCellStyle Mstyle = new DataGridViewCellStyle();
+                Mstyle.BackColor = Color.Purple;
+                Mstyle.ForeColor = Color.White;
+                if (inscomp)
+                {
+                    inscomp = false;
+                    FlujoEjec.Rows[FlujoEjec.Rows.Count - 1].Cells[8].Style = Mstyle;
+                }
                 if (GestMemon)
                 {
                     FlujoEjec.Rows[FlujoEjec.Rows.Count - 1].ContextMenuStrip = MenuConMem;
@@ -1494,7 +1496,7 @@ namespace WindowsFormsApplication3
             if (temporal > 0)
             {
                 intercompac = temporal;
-                intcomactual = temporal;
+                intcomactual = temporal-1;
                 Compactacion.Text = "Compactacion (Int=" +intercompac + ")";
             }
             else
