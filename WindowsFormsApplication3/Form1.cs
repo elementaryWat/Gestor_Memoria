@@ -1011,12 +1011,10 @@ namespace WindowsFormsApplication3
                 {
                     MessageBox.Show("Se encontro caracteres no numericos en los datos de los procesos");
                 }
-                /*
                 catch (NullReferenceException)
                 {
                     MessageBox.Show("Se encontro valores nulos en los datos de los procesos");
                 }
-                */
             }
             
         }
