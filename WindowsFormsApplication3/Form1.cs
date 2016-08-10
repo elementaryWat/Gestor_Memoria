@@ -899,6 +899,7 @@ namespace WindowsFormsApplication3
             particiones.Clear();
             cantpartins.Clear();
             fragmentaciones.Clear();
+            intcomactual = intercompac - 1;
             reloj =0;
             int cantidad = (DatosFlow.RowCount) - 1;
             if (cantidad==0)
@@ -1496,7 +1497,6 @@ namespace WindowsFormsApplication3
             if (temporal > 0)
             {
                 intercompac = temporal;
-                intcomactual = temporal-1;
                 Compactacion.Text = "Compactacion (Int=" +intercompac + ")";
             }
             else
