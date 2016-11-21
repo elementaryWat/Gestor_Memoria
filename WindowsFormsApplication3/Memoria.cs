@@ -297,6 +297,7 @@ namespace WindowsFormsApplication3
                             if (!usandolamem[mapamemoria[i]])
                             {
                                 usandolamem[mapamemoria[i]] = true;
+                                usandomemoria.Add(mapamemoria[i]);
                             }
                         }
                     }

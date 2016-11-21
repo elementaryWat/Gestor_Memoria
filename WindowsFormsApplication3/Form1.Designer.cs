@@ -133,6 +133,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.Promediosrafagas = new System.Windows.Forms.DataGridView();
             this.PromDifAr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PromRaf1CPU = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -197,7 +198,7 @@
             this.politicaESSJF = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuConMem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
+            this.simuladorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.FlujoEjec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DatosFlow)).BeginInit();
             this.estadisticass.SuspendLayout();
@@ -835,6 +836,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Referencias";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Purple;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 82);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Intervalo Compactacion";
+            // 
             // Promediosrafagas
             // 
             this.Promediosrafagas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -929,7 +941,8 @@
             this.ejer9Guia1ToolStripMenuItem,
             this.ejerToolStripMenuItem,
             this.ejercicio8ToolStripMenuItem,
-            this.ejer5Guia4ToolStripMenuItem});
+            this.ejer5Guia4ToolStripMenuItem,
+            this.simuladorToolStripMenuItem});
             this.datosDeInicioToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.datosDeInicioToolStripMenuItem.Name = "datosDeInicioToolStripMenuItem";
             this.datosDeInicioToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
@@ -942,7 +955,7 @@
             this.ejercicio7ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio7ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio7ToolStripMenuItem.Name = "ejercicio7ToolStripMenuItem";
-            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.ejercicio7ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejercicio7ToolStripMenuItem.Text = "Ejercicio 7";
             this.ejercicio7ToolStripMenuItem.Click += new System.EventHandler(this.DatosEjer7_Inicio);
             this.ejercicio7ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -953,7 +966,7 @@
             this.ejer9Guia1ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejer9Guia1ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejer9Guia1ToolStripMenuItem.Name = "ejer9Guia1ToolStripMenuItem";
-            this.ejer9Guia1ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.ejer9Guia1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejer9Guia1ToolStripMenuItem.Text = "Ejer9/Guia1";
             this.ejer9Guia1ToolStripMenuItem.Click += new System.EventHandler(this.ejer9Guia1ToolStripMenuItem_Click);
             this.ejer9Guia1ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -964,7 +977,7 @@
             this.ejerToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejerToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejerToolStripMenuItem.Name = "ejerToolStripMenuItem";
-            this.ejerToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.ejerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejerToolStripMenuItem.Text = "Ejer12/Guia 1";
             this.ejerToolStripMenuItem.Click += new System.EventHandler(this.ejerToolStripMenuItem_Click);
             this.ejerToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -975,7 +988,7 @@
             this.ejercicio8ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejercicio8ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejercicio8ToolStripMenuItem.Name = "ejercicio8ToolStripMenuItem";
-            this.ejercicio8ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.ejercicio8ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejercicio8ToolStripMenuItem.Text = "Modelo Libro";
             this.ejercicio8ToolStripMenuItem.Click += new System.EventHandler(this.ejercicio8ToolStripMenuItem_Click);
             this.ejercicio8ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -986,7 +999,7 @@
             this.ejer5Guia4ToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
             this.ejer5Guia4ToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
             this.ejer5Guia4ToolStripMenuItem.Name = "ejer5Guia4ToolStripMenuItem";
-            this.ejer5Guia4ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.ejer5Guia4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ejer5Guia4ToolStripMenuItem.Text = "Ejer5/Guia 4";
             this.ejer5Guia4ToolStripMenuItem.Click += new System.EventHandler(this.ejer5Guia4ToolStripMenuItem_Click);
             this.ejer5Guia4ToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
@@ -1084,7 +1097,7 @@
             this.isKB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.isKB.ForeColor = System.Drawing.Color.Cyan;
             this.isKB.Name = "isKB";
-            this.isKB.Size = new System.Drawing.Size(152, 22);
+            this.isKB.Size = new System.Drawing.Size(118, 22);
             this.isKB.Text = "KB";
             this.isKB.Click += new System.EventHandler(this.UnidadToolStripMenuItem_Click);
             // 
@@ -1094,7 +1107,7 @@
             this.isWORD.CheckOnClick = true;
             this.isWORD.ForeColor = System.Drawing.Color.Cyan;
             this.isWORD.Name = "isWORD";
-            this.isWORD.Size = new System.Drawing.Size(152, 22);
+            this.isWORD.Size = new System.Drawing.Size(118, 22);
             this.isWORD.Text = "Palabras";
             this.isWORD.Click += new System.EventHandler(this.UnidadToolStripMenuItem_Click);
             // 
@@ -1584,16 +1597,16 @@
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Text = "Ver mapa de memoria en este instante";
             this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem.Click += new System.EventHandler(this.verMapaDeMemoriaEnEsteInstanteToolStripMenuItem_Click);
             // 
-            // label1
+            // simuladorToolStripMenuItem
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Purple;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(6, 82);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Intervalo Compactacion";
+            this.simuladorToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue;
+            this.simuladorToolStripMenuItem.ForeColor = System.Drawing.Color.Cyan;
+            this.simuladorToolStripMenuItem.Name = "simuladorToolStripMenuItem";
+            this.simuladorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.simuladorToolStripMenuItem.Text = "Simulador";
+            this.simuladorToolStripMenuItem.Click += new System.EventHandler(this.simuladorToolStripMenuItem_Click);
+            this.simuladorToolStripMenuItem.MouseEnter += new System.EventHandler(this.Menu_MouseEnter);
+            this.simuladorToolStripMenuItem.MouseLeave += new System.EventHandler(this.Menu_MouseLeave);
             // 
             // Form1
             // 
@@ -1779,6 +1792,7 @@
         private System.Windows.Forms.ToolStripMenuItem isKB;
         private System.Windows.Forms.ToolStripMenuItem isWORD;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem simuladorToolStripMenuItem;
     }
 }
 

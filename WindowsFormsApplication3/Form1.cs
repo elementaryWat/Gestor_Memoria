@@ -175,6 +175,21 @@ namespace WindowsFormsApplication3
             string[] row6 = { "6", "", "11", "4", "1", "2", "2", "2", "1" };
             DatosFlow.Rows.Add(row6);
         }
+        private void simuladorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatosFlow.Rows.Clear();
+            //{Id_Proceso,Tiempo_de_arribo,1er_R_CPU,Entrada,2da_R_CPU,Salida,3er_R_CPU}
+            string[] row1 = { "1", "", "1000", "1", "250", "50", "650", "0", "0" };
+            DatosFlow.Rows.Add(row1);
+            string[] row2 = { "2", "", "500", "1", "1000", "2000", "1500", "0", "0" };
+            DatosFlow.Rows.Add(row2);
+            string[] row3 = { "3", "", "650", "1", "1000", "1500", "0", "0", "0" };
+            DatosFlow.Rows.Add(row3);
+            string[] row4 = { "4", "", "1000", "1", "1500", "1000", "1500", "0", "0" };
+            DatosFlow.Rows.Add(row4);
+            string[] row5 = { "5", "", "1500", "1", "500", "1000", "450", "0", "0" };
+            DatosFlow.Rows.Add(row5);
+        }
         private void ejercicio8ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DatosFlow.Rows.Clear();
@@ -1571,6 +1586,8 @@ namespace WindowsFormsApplication3
                 GestMemon = false;
             }
         }
+
+        
     }
     /*-----------------------------------------------------------------------------------------*/
 }

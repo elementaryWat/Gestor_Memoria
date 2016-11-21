@@ -136,7 +136,7 @@ namespace WindowsFormsApplication3
             Queue<int> actuall=null;
             if (politica == CM)
             {
-                //Si la politica actua
+                //Si la politica es realimentada
                 if (CRealimentada)
                 {
                     //Inserta el proceso en la primera cola cuando es la primera vez ejecutado y en la correspondiente cuando ya habia sido ejecutado previamente
