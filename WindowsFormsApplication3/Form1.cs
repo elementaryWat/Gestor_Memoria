@@ -314,7 +314,8 @@ namespace WindowsFormsApplication3
         int instanteseleccionado;
         private void estinst(object sender, DataGridViewCellEventArgs e)
         {
-           instanteseleccionado = e.RowIndex;
+           int fila = e.RowIndex;
+           instanteseleccionado=Int32.Parse(FlujoEjec.Rows[fila].Cells[0].Value.ToString());
         }
         public void limpiarseleccombo()
         {
